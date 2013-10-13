@@ -1,12 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Genome.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\SimulationsManager.cs">
     <Files>
-      <File FileName="Assets\Genome.cs" Line="21" Column="10" />
-      <File FileName="Assets\NewBehaviourScript.cs" Line="54" Column="28" />
-      <File FileName="Assets\MoveFunction.cs" Line="6" Column="2" />
-      <File FileName="Assets\JointMovementController.cs" Line="18" Column="9" />
-      <File FileName="Assets\Gen.cs" Line="24" Column="9" />
+      <File FileName="Assets\scripts\SimulationsManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveFunction.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveController.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Genome.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class MoveController : MonoBehaviour {
 	
 	public JointMovementController backLeft1;
 	public JointMovementController backLeft2;
@@ -34,31 +34,10 @@ public class NewBehaviourScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
-		backLeft1.setFunction(new MoveFunction(40f,1.2f,0f,1000f));
-		backLeft2.setFunction(new MoveFunction(-40f,1.2f,0f,1000f));
-		backLeftShoulder.setFunction(new MoveFunction(10f,0.2f,0f,1000f));
-		
-		backRight1.setFunction(new MoveFunction(40f,1.2f,0f,1000f));
-		backRight2.setFunction(new MoveFunction(-40f,1.2f,0f,1000f));
-		backRightShoulder.setFunction(new MoveFunction(10f,0.2f,0f,1000f));
-		
-		frontLeft1.setFunction(new MoveFunction(40f,1.2f,0f,1000f));
-		frontLeft2.setFunction(new MoveFunction(-40f,1.2f,0f,1000f));
-		frontLeftShoulder.setFunction(new MoveFunction(10f,0.2f,0f,1000f));
-		
-		frontRight1.setFunction(new MoveFunction(40f,1.2f,0f,1000f));
-		frontRight2.setFunction(new MoveFunction(-40f,1.2f,0f,1000f));
-		frontRightShoulder.setFunction(new MoveFunction(10f,0.2f,0f,1000f));
-		
-		testGenome(new Genome());
-		
-		initialPositionX = body.transform.position.x;
-		initialPositionY = body.transform.position.y;
-		initialPositionZ = body.transform.position.z;
 	}
 	
-	void testGenome(Genome genome){
+	public void testGenome(Genome genome){
+		
 		backLeft1.setFunction(new MoveFunction(genome.getAmplitude(0),genome.getPeriod(),genome.getFase(0),genome.getStrength()));
 		backLeft2.setFunction(new MoveFunction(genome.getAmplitude(1),genome.getPeriod(),genome.getFase(1),genome.getStrength()));
 		backLeftShoulder.setFunction(new MoveFunction(genome.getAmplitude(2),genome.getPeriod(),genome.getFase(2),genome.getStrength()));
@@ -73,16 +52,25 @@ public class NewBehaviourScript : MonoBehaviour {
 		
 		frontRight1.setFunction(new MoveFunction(genome.getAmplitude(9),genome.getPeriod(),genome.getFase(9),genome.getStrength()));
 		frontRight2.setFunction(new MoveFunction(genome.getAmplitude(10),genome.getPeriod(),genome.getFase(10),genome.getStrength()));
-		frontRightShoulder.setFunction(new MoveFunction(genome.getAmplitude(11),genome.getPeriod(),genome.getFase(11),genome.getStrength()));	
+		frontRightShoulder.setFunction(new MoveFunction(genome.getAmplitude(11),genome.getPeriod(),genome.getFase(11),genome.getStrength()));
+		
+		
+		initialPositionX = body.transform.position.x;
+		initialPositionY = body.transform.position.y;
+		initialPositionZ = body.transform.position.z;
 	}
 	
 	
-	float getAdvance(){
+	public float getAdvance(){
 		return 	lastPositionX - initialPositionX;
 	}
 	
-	float getCuadraticError(){
+	public float getCuadraticError(){
 		return cumulatedError/updates;	
+	}
+	
+	public float getTimeElapsed(){
+	 return timeElapsed;	
 	}
 	
 	// Update is called once per frame
@@ -90,8 +78,6 @@ public class NewBehaviourScript : MonoBehaviour {
 		
 		cumulatedError += Mathf.Pow((body.transform.position.y - initialPositionY) + (body.transform.position.z - initialPositionZ),2);
 		lastPositionX = body.transform.position.x;
-		
-		Debug.Log("error: " + getCuadraticError() + "-- advance: " + getAdvance());
 		
 		updates++;
 		timeElapsed+=Time.deltaTime;

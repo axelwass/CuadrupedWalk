@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 
 public class Genome
@@ -19,12 +20,12 @@ public class Genome
         }
 		for (int i = 0; i < fases.Length; i++)
         {
-            fases[i] = new Gen(180);
+            fases[i] = new Gen(Mathf.PI * 2.0f);
         }
 		
 		
-		strength = new Gen(10000);
-		period = new Gen(1000);
+		strength = new Gen(1000);
+		period = new Gen((Mathf.PI * 2.0f)/ 5.0f);
 		
 		init();
 	}
