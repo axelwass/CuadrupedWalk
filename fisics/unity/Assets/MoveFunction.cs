@@ -2,29 +2,28 @@ using System;
 using UnityEngine;
 
 
-	public class MoveFunction
+public class MoveFunction
+{
+	float A;
+	float B;
+	float C;
+	float strength;
+
+	public MoveFunction(float amplitude, float period, float fase, float strength)
 	{
-		float A;
-		float B;
-		float C;
-		float strength;
-		HingeJoint joint;
-		public MoveFunction(HingeJoint j, float A, float B, float C, float strength)
-		{
-		this.A= A;
-		this.B= B;
-		this.C= C;
+		this.A= amplitude;
+		this.B= period;
+		this.C= fase;
 		this.strength = strength;
-		this.joint = j;
-		}
-		
-		public void update(float t){
-			float angle = A*(float)Math.Sin(t*B+C);
-			JointSpring s = new JointSpring();
-		s.targetPosition = angle;
-		s.spring = strength;
-			joint.spring = s;
-		}
-			
 	}
+
+	public float evalAngle(float t){
+		return A*(float)Math.Sin(t*B+C);
+	}
+	
+	public float evalStrength(float t){
+		return strength;
+	}
+		
+}
 
