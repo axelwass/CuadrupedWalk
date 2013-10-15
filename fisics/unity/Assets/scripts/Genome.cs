@@ -2,35 +2,39 @@ using System;
 using UnityEngine;
 
 
-public class Genome
+public class Genome:System.Collections.IEnumerable
 {
 	Gen strength;
 	Gen period;
 	
 	Gen[] amplitudes;
 	Gen[] fases;
+	Gen[] centerAngles;
 	
 	public Genome ()
 	{
 		amplitudes = new Gen[12];
 		fases = new Gen[12];
+		centerAngles = new Gen[12];
 		for (int i = 0; i < amplitudes.Length; i++)
         {
-            amplitudes[i] = new Gen(90);
+            amplitudes[i] = new Gen(0,90);
         }
 		for (int i = 0; i < fases.Length; i++)
         {
-            fases[i] = new Gen(Mathf.PI * 2.0f);
+            fases[i] = new Gen(0,Mathf.PI * 2.0f);
+        }
+		for (int i = 0; i < fases.Length; i++)
+        {
+            centerAngles[i] = new Gen(-90,90);
         }
 		
 		
-		strength = new Gen(1000);
-		period = new Gen((Mathf.PI * 2.0f)/ 5.0f);
-		
-		init();
+		strength = new Gen(0,1000);
+		period = new Gen(0,(Mathf.PI * 2.0f)/ 5.0f);
 	}
 	
-	void init(){
+	public Genome init(){
 		for (int i = 0; i < amplitudes.Length; i++)
         {
             amplitudes[i].generateVal();
@@ -39,10 +43,16 @@ public class Genome
         {
             fases[i].generateVal();
         }
+		for (int i = 0; i < fases.Length; i++)
+        {
+            centerAngles[i].generateVal();
+        }
 		
 		
 		strength.generateVal();
 		period.generateVal();
+		
+		return this;
 	}
 	
 	public float getStrength(){
@@ -61,6 +71,10 @@ public class Genome
 		return fases[i].getVal();	
 	}
 	
+	public float getCenterAngle(int i){
+		return 0; //centerAngles[i].getVal();	//TODO descomentar para usar angulos centrales.
+	}
+	
 	public System.Collections.IEnumerator GetEnumerator()
     {
 		yield return strength;
@@ -72,6 +86,10 @@ public class Genome
 		for (int i = 0; i < fases.Length; i++)
         {
             yield return fases[i];
+        }
+		for (int i = 0; i < centerAngles.Length; i++)
+        {
+            yield return centerAngles[i];
         }
     }
 	
