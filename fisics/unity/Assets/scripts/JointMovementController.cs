@@ -8,8 +8,8 @@ public class JointMovementController : MonoBehaviour {
 	MoveFunction function;
 	HingeJoint joint;
 	
+	bool firstTime = true;
 	
-	float enlapsedTime = 0;
 	// Use this for initialization
 	void Start () {
 		joint = (HingeJoint)GetComponent("HingeJoint");
@@ -20,13 +20,11 @@ public class JointMovementController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
-		if(function != null){
-			enlapsedTime += Time.deltaTime;
-			
+	public void updateState(float elapsedTime) {
+		if(function != null && joint != null){
 			JointSpring s = new JointSpring();
-			s.targetPosition = function.evalAngle(enlapsedTime);
-			s.spring = function.evalStrength(enlapsedTime);
+			s.targetPosition = function.evalAngle(elapsedTime);
+			s.spring = function.evalStrength(elapsedTime);
 			joint.spring = s;
 			
 		}

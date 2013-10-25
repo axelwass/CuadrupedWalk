@@ -29,14 +29,14 @@ public class GeneticAlgorithm : MonoBehaviour {
 					return poblation[j];
 			}
 		}
-		Debug.Log("JouldNotReach");
+		Debug.Log("ShouldNotReach");
 		return poblation[0];
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(!simManager.isRuningTest()){
-			poblation.Sort(delegate(GenomeContainer gc1, GenomeContainer gc2) {
+			poblation.Sort(delegate(GenomeContainer gc1, GenomeContainer gc2) { //elimina repetidos
                 return gc2.getEvaluation().CompareTo(gc1.getEvaluation());
               });
 			

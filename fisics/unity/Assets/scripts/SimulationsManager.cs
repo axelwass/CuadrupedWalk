@@ -12,8 +12,8 @@ public class SimulationsManager : MonoBehaviour {
 	GameObject testingCreature;
 	MoveController tester;
 	
-	int testNumber = 0;
-	
+	int testNumber = -1;
+	float elapsedTime = 0;
 	bool runingTests = false;
 	
 	System.Collections.Generic.List<GenomeContainer> tests = new System.Collections.Generic.List<GenomeContainer>();
@@ -36,9 +36,9 @@ public class SimulationsManager : MonoBehaviour {
 			runingTests = true;
 			this.tests = tests;
 			
-			testNumber = 0;
+			testNumber = -1;
 			
-			newTest(testNumber);
+			
 		}
 	}
 	
@@ -48,20 +48,34 @@ public class SimulationsManager : MonoBehaviour {
 	}
 	
 	void newTest(int i){
+		elapsedTime=0;
 		testingCreature = (GameObject)Instantiate(creaturePref);
 		tester = (MoveController)testingCreature.GetComponent("MoveController");
 		tester.testGenome(tests[i].getGenome());
+		
 	}
 	
-	
-	// Update is called once per frame
-	void Update () {
-		if(tester != null && tester.getTimeElapsed() >testingTime){
-			float evaluation = tester.getAdvance()<0? 0: tester.getAdvance() / (1 + tester.getCuadraticError());
+	void endActualTest(){
+			float evaluation = tester.getAdvance()<0? 0: tester.getAdvance();// / (1 + tester.getCuadraticError());
 			Debug.Log("test number: " + testNumber + "= error: " + tester.getCuadraticError() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation);
 			tests[testNumber].setEvaluation(evaluation);
 			destroyTest();
+	}
+	
+	
+	
+	// Update is called once per 
+	void FixedUpdate () {
+
+		
+		
+		if(testNumber == -1){
+			testNumber++;
+			newTest(testNumber);	
 			
+		}
+		if(tester != null && testNumber >= 0 && elapsedTime >testingTime){
+			endActualTest();
 			testNumber++;
 			if(testNumber<tests.Count){
 				newTest(testNumber);
@@ -69,7 +83,13 @@ public class SimulationsManager : MonoBehaviour {
 			else{
 				tests = null;
 				runingTests = false;
+				Debug.Log("csrlrlrlrl");
 			}
 		}
+		if(tester!=null){
+			tester.updateState(elapsedTime);
+		}
+		elapsedTime+=Time.deltaTime;
+		
 	}
 }

@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creaturePref: {fileID: 100030, guid: 80f20e1f27fb1d7498bf35a8bcab55e6, type: 2}
+  creaturePref: {fileID: 100034, guid: 03dc5555da0564f16b41d30ce4b4fa81, type: 2}
   testingTime: 20
   timeScale: 20
 --- !u!4 &362562918
@@ -197,7 +197,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1004967052}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cdf7d3f1ad11f8d6d00011d98d76c639, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

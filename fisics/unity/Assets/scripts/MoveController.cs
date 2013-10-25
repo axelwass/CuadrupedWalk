@@ -21,8 +21,7 @@ public class MoveController : MonoBehaviour {
 	
 	public GameObject body;
 	
-	
-	float timeElapsed;
+
 	
 	float initialPositionX = 0;
 	float initialPositionY = 0;
@@ -35,6 +34,7 @@ public class MoveController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		
 	}
 	
 	public void testGenome(Genome genome){
@@ -70,17 +70,30 @@ public class MoveController : MonoBehaviour {
 		return cumulatedError/updates;	
 	}
 	
-	public float getTimeElapsed(){
-	 return timeElapsed;	
-	}
+
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	public void updateState(float elapsedTime) {
+		backLeft1.updateState(elapsedTime);
+		backLeft2.updateState(elapsedTime);
+		backLeftShoulder.updateState(elapsedTime);
+		
+		backRight1.updateState(elapsedTime);
+		backRight2.updateState(elapsedTime);
+		backRightShoulder.updateState(elapsedTime);
+		
+		frontLeft1.updateState(elapsedTime);
+		frontLeft2.updateState(elapsedTime);
+		frontLeftShoulder.updateState(elapsedTime);
+		
+		frontRight1.updateState(elapsedTime);
+		frontRight2.updateState(elapsedTime);
+		frontRightShoulder.updateState(elapsedTime);
+		
 		
 		cumulatedError += Mathf.Pow((body.transform.position.y - initialPositionY) + (body.transform.position.z - initialPositionZ),2);
 		lastPositionX = body.transform.position.x;
 		
 		updates++;
-		timeElapsed+=Time.deltaTime;
 	}
 }
