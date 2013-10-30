@@ -16,6 +16,8 @@ public class SimulationsManager : MonoBehaviour {
 	float elapsedTime = 0;
 	bool runingTests = false;
 	
+	bool nextTest = false;
+	
 	System.Collections.Generic.List<GenomeContainer> tests = new System.Collections.Generic.List<GenomeContainer>();
 	
 	// Use this for initialization
@@ -37,59 +39,61 @@ public class SimulationsManager : MonoBehaviour {
 			this.tests = tests;
 			
 			testNumber = -1;
-			
+			nextTest=true;
 			
 		}
 	}
 	
 	void destroyTest(){
 		tester = null;
-		Destroy(testingCreature);	
+		//Destroy(testingCreature);
+		DestroyImmediate(testingCreature);
 	}
 	
 	void newTest(int i){
-		elapsedTime=0;
 		testingCreature = (GameObject)Instantiate(creaturePref);
 		tester = (MoveController)testingCreature.GetComponent("MoveController");
 		tester.testGenome(tests[i].getGenome());
-		
+		tests[i].getGenome().print();
+		elapsedTime=-0.02f;
+		Random.seed = 0;
 	}
 	
 	void endActualTest(){
 			float evaluation = tester.getAdvance()<0? 0: tester.getAdvance();// / (1 + tester.getCuadraticError());
 			Debug.Log("test number: " + testNumber + "= error: " + tester.getCuadraticError() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation);
-			tests[testNumber].setEvaluation(evaluation);
+			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();
+			
 	}
 	
 	
 	
 	// Update is called once per 
 	void FixedUpdate () {
-
-		
-		
-		if(testNumber == -1){
+		if(nextTest){
 			testNumber++;
-			newTest(testNumber);	
+			newTest(testNumber);
+			nextTest = false;
 			
-		}
-		if(tester != null && testNumber >= 0 && elapsedTime >testingTime){
-			endActualTest();
-			testNumber++;
-			if(testNumber<tests.Count){
-				newTest(testNumber);
+		}else{
+			if(tester != null && testNumber >= 0 && elapsedTime >testingTime){
+				endActualTest();
+				testNumber++;
+				if(testNumber<tests.Count){
+					nextTest =true;
+				}
+				else{
+					tests = null;
+					runingTests = false;
+					Debug.Log("fin de generación");
+				}
+			}else{
+				if(tester!=null){
+					tester.updateState(elapsedTime);
+				}
+				elapsedTime+=Time.deltaTime;
 			}
-			else{
-				tests = null;
-				runingTests = false;
-				Debug.Log("csrlrlrlrl");
-			}
 		}
-		if(tester!=null){
-			tester.updateState(elapsedTime);
-		}
-		elapsedTime+=Time.deltaTime;
-		
 	}
 }

@@ -38,7 +38,7 @@ public class MoveController : MonoBehaviour {
 	}
 	
 	public void testGenome(Genome genome){
-		
+		Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
 		backLeft1.setFunction(new MoveFunction(genome.getAmplitude(0),genome.getPeriod(),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength()));
 		backLeft2.setFunction(new MoveFunction(genome.getAmplitude(1),genome.getPeriod(),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength()));
 		backLeftShoulder.setFunction(new MoveFunction(genome.getAmplitude(2),genome.getPeriod(),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength()));
@@ -59,21 +59,28 @@ public class MoveController : MonoBehaviour {
 		initialPositionX = body.transform.position.x;
 		initialPositionY = body.transform.position.y;
 		initialPositionZ = body.transform.position.z;
+		//Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
+	
 	}
 	
 	
 	public float getAdvance(){
+		
 		return 	lastPositionX - initialPositionX;
 	}
 	
 	public float getCuadraticError(){
+		//Debug.Log("updates: " + updates);
 		return cumulatedError/updates;	
 	}
 	
 
 	
-	// Update is called once per frame
+	// Update is called once every 0.02 sec.
 	public void updateState(float elapsedTime) {
+		if(elapsedTime<0){
+			return;
+		}
 		backLeft1.updateState(elapsedTime);
 		backLeft2.updateState(elapsedTime);
 		backLeftShoulder.updateState(elapsedTime);
@@ -89,7 +96,7 @@ public class MoveController : MonoBehaviour {
 		frontRight1.updateState(elapsedTime);
 		frontRight2.updateState(elapsedTime);
 		frontRightShoulder.updateState(elapsedTime);
-		
+	
 		
 		cumulatedError += Mathf.Pow((body.transform.position.y - initialPositionY) + (body.transform.position.z - initialPositionZ),2);
 		lastPositionX = body.transform.position.x;

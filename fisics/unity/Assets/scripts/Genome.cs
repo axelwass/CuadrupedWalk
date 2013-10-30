@@ -93,5 +93,26 @@ public class Genome:System.Collections.IEnumerable
         }
     }
 	
+	public void print(){
+		Debug.Log("strength" + strength.getVal());
+		Debug.Log("period" + period.getVal());
+		
+		String a = "Amplitudes: ";
+		 for (int i = 0; i < amplitudes.Length; i++)
+        {
+            a += amplitudes[i].getVal();
+        }
+		Debug.Log(a);
+		String b = "fases: ";
+		for (int i = 0; i < fases.Length; i++)
+        {
+            b+=fases[i].getVal();
+        }
+		Debug.Log(b);
+		//for (int i = 0; i < centerAngles.Length; i++)
+        //{
+        //    Debug.Log(centerAngles[i]);
+        //}
+	}
 }
 

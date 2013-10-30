@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creaturePref: {fileID: 100034, guid: 03dc5555da0564f16b41d30ce4b4fa81, type: 2}
-  testingTime: 20
-  timeScale: 20
+  creaturePref: {fileID: 100034, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+  testingTime: 5
+  timeScale: 1
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb10b68e359dc4bb36b540c5e22fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  POPULATION: 20
+  POPULATION: 30
   simManager: {fileID: 362562917}
 --- !u!4 &954359148
 Transform:
