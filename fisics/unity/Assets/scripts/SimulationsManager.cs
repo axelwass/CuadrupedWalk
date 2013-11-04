@@ -20,6 +20,19 @@ public class SimulationsManager : MonoBehaviour {
 	
 	System.Collections.Generic.List<GenomeContainer> tests = new System.Collections.Generic.List<GenomeContainer>();
 	
+	
+	private static SimulationsManager instance;
+	
+	void Awake(){
+		if(instance != null){
+			DestroyImmediate(this.gameObject);	
+		}
+		else{
+			instance = this;	
+			DontDestroyOnLoad(this);
+		}
+	}
+	
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = timeScale;
@@ -47,16 +60,25 @@ public class SimulationsManager : MonoBehaviour {
 	void destroyTest(){
 		tester = null;
 		//Destroy(testingCreature);
-		DestroyImmediate(testingCreature);
+		//DestroyImmediate(testingCreature);
 	}
 	
-	void newTest(int i){
-		testingCreature = (GameObject)Instantiate(creaturePref);
-		tester = (MoveController)testingCreature.GetComponent("MoveController");
-		tester.testGenome(tests[i].getGenome());
-		tests[i].getGenome().print();
-		elapsedTime=-0.02f;
-		Random.seed = 0;
+	void newTest(){
+		//Debug.Log("testnumber: " + testNumber);
+		Application.LoadLevel(0);
+	}
+	
+	void OnLevelWasLoaded (int level) {
+		if (level == 0) {
+			//Debug.Log("testnumber: " + testNumber);
+			testingCreature = GameObject.Find("testingCreature");//(GameObject)Instantiate(creaturePref);
+			tester = (MoveController)testingCreature.GetComponent("MoveController");
+			tester.testGenome(tests[testNumber].getGenome());
+			//tests[testNumber].getGenome().print();
+			elapsedTime=-0.02f;
+			//Random.seed = 0;
+			
+		}
 	}
 	
 	void endActualTest(){
@@ -73,14 +95,14 @@ public class SimulationsManager : MonoBehaviour {
 	void FixedUpdate () {
 		if(nextTest){
 			testNumber++;
-			newTest(testNumber);
+			newTest();
 			nextTest = false;
 			
 		}else{
 			if(tester != null && testNumber >= 0 && elapsedTime >testingTime){
 				endActualTest();
-				testNumber++;
-				if(testNumber<tests.Count){
+				//testNumber++;
+				if(testNumber+1<tests.Count){
 					nextTest =true;
 				}
 				else{

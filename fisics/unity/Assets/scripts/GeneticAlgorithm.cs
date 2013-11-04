@@ -11,11 +11,24 @@ public class GeneticAlgorithm : MonoBehaviour {
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
 	
 	
+	private static GeneticAlgorithm instance;
+	
+	void Awake(){
+		if(instance != null){
+			
+			DestroyImmediate(this.gameObject);
+		}
+		else{
+			instance = this;	
+			DontDestroyOnLoad(this);
+		}
+	}
+	
 	// Use this for initialization
 	void Start () {
-		GenomeContainer gc = new GenomeContainer();
+		//GenomeContainer gc = new GenomeContainer();
 		for(int i =0; i<POPULATION; i++){
-			population.Add(gc);	
+			population.Add(new GenomeContainer());	
 		}
 		simManager.runTests(population);
 	}

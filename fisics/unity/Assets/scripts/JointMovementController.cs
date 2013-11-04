@@ -8,8 +8,6 @@ public class JointMovementController : MonoBehaviour {
 	MoveFunction function;
 	HingeJoint joint;
 	
-	bool firstTime = true;
-	
 	// Use this for initialization
 	void Start () {
 		joint = (HingeJoint)GetComponent("HingeJoint");
