@@ -14,7 +14,7 @@ public class SheepSphere : MonoBehaviour {
 		sheep1.rigidbody.AddForce(new Vector3(0, 0, -force), ForceMode.Impulse);
 		sheep2.rigidbody.AddForce(new Vector3(0, 0, force), ForceMode.Impulse);
 		
-       writer = new StreamWriter("C:/Users/Kevin/Desktop/Test.txt");
+       writer = new StreamWriter("Test.txt");
 	   writer.WriteLine("Time \t Sheep1(z) \t Sheep2(z)");
 	}
 	
