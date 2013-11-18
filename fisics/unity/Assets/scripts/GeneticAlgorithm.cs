@@ -35,25 +35,52 @@ public class GeneticAlgorithm : MonoBehaviour {
 		simManager.runTests(population);
 	}
 	
-	GenomeContainer getRouletteParent(float totalEvaluation){
+	GenomeContainer getRouletteParent(System.Collections.Generic.List<GenomeContainer> pop){
+		float totalEvaluation = getTotalEvaluation(pop);
 		float number = UnityEngine.Random.Range(0.0f,totalEvaluation);
 		
 		float cumEval = 0;
-		for(int j =0; j<POPULATION; j++){
-			cumEval += population[j].getEvaluation();
-			if(cumEval>number){
-					return population[j];
+		for(int j =0; j<pop.Count; j++){
+			cumEval += pop[j].getEvaluation();
+			if(cumEval>=number){
+					return pop[j];
 			}
 		}
 		Debug.Log("ShouldNotReach");
-		return population[0];
+		return pop[0];
 	}
 	
-	GenomeContainer getRandomParent(){
-		int parent = UnityEngine.Random.Range(0,POPULATION);
+/*	GenomeContainer getRankingParent(System.Collections.Generic.List<GenomeContainer> pop){
+		float totalEvaluation = getTotalEvaluation(pop);
+		float number = UnityEngine.Random.Range(0.0f,totalEvaluation);
+		System.Collections.Generic.List<Integer> rank = new System.Collections.Generic.List<Integer>();
+		int totalRank = 0;
+		float last = pop[0].getEvaluation();
+		for(int j =0; j<pop.Count; j++){
+			cumEval += pop[j].getEvaluation();
+			if(cumEval>number){
+					return pop[j];
+			}
+		}
+		Debug.Log("ShouldNotReach");
+		return pop[0];
+	}*/
+	
+	GenomeContainer getRandomParent(System.Collections.Generic.List<GenomeContainer> pop){
+		int parent = UnityEngine.Random.Range(0,pop.Count);
 		//Debug.Log("Se devuelve el: " + parent);
-		return population[parent];
+		return pop[parent];
 		
+	}
+	
+	float getTotalEvaluation(System.Collections.Generic.List<GenomeContainer> pop){
+		float totalEvaluation = 0;
+		foreach(GenomeContainer gc in pop){
+				totalEvaluation += gc.getEvaluation();
+				//Debug.Log("genome eval: " + gc.getEvaluation());
+				
+			}
+		return totalEvaluation;
 	}
 	
 	// Update is called once per frame
@@ -63,18 +90,16 @@ public class GeneticAlgorithm : MonoBehaviour {
 				return gc2.getEvaluation().CompareTo(gc1.getEvaluation());
               });
 			
-			float totalEvaluation = 0;
-			foreach(GenomeContainer gc in population){
-				totalEvaluation += gc.getEvaluation();
-				//Debug.Log("genome eval: " + gc.getEvaluation());
-				
-			}
+			
 			
 			Debug.Log("Best sofar: " + population[0].getEvaluation());
 			population[0].getGenome().saveToFile("bestSoFar["+generation+"].genome");
 			
 			System.Collections.Generic.List<GenomeContainer> newPopulation = new System.Collections.Generic.List<GenomeContainer>();
-			
+			System.Collections.Generic.List<GenomeContainer> oldPopulation = new System.Collections.Generic.List<GenomeContainer>();
+			for(int i =0; i<POPULATION; i++){
+				oldPopulation.Add(population[i]);
+			}
 			//for(int i =0; i<POPULATION / 5; i++){
 			//	newPoblation.Add(population[i]);
 			//}
@@ -83,21 +108,33 @@ public class GeneticAlgorithm : MonoBehaviour {
 			for(int i =0; i<eliteSize; i++){
 				newPopulation.Add(population[i]);
 			}
-			int rouletteSize = 8;
-			for(int i =0; i< rouletteSize; i++){
-				GenomeContainer son = getRouletteParent(totalEvaluation).apariate(getRouletteParent(totalEvaluation));
+			int rouletteSize = 26;
+			for(int i =0; i< rouletteSize/2; i++){
+				GenomeContainer c1 = getRouletteParent(oldPopulation);
+				oldPopulation.Remove(c1);
+				GenomeContainer c2 = getRouletteParent(oldPopulation);
+				oldPopulation.Remove(c2);
+				GenomeContainer son1 = c1.apariate(c2);
+				GenomeContainer son2 = c2.apariate(c1);
 				if(UnityEngine.Random.Range(0.0f,1.0f)<0.3f){
-					son = son.mutate();
+					son1 = son1.mutate();
 				}
-				newPopulation.Add(son);	
+				if(UnityEngine.Random.Range(0.0f,1.0f)<0.3f){
+					son2 = son2.mutate();
+				}
+				newPopulation.Add(son1);
+				Debug.Log("newPop size: " + newPopulation.Count);
+				newPopulation.Add(son2);
+				Debug.Log("newPop size: " + newPopulation.Count);
 			}
 			
 			for(int i =0; i< POPULATION - rouletteSize - eliteSize; i++){
-				GenomeContainer son = getRandomParent().apariate(getRandomParent());
+				GenomeContainer son = getRandomParent(oldPopulation).apariate(getRandomParent(oldPopulation));
 				if(UnityEngine.Random.Range(0.0f,1.0f)<0.3f){
 					son = son.mutate();
 				}
 				newPopulation.Add(son);	
+				Debug.Log("newPop size: " + newPopulation.Count);
 			}
 			/*for(int i =0; i<POPULATION / 2; i++){
 				newPoblation.Add(poblation[i]);
