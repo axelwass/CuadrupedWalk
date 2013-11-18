@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
-
-public class Genome:System.Collections.IEnumerable
+[Serializable]
+public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization.ISerializable
 {
 	Gen strength;
 	Gen period;
@@ -10,6 +13,32 @@ public class Genome:System.Collections.IEnumerable
 	Gen[] amplitudes;
 	Gen[] fases;
 	Gen[] centerAngles;
+	
+	public static Genome createFromFile(String filename){
+		Genome instance  = null;
+
+        // Open the file containing the data that you want to deserialize.
+        FileStream fs = new FileStream(filename, FileMode.Open);
+        try 
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            // Deserialize the hashtable from the file and  
+            // assign the reference to the local variable.
+            instance = (Genome) formatter.Deserialize(fs);
+        }
+        catch (SerializationException e) 
+        {
+            Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+            throw;
+        }
+        finally 
+        {
+            fs.Close();
+        }
+		
+		return instance;
+	}
 	
 	public Genome ()
 	{
@@ -24,7 +53,7 @@ public class Genome:System.Collections.IEnumerable
         {
             fases[i] = new Gen(0,Mathf.PI * 2.0f);
         }
-		for (int i = 0; i < fases.Length; i++)
+		for (int i = 0; i < centerAngles.Length; i++)
         {
             centerAngles[i] = new Gen(-90,90);
         }
@@ -43,7 +72,7 @@ public class Genome:System.Collections.IEnumerable
         {
             fases[i].generateVal();
         }
-		for (int i = 0; i < fases.Length; i++)
+		for (int i = 0; i < centerAngles.Length; i++)
         {
             centerAngles[i].generateVal();
         }
@@ -114,5 +143,71 @@ public class Genome:System.Collections.IEnumerable
         //    Debug.Log(centerAngles[i]);
         //}
 	}
+	
+	public void saveToFile(String filename){
+		FileStream fs = new FileStream(filename, FileMode.Create);
+
+        // Construct a BinaryFormatter and use it to serialize the data to the stream.
+        BinaryFormatter formatter = new BinaryFormatter();
+        try 
+        {
+            formatter.Serialize(fs, this);
+        }
+        catch (SerializationException e) 
+        {
+            Console.WriteLine("Failed to serialize. Reason: " + e.Message);
+            throw;
+        }
+        finally 
+        {
+            fs.Close();
+        }	
+	}
+	
+	
+	public void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        // Use the AddValue method to specify serialized values.
+		
+		for (int i = 0; i < amplitudes.Length; i++)
+        {
+        	info.AddValue("amplitudes" + i, amplitudes[i].getVal(), typeof(float));
+        }
+		for (int i = 0; i < fases.Length; i++)
+        {
+        	info.AddValue("fases" + i, fases[i].getVal(), typeof(float));
+        }
+		for (int i = 0; i < centerAngles.Length; i++)
+        {
+        	info.AddValue("centerAngles" + i, centerAngles[i].getVal(), typeof(float));
+        }
+		
+		
+        info.AddValue("strength", strength.getVal(), typeof(float));
+        info.AddValue("period", period.getVal(), typeof(float));
+
+    }
+
+    // The special constructor is used to deserialize values.
+    public Genome(SerializationInfo info, StreamingContext context):this()
+    {
+		
+		for (int i = 0; i < amplitudes.Length; i++)
+        {
+            amplitudes[i].setVal((float) info.GetValue("amplitudes" + i, typeof(float)));
+        }
+		for (int i = 0; i < fases.Length; i++)
+        {
+            fases[i].setVal((float) info.GetValue("fases" + i, typeof(float)));
+        }
+		for (int i = 0; i < centerAngles.Length; i++)
+        {
+            centerAngles[i].setVal((float) info.GetValue("centerAngles" + i, typeof(float)));
+        }
+		
+		
+		strength.setVal((float) info.GetValue("strength", typeof(float)));
+		period.setVal((float) info.GetValue("period", typeof(float)));
+    }
 }
 

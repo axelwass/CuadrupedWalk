@@ -98,7 +98,7 @@ public class MoveController : MonoBehaviour {
 		frontRightShoulder.updateState(elapsedTime);
 	
 		
-		cumulatedError += Mathf.Pow((body.transform.position.y - initialPositionY) + (body.transform.position.z - initialPositionZ),2);
+		cumulatedError += body.transform.position.y < initialPositionY? Mathf.Pow((body.transform.position.y - initialPositionY),2):0;
 		lastPositionX = body.transform.position.x;
 		
 		updates++;

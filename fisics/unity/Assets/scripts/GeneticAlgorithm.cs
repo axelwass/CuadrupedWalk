@@ -13,6 +13,8 @@ public class GeneticAlgorithm : MonoBehaviour {
 	
 	private static GeneticAlgorithm instance;
 	
+	int generation = 0;
+	
 	void Awake(){
 		if(instance != null){
 			
@@ -69,6 +71,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 			}
 			
 			Debug.Log("Best sofar: " + population[0].getEvaluation());
+			population[0].getGenome().saveToFile("bestSoFar["+generation+"].genome");
 			
 			System.Collections.Generic.List<GenomeContainer> newPopulation = new System.Collections.Generic.List<GenomeContainer>();
 			

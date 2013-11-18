@@ -82,7 +82,8 @@ public class SimulationsManager : MonoBehaviour {
 	}
 	
 	void endActualTest(){
-			float evaluation = tester.getAdvance()<0? 0: tester.getAdvance();// / (1 + tester.getCuadraticError());
+			float evaluation = tester.getAdvance() - tester.getCuadraticError() * 10.0f;// / (1 + tester.getCuadraticError());
+			evaluation = evaluation<0? 0: evaluation;
 			Debug.Log("test number: " + testNumber + "= error: " + tester.getCuadraticError() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation);
 			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();
