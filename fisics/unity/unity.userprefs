@@ -2,13 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GeneticAlgorithm.cs">
     <Files>
-      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="76" Column="21" />
-      <File FileName="Assets\scripts\SimulationsManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="86" Column="24" />
+      <File FileName="Assets\scripts\SimulationsManager.cs" Line="85" Column="87" />
       <File FileName="Assets\scripts\MoveFunction.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\JointMovementController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\MoveController.cs" Line="61" Column="5" />
+      <File FileName="Assets\scripts\MoveController.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Genome.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GenomeContainer.cs" Line="51" Column="3" />
+      <File FileName="Assets\scripts\GenomeContainer.cs" Line="88" Column="30" />
       <File FileName="Assets\scripts\Gen.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\ExecutionManager.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\SimulationManagerData.cs" Line="1" Column="1" />

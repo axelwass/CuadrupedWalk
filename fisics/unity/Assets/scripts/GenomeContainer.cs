@@ -66,6 +66,26 @@ public class GenomeContainer
 		return new GenomeContainer(newGenome);
 	}
 	
-	
+	public override bool Equals (object obj)
+	{
+		GenomeContainer other = (GenomeContainer)obj;
+        System.Collections.IEnumerator iterator1 = genome.GetEnumerator();
+		System.Collections.IEnumerator iterator2 = other.genome.GetEnumerator();
+		foreach(Gen gen in genome){
+			iterator1.MoveNext();
+			iterator2.MoveNext();
+			
+		if(!((Gen)iterator1.Current).getVal().Equals(((Gen)iterator2.Current).getVal())){
+				return false;
+			}
+			
+		}
+		return true;
+	}
+
+	public override int GetHashCode ()
+	{
+		return base.GetHashCode ();
+	}
 }
 
