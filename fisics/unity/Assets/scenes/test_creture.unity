@@ -1905,7 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60c7ffa13e4627419c755f0c4f5f26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatureFilePath: bestSoFar[0].genome
+  creatureFilePath: bestSoFar[24].genome
 --- !u!114 &1931004678
 MonoBehaviour:
   m_ObjectHideFlags: 0

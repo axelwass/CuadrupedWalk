@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class GeneticAlgorithm : MonoBehaviour {
 	
@@ -33,6 +34,10 @@ public class GeneticAlgorithm : MonoBehaviour {
 			population.Add(new GenomeContainer());	
 		}
 		simManager.runTests(population);
+		
+		StreamWriter writer = new StreamWriter("fitness.txt",false);
+		writer.Write(writer.NewLine);
+		writer.Close();
 	}
 	
 	GenomeContainer getRouletteParent(float totalEvaluation){
@@ -63,15 +68,21 @@ public class GeneticAlgorithm : MonoBehaviour {
 				return gc2.getEvaluation().CompareTo(gc1.getEvaluation());
               });
 			
+			
+			StreamWriter writer = new StreamWriter("fitness.txt",true);
 			float totalEvaluation = 0;
 			foreach(GenomeContainer gc in population){
+				writer.Write(gc.getEvaluation());
+				writer.Write("\t");
 				totalEvaluation += gc.getEvaluation();
 				//Debug.Log("genome eval: " + gc.getEvaluation());
 				
 			}
+			writer.Write(writer.NewLine);
+			writer.Close();
 			
 			Debug.Log("Best sofar: " + population[0].getEvaluation());
-			population[0].getGenome().saveToFile("bestSoFar["+generation+"].genome");
+			population[0].getGenome().saveToFile("bestSoFar["+(generation++)+"].genome");
 			
 			System.Collections.Generic.List<GenomeContainer> newPopulation = new System.Collections.Generic.List<GenomeContainer>();
 			
@@ -79,11 +90,11 @@ public class GeneticAlgorithm : MonoBehaviour {
 			//	newPoblation.Add(population[i]);
 			//}
 			// cambiado por 2 de elite.
-			int eliteSize = 2;
+			int eliteSize = 5;
 			for(int i =0; i<eliteSize; i++){
 				newPopulation.Add(population[i]);
 			}
-			int rouletteSize = 8;
+			int rouletteSize = 10;
 			for(int i =0; i< rouletteSize; i++){
 				GenomeContainer son = getRouletteParent(totalEvaluation).apariate(getRouletteParent(totalEvaluation));
 				if(UnityEngine.Random.Range(0.0f,1.0f)<0.3f){

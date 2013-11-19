@@ -25,7 +25,7 @@ public class MoveController : MonoBehaviour {
 	
 	float initialPositionX = 0;
 	float initialPositionY = 0;
-	float initialPositionZ = 0;
+	//float initialPositionZ = 0;
 	
 	
 	float lastPositionX = 0;
@@ -58,7 +58,7 @@ public class MoveController : MonoBehaviour {
 		
 		initialPositionX = body.transform.position.x;
 		initialPositionY = body.transform.position.y;
-		initialPositionZ = body.transform.position.z;
+		//initialPositionZ = body.transform.position.z;
 		//Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
 	
 	}
