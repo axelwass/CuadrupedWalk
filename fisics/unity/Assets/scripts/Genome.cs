@@ -59,8 +59,8 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
         }
 		
 		
-		strength = new Gen(0,1000);
-		period = new Gen(0,(Mathf.PI * 2.0f)/ 5.0f);
+		strength = new Gen(0,10000);
+		period = new Gen(0,/*(Mathf.PI * 2.0f)*/10);
 	}
 	
 	public Genome init(){

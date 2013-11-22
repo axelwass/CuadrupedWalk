@@ -112,7 +112,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 396275533}
   m_GameObject: {fileID: 264938556}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -689,8 +689,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb10b68e359dc4bb36b540c5e22fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  POPULATION: 30
+  POPULATION: 60
+  ELITE_SIZE: 20
+  ROULET_SIZE: 30
   simManager: {fileID: 362562917}
+  folder: mucha poblacion
 --- !u!4 &954359148
 Transform:
   m_ObjectHideFlags: 0

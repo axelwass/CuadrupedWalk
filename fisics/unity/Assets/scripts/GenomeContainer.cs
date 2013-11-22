@@ -55,11 +55,14 @@ public class GenomeContainer
 		foreach(Gen gen in newGenome){
 			iterator1.MoveNext();
 			iterator2.MoveNext();
-			if(UnityEngine.Random.Range(0.0f,1.0f) < 0.5){
+			float rand = UnityEngine.Random.Range(0.0f,1.0f);
+			if( rand< 0.4){
 				gen.setVal(((Gen)iterator1.Current).getVal());
 			}
-			else{
+			else if(rand < 0.8){
 				gen.setVal(((Gen)iterator2.Current).getVal());
+			}else{
+				gen.setVal(	(((Gen)iterator1.Current).getVal() + ((Gen)iterator2.Current).getVal())/2);
 			}
 		}
 		
