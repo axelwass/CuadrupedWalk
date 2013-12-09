@@ -42,9 +42,9 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	
 	public Genome ()
 	{
-		amplitudes = new Gen[12];
-		fases = new Gen[12];
-		centerAngles = new Gen[12];
+		amplitudes = new Gen[6];
+		fases = new Gen[6];
+		centerAngles = new Gen[6];
 		for (int i = 0; i < amplitudes.Length; i++)
         {
             amplitudes[i] = new Gen(0,90);
@@ -59,8 +59,8 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
         }
 		
 		
-		strength = new Gen(0,10000);
-		period = new Gen(0,/*(Mathf.PI * 2.0f)*/10);
+		strength = new Gen(0,1000);
+		period = new Gen(0,/*(Mathf.PI * 2.0f)*/5);
 	}
 	
 	public Genome init(){
@@ -168,46 +168,58 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         // Use the AddValue method to specify serialized values.
-		
+		StreamWriter writer = new StreamWriter("save.txt",false);
 		for (int i = 0; i < amplitudes.Length; i++)
         {
         	info.AddValue("amplitudes" + i, amplitudes[i].getVal(), typeof(float));
+			writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
         }
 		for (int i = 0; i < fases.Length; i++)
         {
         	info.AddValue("fases" + i, fases[i].getVal(), typeof(float));
+			writer.WriteLine("fases" + i +": " +  fases[i].getVal());
         }
 		for (int i = 0; i < centerAngles.Length; i++)
         {
-        	info.AddValue("centerAngles" + i, centerAngles[i].getVal(), typeof(float));
+        	info.AddValue("centerAngles" + i , centerAngles[i].getVal(), typeof(float));
+			writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
         }
 		
 		
         info.AddValue("strength", strength.getVal(), typeof(float));
+			writer.WriteLine("strength: " + strength.getVal());
         info.AddValue("period", period.getVal(), typeof(float));
-
+			writer.WriteLine("period: "+ period.getVal());
+		
+		writer.Close();
     }
 
     // The special constructor is used to deserialize values.
     public Genome(SerializationInfo info, StreamingContext context):this()
     {
-		
+		StreamWriter writer = new StreamWriter("load.txt",false);
 		for (int i = 0; i < amplitudes.Length; i++)
         {
             amplitudes[i].setVal((float) info.GetValue("amplitudes" + i, typeof(float)));
+			writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
         }
 		for (int i = 0; i < fases.Length; i++)
         {
             fases[i].setVal((float) info.GetValue("fases" + i, typeof(float)));
+			writer.WriteLine("fases" + i +": " +  fases[i].getVal());
         }
 		for (int i = 0; i < centerAngles.Length; i++)
         {
             centerAngles[i].setVal((float) info.GetValue("centerAngles" + i, typeof(float)));
+			writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
         }
 		
 		
 		strength.setVal((float) info.GetValue("strength", typeof(float)));
+			writer.WriteLine("strength: " + strength.getVal());
 		period.setVal((float) info.GetValue("period", typeof(float)));
+			writer.WriteLine("period: "+ period.getVal());
+		writer.Close();
     }
 }
 
