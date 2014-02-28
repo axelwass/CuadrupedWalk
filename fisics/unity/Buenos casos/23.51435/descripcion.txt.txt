@@ -1,0 +1,14 @@
+population: 60
+elte: 20
+roulet: 30
+
+fitness: tester.getAdvance() * (1-(tester.getCuadraticErrorRotation()/90f));
+
+genome: 
+	amplitudes[i] = new Gen(0,90);
+	fases[i] = new Gen(0,Mathf.PI * 2.0f);
+	centerAngles[i] = new Gen(-90,90);
+	strength = new Gen(0,1000);
+	period = new Gen(0,/*(Mathf.PI * 2.0f)*/5);
+
+fase izq/der: true
