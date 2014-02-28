@@ -19,8 +19,10 @@ public class GeneticAlgorithm : MonoBehaviour {
 	
 	int generation = 0;
 	
+	public bool generate = true;
+	
 	void Awake(){
-		if(instance != null){
+		if(!generate || instance != null){
 			
 			DestroyImmediate(this.gameObject);
 		}
@@ -37,10 +39,10 @@ public class GeneticAlgorithm : MonoBehaviour {
 			population.Add(new GenomeContainer());	
 		}
 		simManager.runTests(population);
+		Directory.CreateDirectory("./test/");
+		Directory.CreateDirectory("./test/"+folder);
 		
-		Directory.CreateDirectory("./"+folder);
-		
-		StreamWriter writer = new StreamWriter(folder+"/fitness.txt",false);
+		StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",false);
 		writer.Write(writer.NewLine);
 		writer.Close();
 	}
@@ -85,7 +87,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 				return gc2.getEvaluation().CompareTo(gc1.getEvaluation());
               });
 
-			StreamWriter writer = new StreamWriter(folder+"/fitness.txt",true);
+			StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",true);
 			foreach(GenomeContainer gc in population){
 				writer.Write(gc.getEvaluation());
 				writer.Write("\t");
@@ -93,8 +95,8 @@ public class GeneticAlgorithm : MonoBehaviour {
 			writer.Write(writer.NewLine);
 			writer.Close();
 
-			Debug.Log("Best sofar: " + population[0].getEvaluation());
-			population[0].getGenome().saveToFile(folder+"/bestSoFar["+(generation++)+"].genome");
+			Debug.Log("Best sofar["+generation+"]: " + population[0].getEvaluation());
+			population[0].getGenome().saveToFile("test/"+folder+"/bestSoFar["+(generation++)+"].genome");
 			
 			System.Collections.Generic.List<GenomeContainer> newPopulation = new System.Collections.Generic.List<GenomeContainer>();
 			System.Collections.Generic.List<GenomeContainer> oldPopulation = new System.Collections.Generic.List<GenomeContainer>();
