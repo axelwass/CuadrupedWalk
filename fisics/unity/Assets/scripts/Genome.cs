@@ -47,7 +47,11 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		centerAngles = new Gen[6];
 		for (int i = 0; i < amplitudes.Length; i++)
         {
-            amplitudes[i] = new Gen(0,90);
+			if(i%3==0){
+            	amplitudes[i] = new Gen(0,30);
+			}else{
+				amplitudes[i] = new Gen(0,45);
+			}
         }
 		for (int i = 0; i < fases.Length; i++)
         {
@@ -55,11 +59,15 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
         }
 		for (int i = 0; i < centerAngles.Length; i++)
         {
-            centerAngles[i] = new Gen(-90,90);
+			if(i%3==0){
+				centerAngles[i] = new Gen(0,30);
+			}else{
+            	centerAngles[i] = new Gen(-45,45);
+			}
         }
 		
 		
-		strength = new Gen(0,1000);
+		strength = new Gen(1000,3000);
 		period = new Gen(0,/*(Mathf.PI * 2.0f)*/5);
 	}
 	

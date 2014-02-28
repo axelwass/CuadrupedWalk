@@ -50,13 +50,13 @@ public class MoveController : MonoBehaviour {
 		backLeft2.setFunction(new MoveFunction(genome.getAmplitude(1),genome.getPeriod(),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength()));
 		backLeftShoulder.setFunction(new MoveFunction(genome.getAmplitude(2),genome.getPeriod(),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength()));
 		
-		backRight1.setFunction(new MoveFunction(genome.getAmplitude(3),genome.getPeriod(),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength()));
-		backRight2.setFunction(new MoveFunction(genome.getAmplitude(4),genome.getPeriod(),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength()));
-		backRightShoulder.setFunction(new MoveFunction(genome.getAmplitude(5),genome.getPeriod(),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength()));
+		frontLeft1.setFunction(new MoveFunction(genome.getAmplitude(3),genome.getPeriod(),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength()));
+		frontLeft2.setFunction(new MoveFunction(genome.getAmplitude(4),genome.getPeriod(),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength()));
+		frontLeftShoulder.setFunction(new MoveFunction(genome.getAmplitude(5),genome.getPeriod(),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength()));
 		
-		frontLeft1.setFunction(new MoveFunction(genome.getAmplitude(0),genome.getPeriod(),genome.getFase(0)+ Mathf.PI,genome.getCenterAngle(0),genome.getStrength()));
-		frontLeft2.setFunction(new MoveFunction(genome.getAmplitude(1),genome.getPeriod(),genome.getFase(1)+ Mathf.PI,genome.getCenterAngle(1),genome.getStrength()));
-		frontLeftShoulder.setFunction(new MoveFunction(genome.getAmplitude(2),genome.getPeriod(),genome.getFase(2)+ Mathf.PI,genome.getCenterAngle(2),genome.getStrength()));
+		backRight1.setFunction(new MoveFunction(genome.getAmplitude(0),genome.getPeriod(),genome.getFase(0)+ Mathf.PI,genome.getCenterAngle(0),genome.getStrength()));
+		backRight2.setFunction(new MoveFunction(genome.getAmplitude(1),genome.getPeriod(),genome.getFase(1)+ Mathf.PI,genome.getCenterAngle(1),genome.getStrength()));
+		backRightShoulder.setFunction(new MoveFunction(genome.getAmplitude(2),genome.getPeriod(),genome.getFase(2)+ Mathf.PI,genome.getCenterAngle(2),genome.getStrength()));
 		
 		frontRight1.setFunction(new MoveFunction(genome.getAmplitude(3),genome.getPeriod(),genome.getFase(3)+ Mathf.PI,genome.getCenterAngle(3),genome.getStrength()));
 		frontRight2.setFunction(new MoveFunction(genome.getAmplitude(4),genome.getPeriod(),genome.getFase(4)+ Mathf.PI,genome.getCenterAngle(4),genome.getStrength()));
