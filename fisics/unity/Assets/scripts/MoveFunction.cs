@@ -2,30 +2,16 @@ using System;
 using UnityEngine;
 
 
-public class MoveFunction
+public abstract class MoveFunction
 {
-	float A;
-	float B;
-	float C;
-	float D;
-	float strength;
+	protected float A;
+	protected float B;
+	protected float C;
+	protected float D;
+	protected float strength;
 
-	public MoveFunction(float amplitude, float period, float fase, float centerAngle, float strength)
-	{
-		this.A= amplitude;
-		this.B= period;
-		this.C= fase;
-		this.D= centerAngle;
-		this.strength = strength;
-	}
-
-	public float evalAngle(float t){
-		return A*(float)Math.Sin(t*B+C) + D;
-	}
-	
-	public float evalStrength(float t){
-		return strength;
-	}
+	public abstract float evalAngle (float t);
+	public abstract float evalStrength (float t);
 		
 }
 

@@ -9,11 +9,13 @@ public class TestCreature : MonoBehaviour {
 	public string creatureFilePath;
 	
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
+
+
 	
 	
+	public bool faseSync = true;
+
 	private static TestCreature instance;
-	
-	int generation = 0;
 	
 	public bool generate = true;
 	
@@ -26,6 +28,10 @@ public class TestCreature : MonoBehaviour {
 			instance = this;	
 			DontDestroyOnLoad(this);
 		}
+	}
+	
+	public static TestCreature getInstance(){
+		return instance;
 	}
 	
 	// Use this for initialization

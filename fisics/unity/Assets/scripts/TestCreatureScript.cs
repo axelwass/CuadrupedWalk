@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class TestCreatureScript : MonoBehaviour {
@@ -66,4 +66,4 @@ public class TestCreatureScript : MonoBehaviour {
 			elapsedTime+=Time.deltaTime;
 		}
 	}
-}
+}*/

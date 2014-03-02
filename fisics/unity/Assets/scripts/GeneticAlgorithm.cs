@@ -9,7 +9,9 @@ public class GeneticAlgorithm : MonoBehaviour {
 	public int ROULET_SIZE = 20;
 	
 	public SimulationManager simManager;
-	
+
+	public bool faseSync = true;
+
 	public string folder;
 	
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
@@ -36,7 +38,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 	void Start () {
 		//GenomeContainer gc = new GenomeContainer();
 		for(int i =0; i<POPULATION; i++){
-			population.Add(new GenomeContainer());	
+			population.Add(new GenomeContainer(faseSync));	
 		}
 		simManager.runTests(population);
 		Directory.CreateDirectory("./test/");

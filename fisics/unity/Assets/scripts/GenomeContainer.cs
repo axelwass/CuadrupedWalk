@@ -5,9 +5,9 @@ public class GenomeContainer
 	Genome genome;
 	float evaluation;
 	
-	public GenomeContainer ()
+	public GenomeContainer (bool faseSync)
 	{
-		this.genome = new Genome().init();
+		this.genome = new Genome(faseSync).init();
 	}
 	
 	public GenomeContainer (Genome genome)
@@ -28,7 +28,7 @@ public class GenomeContainer
 	}
 	
 	public GenomeContainer mutate(){
-		Genome newGenome = new Genome();
+		Genome newGenome = new Genome(genome.isFaseSync());
 		
 		
 		System.Collections.IEnumerator iterator = genome.GetEnumerator();
@@ -47,7 +47,7 @@ public class GenomeContainer
 	}
 	
 	public GenomeContainer apariate(GenomeContainer couple){
-		Genome newGenome = new Genome();
+		Genome newGenome = new Genome(genome.isFaseSync());
 		
 		
 		System.Collections.IEnumerator iterator1 = genome.GetEnumerator();

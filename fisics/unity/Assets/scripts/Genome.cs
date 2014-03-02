@@ -7,6 +7,8 @@ using System.IO;
 [Serializable]
 public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization.ISerializable
 {
+
+	bool faseSync;
 	Gen strength;
 	Gen period;
 	
@@ -39,19 +41,28 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		
 		return instance;
 	}
-	
-	public Genome ()
+
+	public bool isFaseSync(){
+		return faseSync;
+	}
+
+	public Genome (bool faseSync)
 	{
-		amplitudes = new Gen[6];
-		fases = new Gen[6];
-		centerAngles = new Gen[6];
+		this.faseSync = faseSync;
+		if (faseSync) {
+			amplitudes = new Gen[6];
+			fases = new Gen[6];
+			centerAngles = new Gen[6];
+		} else {
+			amplitudes = new Gen[12];
+			fases = new Gen[12];
+			centerAngles = new Gen[12];
+		}
+
+
 		for (int i = 0; i < amplitudes.Length; i++)
         {
-			if(i%3==0){
-            	amplitudes[i] = new Gen(0,30);
-			}else{
-				amplitudes[i] = new Gen(0,45);
-			}
+			amplitudes[i] = new Gen(0,45);
         }
 		for (int i = 0; i < fases.Length; i++)
         {
@@ -59,16 +70,12 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
         }
 		for (int i = 0; i < centerAngles.Length; i++)
         {
-			if(i%3==0){
-				centerAngles[i] = new Gen(0,30);
-			}else{
-            	centerAngles[i] = new Gen(-45,45);
-			}
+    		centerAngles[i] = new Gen(-45,45);	
         }
 		
 		
-		strength = new Gen(1000,3000);
-		period = new Gen(0,/*(Mathf.PI * 2.0f)*/5);
+		strength = new Gen(1000,5000);
+		period = new Gen(1,/*(Mathf.PI * 2.0f)*/5);
 	}
 	
 	public Genome init(){
@@ -176,58 +183,58 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         // Use the AddValue method to specify serialized values.
-		StreamWriter writer = new StreamWriter("save.txt",false);
+		//StreamWriter writer = new StreamWriter("save.txt",false);
 		for (int i = 0; i < amplitudes.Length; i++)
         {
         	info.AddValue("amplitudes" + i, amplitudes[i].getVal(), typeof(float));
-			writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
+			//writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
         }
 		for (int i = 0; i < fases.Length; i++)
         {
         	info.AddValue("fases" + i, fases[i].getVal(), typeof(float));
-			writer.WriteLine("fases" + i +": " +  fases[i].getVal());
+			//writer.WriteLine("fases" + i +": " +  fases[i].getVal());
         }
 		for (int i = 0; i < centerAngles.Length; i++)
         {
         	info.AddValue("centerAngles" + i , centerAngles[i].getVal(), typeof(float));
-			writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
+			//writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
         }
 		
 		
         info.AddValue("strength", strength.getVal(), typeof(float));
-			writer.WriteLine("strength: " + strength.getVal());
+			//writer.WriteLine("strength: " + strength.getVal());
         info.AddValue("period", period.getVal(), typeof(float));
-			writer.WriteLine("period: "+ period.getVal());
+			//writer.WriteLine("period: "+ period.getVal());
 		
-		writer.Close();
+		//writer.Close();
     }
 
     // The special constructor is used to deserialize values.
-    public Genome(SerializationInfo info, StreamingContext context):this()
+	public Genome(SerializationInfo info, StreamingContext context):this(TestCreature.getInstance().faseSync)
     {
-		StreamWriter writer = new StreamWriter("load.txt",false);
+		//StreamWriter writer = new StreamWriter("load.txt",false);
 		for (int i = 0; i < amplitudes.Length; i++)
         {
             amplitudes[i].setVal((float) info.GetValue("amplitudes" + i, typeof(float)));
-			writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
+			//writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
         }
 		for (int i = 0; i < fases.Length; i++)
         {
             fases[i].setVal((float) info.GetValue("fases" + i, typeof(float)));
-			writer.WriteLine("fases" + i +": " +  fases[i].getVal());
+			//writer.WriteLine("fases" + i +": " +  fases[i].getVal());
         }
 		for (int i = 0; i < centerAngles.Length; i++)
         {
             centerAngles[i].setVal((float) info.GetValue("centerAngles" + i, typeof(float)));
-			writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
+			//writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
         }
 		
 		
 		strength.setVal((float) info.GetValue("strength", typeof(float)));
-			writer.WriteLine("strength: " + strength.getVal());
+			//writer.WriteLine("strength: " + strength.getVal());
 		period.setVal((float) info.GetValue("period", typeof(float)));
-			writer.WriteLine("period: "+ period.getVal());
-		writer.Close();
+			//writer.WriteLine("period: "+ period.getVal());
+		//writer.Close();
     }
 }
 
