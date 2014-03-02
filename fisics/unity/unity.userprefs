@@ -1,12 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/TestCreature.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\MoveController.cs">
     <Files>
-      <File FileName="Assets/scripts/SimulationsManager.cs" Line="21" Column="5" />
-      <File FileName="Assets/scripts/GeneticAlgorithm.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/TestCreatureScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/MoveController.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/TestCreature.cs" Line="38" Column="34" />
+      <File FileName="Assets\scripts\PushSimulationManager.cs" Line="85" Column="49" />
+      <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="76" Column="23" />
+      <File FileName="Assets\scripts\PushSimulationManager.cs" Line="120" Column="1" />
+      <File FileName="Assets\scripts\Genome.cs" Line="53" Column="35" />
+      <File FileName="Assets\scripts\MoveController.cs" Line="53" Column="6" />
+      <File FileName="Assets\scripts\SimulationManager.cs" Line="17" Column="1" />
+      <File FileName="Assets\scripts\MoveFunction.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\JointMovementController.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\TestCreatureScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Gen.cs" Line="20" Column="4" />
+      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="158" Column="1" />
+      <File FileName="Assets\scripts\TestCreature.cs" Line="5" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

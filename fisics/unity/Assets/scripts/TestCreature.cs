@@ -4,7 +4,7 @@ using System.IO;
 
 public class TestCreature : MonoBehaviour {
 	
-	public SimulationsManager simManager;
+	public SimulationManager simManager;
 	
 	public string creatureFilePath;
 	
@@ -30,7 +30,7 @@ public class TestCreature : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-			population.Add(new GenomeContainer(Genome.createFromFile("test/"+creatureFilePath)));	
+			population.Add(new GenomeContainer(Genome.createFromFile(creatureFilePath)));	
 	}
 	
 	// Update is called once per frame

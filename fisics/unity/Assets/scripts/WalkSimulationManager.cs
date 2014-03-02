@@ -2,12 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SimulationsManager : MonoBehaviour {
+public class WalkSimulationManager : SimulationManager {
 
 	
-	public GameObject creaturePref;
-	public float testingTime = 10;
-	public float timeScale = 1;
+
 	
 	GameObject testingCreature;
 	MoveController tester;
@@ -21,7 +19,7 @@ public class SimulationsManager : MonoBehaviour {
 	System.Collections.Generic.List<GenomeContainer> tests = new System.Collections.Generic.List<GenomeContainer>();
 	
 	
-	private static SimulationsManager instance;
+	private static WalkSimulationManager instance;
 	
 	void Awake(){
 		if(instance != null){
@@ -39,11 +37,11 @@ public class SimulationsManager : MonoBehaviour {
 		
 	}
 	
-	public bool isRuningTest(){
+	public override bool isRuningTest(){
 		return runingTests;	
 	}
 	
-	public void runTests(System.Collections.Generic.List<GenomeContainer> tests){
+	public override void runTests(System.Collections.Generic.List<GenomeContainer> tests){
 		if(runingTests){
 			Debug.Log("No se pueden correr dos sries de tests al mismo tiempo");	
 		}
@@ -82,10 +80,8 @@ public class SimulationsManager : MonoBehaviour {
 	}
 	
 	void endActualTest(){
-			float evaluation = tester.getAdvance();//250f - tester.getCuadraticErrorPosition() - tester.getCuadraticErrorRotation();// / (1 + tester.getCuadraticError());
-			evaluation = evaluation<0? 0: evaluation;
-			evaluation = evaluation  - evaluation*tester.getCuadraticErrorRotation()/90f;
-			evaluation = evaluation<0? 0: evaluation;
+			float evaluation = tester.getAdvance() * (1-(tester.getCuadraticErrorRotation()/90f));
+		evaluation = tester.getAdvance()<0 || evaluation<0 ? 0: evaluation;
 			Debug.Log("test number: " + testNumber + "= error position: " + tester.getCuadraticErrorPosition() + "-- error rotation: " + tester.getCuadraticErrorRotation() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation);
 			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();

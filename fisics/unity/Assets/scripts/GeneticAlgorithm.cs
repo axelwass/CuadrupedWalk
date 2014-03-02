@@ -8,7 +8,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 	public int ELITE_SIZE = 4;
 	public int ROULET_SIZE = 20;
 	
-	public SimulationsManager simManager;
+	public SimulationManager simManager;
 	
 	public string folder;
 	
