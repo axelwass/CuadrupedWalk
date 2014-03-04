@@ -10,11 +10,6 @@ public class TestCreature : MonoBehaviour {
 	
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
 
-
-	
-	
-	public bool faseSync = true;
-
 	private static TestCreature instance;
 	
 	public bool generate = true;

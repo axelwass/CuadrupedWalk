@@ -5,9 +5,9 @@ public class GenomeContainer
 	Genome genome;
 	float evaluation;
 	
-	public GenomeContainer (bool faseSync)
+	public GenomeContainer (FunctioT functionType)
 	{
-		this.genome = new Genome(faseSync).init();
+		this.genome = new Genome(functionType).init();
 	}
 	
 	public GenomeContainer (Genome genome)
@@ -28,7 +28,7 @@ public class GenomeContainer
 	}
 	
 	public GenomeContainer mutate(){
-		Genome newGenome = new Genome(genome.isFaseSync());
+		Genome newGenome = new Genome(genome.getFunctionType());
 		
 		
 		System.Collections.IEnumerator iterator = genome.GetEnumerator();
@@ -47,7 +47,7 @@ public class GenomeContainer
 	}
 	
 	public GenomeContainer apariate(GenomeContainer couple){
-		Genome newGenome = new Genome(genome.isFaseSync());
+		Genome newGenome = new Genome(genome.getFunctionType());
 		
 		
 		System.Collections.IEnumerator iterator1 = genome.GetEnumerator();
@@ -56,10 +56,10 @@ public class GenomeContainer
 			iterator1.MoveNext();
 			iterator2.MoveNext();
 			float rand = UnityEngine.Random.Range(0.0f,1.0f);
-			if( rand< 0.4){
+			if( rand< 0.45){
 				gen.setVal(((Gen)iterator1.Current).getVal());
 			}
-			else if(rand < 0.8){
+			else if(rand < 0.45){
 				gen.setVal(((Gen)iterator2.Current).getVal());
 			}else{
 				gen.setVal(	(((Gen)iterator1.Current).getVal() + ((Gen)iterator2.Current).getVal())/2);

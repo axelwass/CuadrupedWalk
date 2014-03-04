@@ -8,9 +8,9 @@ using System.IO;
 public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization.ISerializable
 {
 
-	bool faseSync;
-	Gen strength;
-	Gen period;
+	FunctioT functionType;
+	Gen[] strength;
+	Gen[] period;
 	
 	Gen[] amplitudes;
 	Gen[] fases;
@@ -42,40 +42,72 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		return instance;
 	}
 
-	public bool isFaseSync(){
-		return faseSync;
+	public FunctioT getFunctionType(){
+		return functionType;
 	}
 
-	public Genome (bool faseSync)
-	{
-		this.faseSync = faseSync;
-		if (faseSync) {
-			amplitudes = new Gen[6];
-			fases = new Gen[6];
-			centerAngles = new Gen[6];
-		} else {
+	private void createVectors(FunctioT functionType){
+		switch (functionType) {
+		case FunctioT.Classic:
 			amplitudes = new Gen[12];
 			fases = new Gen[12];
 			centerAngles = new Gen[12];
+			strength = new Gen[1];
+			period = new Gen[1];
+			break;
+		case FunctioT.FaseSync:
+			amplitudes = new Gen[6];
+			fases = new Gen[6];
+			centerAngles = new Gen[6];
+			strength = new Gen[1];
+			period = new Gen[1];
+			break;
+		case FunctioT.Fourier2:
+			amplitudes = new Gen[12];
+			fases = new Gen[6];
+			centerAngles = new Gen[6];
+			strength = new Gen[1];
+			period = new Gen[1];
+			break;
+		case FunctioT.Partida:
+			amplitudes = new Gen[24];
+			fases = new Gen[24];
+			centerAngles = new Gen[24];
+			strength = new Gen[2];
+			period = new Gen[2];
+			break;
 		}
-
-
+		
 		for (int i = 0; i < amplitudes.Length; i++)
-        {
+		{
 			amplitudes[i] = new Gen(0,45);
-        }
+		}
 		for (int i = 0; i < fases.Length; i++)
-        {
-            fases[i] = new Gen(0,Mathf.PI * 2.0f);
-        }
+		{
+			fases[i] = new Gen(0,Mathf.PI * 2.0f);
+		}
 		for (int i = 0; i < centerAngles.Length; i++)
-        {
-    		centerAngles[i] = new Gen(-45,45);	
-        }
+		{
+			centerAngles[i] = new Gen(-45,45);	
+		}
 		
 		
-		strength = new Gen(1000,5000);
-		period = new Gen(1,/*(Mathf.PI * 2.0f)*/5);
+		for (int i = 0; i < strength.Length; i++) {
+			strength[i] = new Gen (500, 3000);
+		}
+		for (int i = 0; i < period.Length; i++) {
+			period[i] = new Gen(1,/*(Mathf.PI * 2.0f)*/5);
+		}
+	}
+	
+	private Genome (){
+	}
+	
+	public Genome (FunctioT functionType)
+	{
+		this.functionType = functionType;
+
+		this.createVectors (functionType);
 	}
 	
 	public Genome init(){
@@ -92,19 +124,25 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
             centerAngles[i].generateVal();
         }
 		
-		
-		strength.generateVal();
-		period.generateVal();
+		for (int i = 0; i < strength.Length; i++)
+		{
+			strength[i].generateVal();
+		}
+
+		for (int i = 0; i < period.Length; i++)
+		{
+			period[i].generateVal();
+		}
 		
 		return this;
 	}
 	
-	public float getStrength(){
-		return strength.getVal();
+	public float getStrength(int i){
+		return strength[i].getVal();
 	}
 	
-	public float getPeriod(){
-		return period.getVal();
+	public float getPeriod(int i){
+		return period[i].getVal();
 	}
 	
 	public float getAmplitude(int i){
@@ -121,9 +159,16 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	
 	public System.Collections.IEnumerator GetEnumerator()
     {
-		yield return strength;
-		yield return period;
-        for (int i = 0; i < amplitudes.Length; i++)
+		for (int i = 0; i < strength.Length; i++)
+		{
+			yield return strength[i];
+		}
+		for (int i = 0; i < period.Length; i++)
+		{
+			yield return period[i];
+		}
+		
+		for (int i = 0; i < amplitudes.Length; i++)
         {
             yield return amplitudes[i];
         }
@@ -138,8 +183,18 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
     }
 	
 	public void print(){
-		Debug.Log("strength" + strength.getVal());
-		Debug.Log("period" + period.getVal());
+		String s = "strength: ";
+		for (int i = 0; i < strength.Length; i++)
+		{
+			s += strength[i].getVal();
+		}
+		Debug.Log(s);
+		String p = "period: ";
+		for (int i = 0; i < period.Length; i++)
+		{
+			p += period[i].getVal();
+		}
+		Debug.Log(p);
 		
 		String a = "Amplitudes: ";
 		 for (int i = 0; i < amplitudes.Length; i++)
@@ -182,6 +237,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	
 	public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
+		info.AddValue ("functionType", functionType, typeof(FunctioT));
         // Use the AddValue method to specify serialized values.
 		//StreamWriter writer = new StreamWriter("save.txt",false);
 		for (int i = 0; i < amplitudes.Length; i++)
@@ -199,19 +255,31 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
         	info.AddValue("centerAngles" + i , centerAngles[i].getVal(), typeof(float));
 			//writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
         }
-		
-		
-        info.AddValue("strength", strength.getVal(), typeof(float));
-			//writer.WriteLine("strength: " + strength.getVal());
-        info.AddValue("period", period.getVal(), typeof(float));
-			//writer.WriteLine("period: "+ period.getVal());
+
+		for (int i = 0; i < strength.Length; i++)
+		{
+			info.AddValue("strength" + i , strength[i].getVal(), typeof(float));
+		}
+
+		for (int i = 0; i < period.Length; i++)
+		{
+			info.AddValue("period" + i , period[i].getVal(), typeof(float));
+		}
 		
 		//writer.Close();
     }
 
     // The special constructor is used to deserialize values.
-	public Genome(SerializationInfo info, StreamingContext context):this(TestCreature.getInstance().faseSync)
+	public Genome(SerializationInfo info, StreamingContext context):this()
     {
+		try{
+			functionType = (FunctioT)info.GetValue ("functionType", typeof(FunctioT));
+		}catch(SerializationException e){
+			functionType = FunctioT.FaseSync;
+		}
+
+		createVectors (functionType);
+
 		//StreamWriter writer = new StreamWriter("load.txt",false);
 		for (int i = 0; i < amplitudes.Length; i++)
         {
@@ -228,12 +296,21 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
             centerAngles[i].setVal((float) info.GetValue("centerAngles" + i, typeof(float)));
 			//writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
         }
-		
-		
-		strength.setVal((float) info.GetValue("strength", typeof(float)));
-			//writer.WriteLine("strength: " + strength.getVal());
-		period.setVal((float) info.GetValue("period", typeof(float)));
-			//writer.WriteLine("period: "+ period.getVal());
+
+		try{
+			for (int i = 0; i < strength.Length; i++)
+			{
+				strength[i].setVal((float) info.GetValue("strength" + i, typeof(float)));
+			}
+			for (int i = 0; i < period.Length; i++)
+			{
+				period[i].setVal((float) info.GetValue("period" + i, typeof(float)));
+			}
+		}catch(SerializationException e){
+			strength[0].setVal((float) info.GetValue("strength", typeof(float)));
+			period[0].setVal((float) info.GetValue("period", typeof(float)));
+		}
+
 		//writer.Close();
     }
 }

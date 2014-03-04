@@ -368,8 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test/new/bestSoFar[22].genome
-  faseSync: 1
+  creatureFilePath: Buenos casos\23.51435/bestSoFar[74].genome
   generate: 0
 --- !u!1 &453548666
 GameObject:
@@ -1065,12 +1064,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb10b68e359dc4bb36b540c5e22fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  POPULATION: 60
+  RANDOM_SIZE: 10
   ELITE_SIZE: 20
   ROULET_SIZE: 30
   simManager: {fileID: 362562917}
-  faseSync: 1
-  folder: walk
+  functionType: 2
+  folder: walk5
   generate: 1
 --- !u!4 &954359148
 Transform:

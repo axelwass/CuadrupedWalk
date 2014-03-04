@@ -4,19 +4,18 @@ using System.IO;
 
 public class GeneticAlgorithm : MonoBehaviour {
 	
-	public int POPULATION = 30; // DEBE SER MAYOR QUE 10!
+	public int RANDOM_SIZE = 30; // DEBE SER MAYOR QUE 10!
 	public int ELITE_SIZE = 4;
 	public int ROULET_SIZE = 20;
 	
 	public SimulationManager simManager;
 
-	public bool faseSync = true;
+	public FunctioT functionType = FunctioT.Classic;
 
 	public string folder;
 	
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
-	
-	
+
 	private static GeneticAlgorithm instance;
 	
 	int generation = 0;
@@ -37,8 +36,8 @@ public class GeneticAlgorithm : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//GenomeContainer gc = new GenomeContainer();
-		for(int i =0; i<POPULATION; i++){
-			population.Add(new GenomeContainer(faseSync));	
+		for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE; i++){
+			population.Add(new GenomeContainer(functionType));	
 		}
 		simManager.runTests(population);
 		Directory.CreateDirectory("./test/");
@@ -102,7 +101,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 			
 			System.Collections.Generic.List<GenomeContainer> newPopulation = new System.Collections.Generic.List<GenomeContainer>();
 			System.Collections.Generic.List<GenomeContainer> oldPopulation = new System.Collections.Generic.List<GenomeContainer>();
-			for(int i =0; i<POPULATION; i++){
+			for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE; i++){
 				oldPopulation.Add(population[i]);
 			}
 			
@@ -131,7 +130,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 				//Debug.Log("newPop size: " + newPopulation.Count);
 			}
 			
-			for(int i =0; i< POPULATION - ROULET_SIZE - ELITE_SIZE; i++){
+			for(int i =0; i< RANDOM_SIZE; i++){
 				GenomeContainer son = getRandomParent(oldPopulation).apariate(getRandomParent(oldPopulation));
 				if(UnityEngine.Random.Range(0.0f,1.0f)<0.3f){
 					son = son.mutate();
@@ -149,11 +148,13 @@ public class GeneticAlgorithm : MonoBehaviour {
 			
 			population = newPopulation;
 			
-			foreach(GenomeContainer gc in population){
+			/*foreach(GenomeContainer gc in population){
 				gc.setEvaluation(0);	
-			}
-			
-			simManager.runTests(population);
+			}*/
+
+			System.Collections.Generic.List<GenomeContainer> toTest = population.GetRange(ELITE_SIZE,RANDOM_SIZE+ROULET_SIZE);
+
+			simManager.runTests(toTest);
 		}
 	}
 }

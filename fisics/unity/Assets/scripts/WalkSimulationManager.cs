@@ -80,12 +80,12 @@ public class WalkSimulationManager : SimulationManager {
 	}
 	
 	void endActualTest(){
-			float evaluation = tester.getAdvance() * (1-(tester.getCuadraticErrorRotation()/90f));
+			float evaluation = tester.getAdvance() * (1-(tester.getCuadraticErrorRotation()/180f));
 		evaluation = tester.getAdvance()<0 || evaluation<0 ? 0: evaluation;
 			Debug.Log("test number: " + testNumber + "= error position: " + tester.getCuadraticErrorPosition() + "-- error rotation: " + tester.getCuadraticErrorRotation() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation);
 			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();
-			
+			 
 	}
 	
 	

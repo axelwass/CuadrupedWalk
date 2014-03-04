@@ -98,7 +98,7 @@ public class PushSimulationManager : SimulationManager {
 			nextTest = false;
 			
 	}else{
-		if(tester != null && testNumber >= 0 && elapsedTime >(Mathf.PI*2/tests[testNumber].getGenome().getPeriod())){
+		if(tester != null && testNumber >= 0 && elapsedTime >(Mathf.PI*2/tests[testNumber].getGenome().getPeriod(0))){
 				endActualTest();
 				//testNumber++;
 				if(testNumber+1<tests.Count){
