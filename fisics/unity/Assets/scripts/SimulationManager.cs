@@ -6,7 +6,6 @@ public abstract class SimulationManager : MonoBehaviour {
 	
 	
 	public GameObject creaturePref;
-	public float testingTime;
 	public float timeScale;
 	
 	

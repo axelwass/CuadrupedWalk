@@ -7,6 +7,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 	public int RANDOM_SIZE = 30; // DEBE SER MAYOR QUE 10!
 	public int ELITE_SIZE = 4;
 	public int ROULET_SIZE = 20;
+	public int NEW_SIZE = 10;
 	
 	public SimulationManager simManager;
 
@@ -36,7 +37,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//GenomeContainer gc = new GenomeContainer();
-		for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE; i++){
+		for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE + NEW_SIZE; i++){
 			population.Add(new GenomeContainer(functionType));	
 		}
 		simManager.runTests(population);
@@ -101,7 +102,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 			
 			System.Collections.Generic.List<GenomeContainer> newPopulation = new System.Collections.Generic.List<GenomeContainer>();
 			System.Collections.Generic.List<GenomeContainer> oldPopulation = new System.Collections.Generic.List<GenomeContainer>();
-			for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE; i++){
+			for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE + NEW_SIZE; i++){
 				oldPopulation.Add(population[i]);
 			}
 			
@@ -110,7 +111,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 				newPopulation.Add(population[i]);
 			}
 
-			for(int i =0; i< ROULET_SIZE/2; i++){
+			for(int i =0; i< ROULET_SIZE/2 + ROULET_SIZE%2; i++){
 				GenomeContainer c1 = getRouletteParent(oldPopulation);
 				oldPopulation.Remove(c1);
 				GenomeContainer c2 = getRouletteParent(oldPopulation);
@@ -132,11 +133,15 @@ public class GeneticAlgorithm : MonoBehaviour {
 			
 			for(int i =0; i< RANDOM_SIZE; i++){
 				GenomeContainer son = getRandomParent(oldPopulation).apariate(getRandomParent(oldPopulation));
-				if(UnityEngine.Random.Range(0.0f,1.0f)<0.3f){
+				if(UnityEngine.Random.Range(0.0f,1.0f)<0.45f){
 					son = son.mutate();
 				}
 				newPopulation.Add(son);	
 				//Debug.Log("newPop size: " + newPopulation.Count);
+			}
+
+			for(int i =0; i<NEW_SIZE; i++){
+				newPopulation.Add(new GenomeContainer(functionType));	
 			}
 			/*for(int i =0; i<POPULATION / 2; i++){
 				newPoblation.Add(poblation[i]);
@@ -152,7 +157,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 				gc.setEvaluation(0);	
 			}*/
 
-			System.Collections.Generic.List<GenomeContainer> toTest = population.GetRange(ELITE_SIZE,RANDOM_SIZE+ROULET_SIZE);
+			System.Collections.Generic.List<GenomeContainer> toTest = population.GetRange(ELITE_SIZE,RANDOM_SIZE+ROULET_SIZE+NEW_SIZE);
 
 			simManager.runTests(toTest);
 		}

@@ -15,6 +15,9 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	Gen[] amplitudes;
 	Gen[] fases;
 	Gen[] centerAngles;
+
+	
+	Gen selector;
 	
 	public static Genome createFromFile(String filename){
 		Genome instance  = null;
@@ -62,6 +65,13 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[1];
 			period = new Gen[1];
 			break;
+		case FunctioT.FaseSuperSync:
+			amplitudes = new Gen[6];
+			fases = new Gen[3];
+			centerAngles = new Gen[6];
+			strength = new Gen[1];
+			period = new Gen[1];
+			break;
 		case FunctioT.Fourier2:
 			amplitudes = new Gen[12];
 			fases = new Gen[6];
@@ -70,6 +80,14 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			period = new Gen[1];
 			break;
 		case FunctioT.Partida:
+			amplitudes = new Gen[24];
+			fases = new Gen[24];
+			centerAngles = new Gen[24];
+			strength = new Gen[2];
+			period = new Gen[2];
+			break;
+		case FunctioT.Olistic:
+			selector = new Gen(0,4.99f);
 			amplitudes = new Gen[24];
 			fases = new Gen[24];
 			centerAngles = new Gen[24];
@@ -133,6 +151,10 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		{
 			period[i].generateVal();
 		}
+
+		if (functionType == FunctioT.Olistic) {
+			selector.generateVal();
+		}
 		
 		return this;
 	}
@@ -154,7 +176,11 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	}
 	
 	public float getCenterAngle(int i){
-		return 0; //centerAngles[i].getVal();	//TODO descomentar para usar angulos centrales.
+		return centerAngles[i].getVal();
+	}
+
+	public FunctioT getSelector(){
+		return (FunctioT)(int)selector.getVal();
 	}
 	
 	public System.Collections.IEnumerator GetEnumerator()
@@ -180,6 +206,11 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
         {
             yield return centerAngles[i];
         }
+
+		
+		if (functionType == FunctioT.Olistic) {
+			yield return selector;
+		}
     }
 	
 	public void print(){
@@ -265,7 +296,11 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		{
 			info.AddValue("period" + i , period[i].getVal(), typeof(float));
 		}
-		
+
+		if (functionType == FunctioT.Olistic) {
+			info.AddValue("selector" , selector.getVal(), typeof(float));
+		}
+
 		//writer.Close();
     }
 
@@ -309,6 +344,10 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		}catch(SerializationException e){
 			strength[0].setVal((float) info.GetValue("strength", typeof(float)));
 			period[0].setVal((float) info.GetValue("period", typeof(float)));
+		}
+
+		if (functionType == FunctioT.Olistic) {
+			selector.setVal((float)info.GetValue("selector" , typeof(float)));
 		}
 
 		//writer.Close();

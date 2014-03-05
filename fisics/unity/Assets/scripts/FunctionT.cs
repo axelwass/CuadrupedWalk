@@ -2,6 +2,6 @@
 using System.Collections;
 
 public enum FunctioT{
-	Classic,FaseSync,Fourier2,Partida
+	FaseSuperSync,Fourier2,FaseSync,Classic,Partida,Olistic
 }
 

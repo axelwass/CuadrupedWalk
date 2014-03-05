@@ -56,10 +56,10 @@ public class GenomeContainer
 			iterator1.MoveNext();
 			iterator2.MoveNext();
 			float rand = UnityEngine.Random.Range(0.0f,1.0f);
-			if( rand< 0.45){
+			if( rand< 0.25){
 				gen.setVal(((Gen)iterator1.Current).getVal());
 			}
-			else if(rand < 0.45){
+			else if(rand < 0.30){
 				gen.setVal(((Gen)iterator2.Current).getVal());
 			}else{
 				gen.setVal(	(((Gen)iterator1.Current).getVal() + ((Gen)iterator2.Current).getVal())/2);

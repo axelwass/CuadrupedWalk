@@ -13,17 +13,18 @@ public class MoveFunctionPartida : MoveFunction {
 	public MoveFunctionPartida(float amplitude, float period, float fase, float centerAngle, float strength,
 	                           float amplitude2, float period2, float fase2, float centerAngle2, float strength2)
 	{
-		this.A= amplitude;
-		this.B= period;
-		this.C= fase;
-		this.D= centerAngle;
-		this.strength = strength;
+		//TODO cambiar de lado
+		this.A= amplitude2;
+		this.B= period2;
+		this.C= fase2;
+		this.D= centerAngle2;
+		this.strength = strength2;
 		
-		this.A2= amplitude2;
-		this.B2= period2;
-		this.C2= fase2;
-		this.D2= centerAngle2;
-		this.strength2 = strength2;
+		this.A2= amplitude;
+		this.B2= period;
+		this.C2= fase;
+		this.D2= centerAngle;
+		this.strength2 = strength;
 	}
 	
 	public override float evalAngle(float t){
