@@ -70,7 +70,7 @@ public class PushSimulationManager : SimulationManager {
 			//Debug.Log("testnumber: " + testNumber);
 			testingCreature = GameObject.Find("testingCreature");//(GameObject)Instantiate(creaturePref);
 			tester = (MoveController)testingCreature.GetComponent("MoveController");
-			tester.testGenome(tests[testNumber].getGenome(),initialSpeed);
+			tester.testGenome(tests[testNumber].getGenome());
 			//tests[testNumber].getGenome().print();
 			elapsedTime=-0.02f;
 			//Random.seed = 0;
@@ -79,9 +79,9 @@ public class PushSimulationManager : SimulationManager {
 	}
 	
 	void endActualTest(){
-		float evaluation = (1-Mathf.Pow(tester.getHeight()-tester.getInitialHeight(),2)) *(1 - tester.getSpeed()/initialSpeed.magnitude) * tester.centered();
+		float evaluation = (1-Mathf.Pow(tester.getHeight()-tester.getInitialHeight(),2)) +tester.getSpeedEvaluation() + tester.centered();
 		evaluation = evaluation<0 || tester.getHeight()<0? 0: evaluation;
-		Debug.Log("test number: " + testNumber + "=  speed: " + tester.getSpeed() + "-- height: " + tester.getHeight() + "-- centered: " + tester.centered() + "-- evaluation: " + evaluation);
+		Debug.Log("test number: " + testNumber + "=  speed evaluation: " + tester.getSpeedEvaluation() + "-- height: " + tester.getHeight() + "-- centered: " + tester.centered() + "-- evaluation: " + evaluation);
 		tests[testNumber].setEvaluation(evaluation);	
 		destroyTest();
 		

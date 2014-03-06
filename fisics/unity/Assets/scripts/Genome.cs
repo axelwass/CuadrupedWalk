@@ -79,6 +79,13 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[1];
 			period = new Gen[1];
 			break;
+		case FunctioT.Partida_FaseSync:
+			amplitudes = new Gen[12];
+			fases = new Gen[12];
+			centerAngles = new Gen[12];
+			strength = new Gen[2];
+			period = new Gen[2];
+			break;
 		case FunctioT.Partida:
 			amplitudes = new Gen[24];
 			fases = new Gen[24];
@@ -87,7 +94,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			period = new Gen[2];
 			break;
 		case FunctioT.Olistic:
-			selector = new Gen(0,4.99f);
+			selector = new Gen(0,(float)(int)FunctioT.Olistic-0.01f);
 			amplitudes = new Gen[24];
 			fases = new Gen[24];
 			centerAngles = new Gen[24];

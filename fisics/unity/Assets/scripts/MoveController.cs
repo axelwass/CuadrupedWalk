@@ -34,6 +34,8 @@ public class MoveController : MonoBehaviour {
 	//float cumulatedError = 0;
 	float cumulatedErrorPosition = 0;
 	float cumulatedErrorRotation = 0;
+
+	float suposedPostionx =0;
 	
 	bool firstTime = true;
 	
@@ -45,9 +47,8 @@ public class MoveController : MonoBehaviour {
 		
 	}
 	
-	public void testGenome(Genome genome, Vector3 initialSpeed){
+	public void testGenome(Genome genome){
 		//Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
-		this.initialSpeed = initialSpeed;
 
 
 		switch (genome.getFunctionType()==FunctioT.Olistic? genome.getSelector() : genome.getFunctionType()) {
@@ -137,6 +138,23 @@ public class MoveController : MonoBehaviour {
 			frontRight2.setFunction (new MoveFunctionPartida (genome.getAmplitude (10), genome.getPeriod (0), genome.getFase (10), genome.getCenterAngle (10), genome.getStrength (0),genome.getAmplitude(22),genome.getPeriod(1),genome.getFase(22),genome.getCenterAngle(22),genome.getStrength(1)));
 			frontRightShoulder.setFunction (new MoveFunctionPartida (genome.getAmplitude (11), genome.getPeriod (0), genome.getFase (11), genome.getCenterAngle (11), genome.getStrength (0),genome.getAmplitude(23),genome.getPeriod(1),genome.getFase(23),genome.getCenterAngle(23),genome.getStrength(1)));
 			break;
+		case FunctioT.Partida_FaseSync:
+			backLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
+			backLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7),genome.getCenterAngle(7),genome.getStrength(1)));
+			backLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8),genome.getCenterAngle(8),genome.getStrength(1)));
+			
+			frontLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9),genome.getCenterAngle(9),genome.getStrength(1)));
+			frontLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10),genome.getCenterAngle(10),genome.getStrength(1)));
+			frontLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11),genome.getCenterAngle(11),genome.getStrength(1)));
+
+			backRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0) + Mathf.PI,genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6) + Mathf.PI,genome.getCenterAngle(6),genome.getStrength(1)));
+			backRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1) + Mathf.PI,genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7) + Mathf.PI,genome.getCenterAngle(7),genome.getStrength(1)));
+			backRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2) + Mathf.PI,genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8) + Mathf.PI,genome.getCenterAngle(8),genome.getStrength(1)));
+			
+			frontRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3) + Mathf.PI,genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9) + Mathf.PI,genome.getCenterAngle(9),genome.getStrength(1)));
+			frontRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4) + Mathf.PI,genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10) + Mathf.PI,genome.getCenterAngle(10),genome.getStrength(1)));
+			frontRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5) + Mathf.PI,genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11) + Mathf.PI,genome.getCenterAngle(11),genome.getStrength(1)));
+			break;
 		}
 		
 		initialPosition = body.transform.position;
@@ -157,6 +175,18 @@ public class MoveController : MonoBehaviour {
 		
 		return 1 - Mathf.Sqrt(Mathf.Pow (body.rigidbody.transform.position.x - xAverage, 2) + Mathf.Pow (body.rigidbody.transform.position.z - zAverage, 2));
 			
+	}
+
+	public float getAdvanceEvaluation(){
+		return (suposedPostionx - lastPositionX)/suposedPostionx;
+	}
+
+	public float getHeightEvaluation(){
+		return 1- (Mathf.Pow(body.rigidbody.transform.position.y - initialPosition.y,2)/initialPosition.y);
+	}
+
+	public float getRotationEvaluation(){
+		return (1 - ((cumulatedErrorRotation / updates) / 180f));
 	}
 
 	public float getHeight(){
@@ -181,8 +211,8 @@ public class MoveController : MonoBehaviour {
 		return cumulatedErrorRotation/updates;	
 	}
 	
-	public float getSpeed(){
-		return body.rigidbody.velocity.magnitude;
+	public float getSpeedEvaluation(){
+		return 1- body.rigidbody.velocity.magnitude/initialSpeed.magnitude;
 	}
 	
 	// Update is called once every 0.02 sec.
@@ -212,6 +242,7 @@ public class MoveController : MonoBehaviour {
 		frontRight2.updateState(elapsedTime);
 		frontRightShoulder.updateState(elapsedTime);
 	
+		suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
 		float step_error = Mathf.Pow((body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((body.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
 		//Debug.Log("step_error: " + (step_error>1?step_error:0));
 		cumulatedErrorPosition += body.transform.position.y < initialPosition.y? Mathf.Pow((body.transform.position.y - initialPosition.y),4):0;

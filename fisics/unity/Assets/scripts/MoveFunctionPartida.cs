@@ -13,7 +13,6 @@ public class MoveFunctionPartida : MoveFunction {
 	public MoveFunctionPartida(float amplitude, float period, float fase, float centerAngle, float strength,
 	                           float amplitude2, float period2, float fase2, float centerAngle2, float strength2)
 	{
-		//TODO cambiar de lado
 		this.A= amplitude2;
 		this.B= period2;
 		this.C= fase2;

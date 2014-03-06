@@ -34,10 +34,19 @@ public class GenomeContainer
 		System.Collections.IEnumerator iterator = genome.GetEnumerator();
 		foreach(Gen gen in newGenome){
 			iterator.MoveNext();
-			if(UnityEngine.Random.Range(0.0f,1.0f) < 0.01){
+			
+			float rand = UnityEngine.Random.Range(0.0f,1.0f);
+			if(rand < 0.01){
 				gen.generateVal();		
 			}
-			else{
+			else if(rand < 0.05){
+				gen.setValMutation(((Gen)iterator.Current).getVal());
+			}
+			else if(rand < 0.15){
+				gen.setValMicroMutation(((Gen)iterator.Current).getVal());
+			}
+			else
+			{
 				gen.setVal(((Gen)iterator.Current).getVal());
 			}
 		}
@@ -56,13 +65,13 @@ public class GenomeContainer
 			iterator1.MoveNext();
 			iterator2.MoveNext();
 			float rand = UnityEngine.Random.Range(0.0f,1.0f);
-			if( rand< 0.25){
+			if( rand< 0.4){
 				gen.setVal(((Gen)iterator1.Current).getVal());
 			}
-			else if(rand < 0.30){
+			else if(rand < 0.8){
 				gen.setVal(((Gen)iterator2.Current).getVal());
 			}else{
-				gen.setVal(	(((Gen)iterator1.Current).getVal() + ((Gen)iterator2.Current).getVal())/2);
+				gen.setVal(((Gen)iterator1.Current).getVal(),((Gen)iterator2.Current).getVal());
 			}
 		}
 		

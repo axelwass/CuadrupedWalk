@@ -70,7 +70,7 @@ public class WalkSimulationManager : SimulationManager {
 			//Debug.Log("testnumber: " + testNumber);
 			testingCreature = GameObject.Find("testingCreature");//(GameObject)Instantiate(creaturePref);
 			tester = (MoveController)testingCreature.GetComponent("MoveController");
-			tester.testGenome(tests[testNumber].getGenome(),initialSpeed);
+			tester.testGenome(tests[testNumber].getGenome());
 			//tests[testNumber].getGenome().print();
 			elapsedTime=-0.02f;
 			//Random.seed = 0;
