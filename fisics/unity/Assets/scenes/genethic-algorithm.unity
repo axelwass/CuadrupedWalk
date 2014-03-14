@@ -231,12 +231,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 362562916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
+  m_Script: {fileID: 11500000, guid: 565b7b61a1d241347a1a8fb5c37df750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creaturePref: {fileID: 100034, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
-  timeScale: 40
-  testingTime: 20
+  timeScale: 1
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -273,8 +272,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 399274225}
-  m_LocalRotation: {x: .0866375566, y: .0233528614, z: .0109472526, w: .995905995}
-  m_LocalPosition: {x: -23.7304382, y: 2.39231992, z: -16.0463085}
+  m_LocalRotation: {x: .397822678, y: .0256185737, z: .0029811596, w: .917099774}
+  m_LocalPosition: {x: 12.6151714, y: 11.0692911, z: -7.44242573}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134268344}
@@ -367,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test\walk17(new mutation)\bestSoFar[92].genome
+  creatureFilePath: test\push7(4)\bestSoFar[136].genome
   generate: 1
 --- !u!1 &453548666
 GameObject:
@@ -901,7 +900,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400024, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
       propertyPath: initialSpeed.x
-      value: .699999988
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: initialSpeed.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: initialSpeed.z
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
@@ -1068,8 +1075,8 @@ MonoBehaviour:
   ROULET_SIZE: 30
   NEW_SIZE: 0
   simManager: {fileID: 362562917}
-  functionType: 2
-  folder: walk23
+  functionType: 5
+  folder: push8(4)
   generate: 0
 --- !u!4 &954359148
 Transform:
@@ -1571,7 +1578,7 @@ MonoBehaviour:
   frontRight2: {fileID: 2034527593}
   frontRightShoulder: {fileID: 585233419}
   body: {fileID: 1704091803}
-  initialSpeed: {x: .699999988, y: 0, z: 0}
+  initialSpeed: {x: 0, y: 0, z: 4}
   walkDirection: {x: 1, y: 0, z: 0}
 --- !u!1 &1638681643
 GameObject:

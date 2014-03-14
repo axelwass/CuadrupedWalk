@@ -79,7 +79,7 @@ public class PushSimulationManager : SimulationManager {
 	}
 	
 	void endActualTest(){
-		float evaluation = (1-Mathf.Pow(tester.getHeight()-tester.getInitialHeight(),2)) +tester.getSpeedEvaluation() + tester.centered();
+		float evaluation = (1-Mathf.Abs(tester.getHeight()-tester.getInitialHeight())) +tester.getSpeedEvaluation() + tester.centered();
 		evaluation = evaluation<0 || tester.getHeight()<0? 0: evaluation;
 		Debug.Log("test number: " + testNumber + "=  speed evaluation: " + tester.getSpeedEvaluation() + "-- height: " + tester.getHeight() + "-- centered: " + tester.centered() + "-- evaluation: " + evaluation);
 		tests[testNumber].setEvaluation(evaluation);	
@@ -97,8 +97,8 @@ public class PushSimulationManager : SimulationManager {
 			newTest();
 			nextTest = false;
 			
-	}else{
-			if(tester != null && testNumber >= 0 && elapsedTime > (Mathf.PI*2/tests[testNumber].getGenome().getPeriod(0)) + (tests[testNumber].getGenome().getFunctionType() == FunctioT.Partida?(Mathf.PI*2/tests[testNumber].getGenome().getPeriod(1)):0)){
+		}else{
+			if(tester != null && testNumber >= 0 && elapsedTime > 3 + (Mathf.PI*2/tests[testNumber].getGenome().getPeriod(0)) + (tests[testNumber].getGenome().getFunctionType() == FunctioT.Partida?(Mathf.PI*2/tests[testNumber].getGenome().getPeriod(1)):0)){
 				endActualTest();
 				//testNumber++;
 				if(testNumber+1<tests.Count){

@@ -93,6 +93,13 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
+		case FunctioT.PartidaFinalConstante:
+			amplitudes = new Gen[24];
+			fases = new Gen[24];
+			centerAngles = new Gen[24];
+			strength = new Gen[2];
+			period = new Gen[2];
+			break;
 		case FunctioT.Olistic:
 			selector = new Gen(0,(float)(int)FunctioT.Olistic-0.01f);
 			amplitudes = new Gen[24];
