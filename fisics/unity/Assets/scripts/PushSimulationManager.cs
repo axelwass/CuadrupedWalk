@@ -70,6 +70,7 @@ public class PushSimulationManager : SimulationManager {
 			//Debug.Log("testnumber: " + testNumber);
 			testingCreature = GameObject.Find("testingCreature");//(GameObject)Instantiate(creaturePref);
 			tester = (MoveController)testingCreature.GetComponent("MoveController");
+			tester.setInitialSpeed(instance.initialSpeed);
 			tester.testGenome(tests[testNumber].getGenome());
 			//tests[testNumber].getGenome().print();
 			elapsedTime=-0.02f;
@@ -117,4 +118,8 @@ public class PushSimulationManager : SimulationManager {
 			}
 		}
 	}
+	public override string getName(){
+		return "push";
+	}
+
 }
