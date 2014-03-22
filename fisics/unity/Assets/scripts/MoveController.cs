@@ -57,6 +57,8 @@ public class MoveController : MonoBehaviour {
 
 	float stepRotationsDiference;
 
+	float cumulatedStepRotationsDiference;
+
 	int cycle = 1;
 
 	float dominantPeriod;
@@ -191,6 +193,26 @@ public class MoveController : MonoBehaviour {
 			period = genome.getPeriod(1);
 			
 			break;
+		case FunctioT.Partida_Classic_FaseSync:
+			backLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
+			backLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7),genome.getCenterAngle(7),genome.getStrength(1)));
+			backLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8),genome.getCenterAngle(8),genome.getStrength(1)));
+			
+			frontLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9),genome.getCenterAngle(9),genome.getStrength(1)));
+			frontLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10),genome.getCenterAngle(10),genome.getStrength(1)));
+			frontLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11),genome.getCenterAngle(11),genome.getStrength(1)));
+			
+			backRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0) + Mathf.PI,genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
+			backRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1) + Mathf.PI,genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
+			backRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2) + Mathf.PI,genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
+			
+			frontRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3) + Mathf.PI,genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(15),genome.getPeriod(1),genome.getFase(15),genome.getCenterAngle(15),genome.getStrength(1)));
+			frontRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4) + Mathf.PI,genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(16),genome.getPeriod(1),genome.getFase(16),genome.getCenterAngle(16),genome.getStrength(1)));
+			frontRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5) + Mathf.PI,genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(17),genome.getPeriod(1),genome.getFase(17),genome.getCenterAngle(17),genome.getStrength(1)));
+			
+			period = genome.getPeriod(1);
+			
+			break;
 		case FunctioT.PartidaFinalConstante:
 			backLeft1.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
 			backLeft2.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
@@ -251,6 +273,10 @@ public class MoveController : MonoBehaviour {
 
 	public float getRotationEvaluation(){
 		return (1 - ((cumulatedErrorRotation / updates) / 180f));
+	}
+
+	public float getCycleDiferenceEvaluation(){
+		return (1 - ((cumulatedStepRotationsDiference / (cycle-1))/450f));
 	}
 
 	public float getHeight(){
@@ -324,6 +350,8 @@ public class MoveController : MonoBehaviour {
 					Quaternion.Angle(frontLeft1.transform.rotation,RotationOldfrontLeft1)+
 					Quaternion.Angle(frontLeft2.transform.rotation,RotationOldfrontLeft2);
 
+			cumulatedStepRotationsDiference += stepRotationsDiference;
+
 			RotationOldBody = body.transform.rotation;
 			RotationOldbackLeft1 = backLeft1.transform.rotation;
 			RotationOldbackLeft2 = backLeft2.transform.rotation;
@@ -342,6 +370,16 @@ public class MoveController : MonoBehaviour {
 				frontLeft2.transform.position.x + frontRight2.transform.position.x) / 5;
 
 		if ( !initialPositionSetted && ( elapsedTime > (2 * Mathf.PI / period) ) ) {
+
+			RotationOldBody = body.transform.rotation;
+			RotationOldbackLeft1 = backLeft1.transform.rotation;
+			RotationOldbackLeft2 = backLeft2.transform.rotation;
+			RotationOldbackRight1 = backRight1.transform.rotation;
+			RotationOldbackRight2 = backRight2.transform.rotation;
+			RotationOldfrontRight1 = frontRight1.transform.rotation;
+			RotationOldfrontRight2 = frontRight2.transform.rotation;
+			RotationOldfrontLeft1 = frontLeft1.transform.rotation;
+			RotationOldfrontLeft2 = frontLeft2.transform.rotation;
 
 			initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position +
 			frontLeft2.transform.position + frontRight2.transform.position) / 5;

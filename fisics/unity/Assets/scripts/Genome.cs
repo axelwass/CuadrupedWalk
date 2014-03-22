@@ -86,6 +86,14 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
+			
+		case FunctioT.Partida_Classic_FaseSync:
+			amplitudes = new Gen[18];
+			fases = new Gen[18];
+			centerAngles = new Gen[18];
+			strength = new Gen[2];
+			period = new Gen[2];
+			break;
 		case FunctioT.Partida:
 			amplitudes = new Gen[24];
 			fases = new Gen[24];
