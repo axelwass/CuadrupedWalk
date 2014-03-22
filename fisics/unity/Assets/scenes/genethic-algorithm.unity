@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creaturePref: {fileID: 100034, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
-  timeScale: 1
-  testingTime: 100
+  timeScale: 10
+  testingTime: 20
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
   creatureFilePath: Buenos casos\23.51435\bestSoFar[74].genome
-  generate: 1
+  generate: 0
 --- !u!1 &453548666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,9 +1076,9 @@ MonoBehaviour:
   ROULET_SIZE: 30
   NEW_SIZE: 0
   simManager: {fileID: 362562917}
-  functionType: 5
-  folder: push8(4)
-  generate: 0
+  functionType: 6
+  folder: walk2000
+  generate: 1
 --- !u!4 &954359148
 Transform:
   m_ObjectHideFlags: 0

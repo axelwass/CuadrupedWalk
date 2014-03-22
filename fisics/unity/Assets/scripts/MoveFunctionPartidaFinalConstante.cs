@@ -28,7 +28,7 @@ public class MoveFunctionPartidaFinalConstante : MoveFunction {
 	
 	public override float evalAngle(float t){
 		return t<(2*Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D:
-				t<(2*Mathf.PI/B2)?A2*(float)Mathf.Sin(t*B2+C2) + D2:
+			t<(2*Mathf.PI/B2)+(2*Mathf.PI/B)?A2*(float)Mathf.Sin(t*B2+C2) + D2:
 				A2*(float)Mathf.Sin(2*Mathf.PI+C2) + D2;
 				
 	}

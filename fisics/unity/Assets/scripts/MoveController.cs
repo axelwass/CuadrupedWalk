@@ -41,6 +41,21 @@ public class MoveController : MonoBehaviour {
 	
 	public Vector3 walkDirection = new Vector3(1,0,0);
 
+	Quaternion RotationOldBody = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldbackLeft1 = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldbackLeft2 = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldbackRight1 = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldbackRight2 = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldfrontLeft1 = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldfrontLeft2 = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldfrontRight1 = Quaternion.Euler(0,0,0);
+	Quaternion RotationOldfrontRight2 = Quaternion.Euler(0,0,0);
+
+	float stepRotationsDiference;
+
+	int cycle = 1;
+
+	float dominantPeriod;
 
 	// Use this for initialization
 	void Start () {
@@ -174,6 +189,8 @@ public class MoveController : MonoBehaviour {
 			break;
 
 		}
+
+		dominantPeriod = genome.getPeriod (0);
 		
 		initialPosition = body.transform.position;
 		initialRotation = body.transform.rotation;
@@ -243,6 +260,8 @@ public class MoveController : MonoBehaviour {
 			body.rigidbody.velocity = initialSpeed;//AddForce(new Vector3(0, 0, 20), ForceMode.Impulse); //TODO body.rigidbody.AddForce(new Vector3(1, 0, 0), ForceMode.Impulse);
 			firstTime = false;	
 		}
+
+	
 		
 		backLeft1.updateState(elapsedTime);
 		backLeft2.updateState(elapsedTime);
@@ -268,7 +287,30 @@ public class MoveController : MonoBehaviour {
 		//cumulatedErrorPosition += (body.transform.position - (initialPosition + elapsedTime * walkDirection)).magnitude;
 		cumulatedErrorRotation += Quaternion.Angle(body.transform.rotation,initialRotation);
 		lastPositionX = body.transform.position.x;
-		
+		if (elapsedTime > (2 * Mathf.PI * cycle / dominantPeriod)) {
+			stepRotationsDiference = Quaternion.Angle(body.transform.rotation,RotationOldBody)+ 
+					Quaternion.Angle(backLeft1.transform.rotation,RotationOldbackLeft1)+ 
+					Quaternion.Angle(backLeft2.transform.rotation,RotationOldbackLeft2)+ 
+					Quaternion.Angle(backRight1.transform.rotation,RotationOldbackRight1)+
+					Quaternion.Angle(backRight2.transform.rotation,RotationOldbackRight2)+
+					Quaternion.Angle(frontRight1.transform.rotation,RotationOldfrontRight1)+
+					Quaternion.Angle(frontRight2.transform.rotation,RotationOldfrontRight2)+
+					Quaternion.Angle(frontLeft1.transform.rotation,RotationOldfrontLeft1)+
+					Quaternion.Angle(frontLeft2.transform.rotation,RotationOldfrontLeft2);
+
+			RotationOldBody = body.transform.rotation;
+			RotationOldbackLeft1 = backLeft1.transform.rotation;
+			RotationOldbackLeft2 = backLeft2.transform.rotation;
+			RotationOldbackRight1 = backRight1.transform.rotation;
+			RotationOldbackRight2 = backRight2.transform.rotation;
+			RotationOldfrontRight1 = frontRight1.transform.rotation;
+			RotationOldfrontRight2 = frontRight2.transform.rotation;
+			RotationOldfrontLeft1 = frontLeft1.transform.rotation;
+			RotationOldfrontLeft2 = frontLeft2.transform.rotation;
+
+			Debug.Log("diferencias: " + stepRotationsDiference);
+			cycle++;
+		}
 		updates++;
 	}
 }
