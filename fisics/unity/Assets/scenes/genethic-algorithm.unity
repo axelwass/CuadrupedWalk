@@ -231,11 +231,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 362562916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 565b7b61a1d241347a1a8fb5c37df750, type: 3}
+  m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creaturePref: {fileID: 100034, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
   timeScale: 1
+  testingTime: 100
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -366,7 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test\push7(4)\bestSoFar[136].genome
+  creatureFilePath: Buenos casos\23.51435\bestSoFar[74].genome
   generate: 1
 --- !u!1 &453548666
 GameObject:
@@ -900,7 +901,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400024, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
       propertyPath: initialSpeed.x
-      value: 0
+      value: .699999988
       objectReference: {fileID: 0}
     - target: {fileID: 11400024, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
       propertyPath: initialSpeed.y
@@ -908,7 +909,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400024, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
       propertyPath: initialSpeed.z
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
@@ -1578,7 +1579,7 @@ MonoBehaviour:
   frontRight2: {fileID: 2034527593}
   frontRightShoulder: {fileID: 585233419}
   body: {fileID: 1704091803}
-  initialSpeed: {x: 0, y: 0, z: 4}
+  initialSpeed: {x: .699999988, y: 0, z: 0}
   walkDirection: {x: 1, y: 0, z: 0}
 --- !u!1 &1638681643
 GameObject:

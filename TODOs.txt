@@ -1,12 +1,17 @@
+- guardar parametros en archivo
+
 caminata:
 
 smooth transition.
-caida de cabeza -> ( sacar empujon inicial(probar corridas mas chicas) - cambiar fitness)
+caida de cabeza -> ( sacar empujon inicial(probar corridas mas chicas) - cambiar fitness: promedio todas posiciones en vez de posicion cuerpo)
 
 final de la primera funcion = principio de la segunda.
 la primer funcion tenga independencia de patas.
 verificar posiciones ciclicas.
 
+-primera funcion classica en vez de sync.
+
+- fitness que vea como se van achicando la diferencia de angulos.
 
 pruebas:
 
@@ -15,5 +20,3 @@ retocar con una segunda funcion.
 empujenes:
 
 probar distintos fitness: posicion inicial y final del bicho sea parecida.
-
-funcion que no haga nada al final para ver la estabilidad. (fuerza y angulo constantes)
