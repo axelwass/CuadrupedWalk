@@ -285,21 +285,11 @@ public class MoveController : MonoBehaviour {
 				if (elapsedTime < 0) {
 						return;
 				}
-		
-<<<<<<< HEAD
+
 		if(firstTime){
 			body.rigidbody.velocity = initialSpeed;//AddForce(new Vector3(0, 0, 20), ForceMode.Impulse); //TODO body.rigidbody.AddForce(new Vector3(1, 0, 0), ForceMode.Impulse);
 			firstTime = false;	
 		}
-
-	
-=======
-				if (firstTime) {
-						body.rigidbody.velocity = initialSpeed;//AddForce(new Vector3(0, 0, 20), ForceMode.Impulse); //TODO body.rigidbody.AddForce(new Vector3(1, 0, 0), ForceMode.Impulse);
-						firstTime = false;	
-				}
->>>>>>> 978189f794baff46671c4a5b7b4fa4186a2ffd04
-		
 				backLeft1.updateState (elapsedTime);
 				backLeft2.updateState (elapsedTime);
 				backLeftShoulder.updateState (elapsedTime);
@@ -316,7 +306,6 @@ public class MoveController : MonoBehaviour {
 				frontRight2.updateState (elapsedTime);
 				frontRightShoulder.updateState (elapsedTime);
 	
-<<<<<<< HEAD
 		suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
 		float step_error = Mathf.Pow((body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((body.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
 		//Debug.Log("step_error: " + (step_error>1?step_error:0));
@@ -324,8 +313,7 @@ public class MoveController : MonoBehaviour {
 		cumulatedErrorPosition += step_error>1?step_error:0;
 		//cumulatedErrorPosition += (body.transform.position - (initialPosition + elapsedTime * walkDirection)).magnitude;
 		cumulatedErrorRotation += Quaternion.Angle(body.transform.rotation,initialRotation);
-		lastPositionX = body.transform.position.x;
-		if (elapsedTime > (2 * Mathf.PI * cycle / dominantPeriod)) {
+		if (elapsedTime > (2 * Mathf.PI * cycle / dominantPeriod) +  (2 * Mathf.PI / period) ) {
 			stepRotationsDiference = Quaternion.Angle(body.transform.rotation,RotationOldBody)+ 
 					Quaternion.Angle(backLeft1.transform.rotation,RotationOldbackLeft1)+ 
 					Quaternion.Angle(backLeft2.transform.rotation,RotationOldbackLeft2)+ 
@@ -346,29 +334,20 @@ public class MoveController : MonoBehaviour {
 			RotationOldfrontLeft1 = frontLeft1.transform.rotation;
 			RotationOldfrontLeft2 = frontLeft2.transform.rotation;
 
-			Debug.Log("diferencias: " + stepRotationsDiference);
+			//Debug.Log("diferencias: " + stepRotationsDiference);
 			cycle++;
 		}
-=======
-				suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
-				float step_error = Mathf.Pow ((body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x), 2) + Mathf.Pow ((body.transform.position.z - (initialPosition + elapsedTime * walkDirection).z), 2);
-				//Debug.Log("step_error: " + (step_error>1?step_error:0));
-				cumulatedErrorPosition += body.transform.position.y < initialPosition.y ? Mathf.Pow ((body.transform.position.y - initialPosition.y), 4) : 0;
-				cumulatedErrorPosition += step_error > 1 ? step_error : 0;
-				//cumulatedErrorPosition += (body.transform.position - (initialPosition + elapsedTime * walkDirection)).magnitude;
-				cumulatedErrorRotation += Quaternion.Angle (body.transform.rotation, initialRotation);
-				lastPositionX = (body.transform.position.x + backLeft2.transform.position.x + backRight2.transform.position.x +
-						frontLeft2.transform.position.x + frontRight2.transform.position.x) / 5;
 
-				if ( !initialPositionSetted && ( elapsedTime > (2 * Mathf.PI / period) ) ) {
+		lastPositionX = (body.transform.position.x + backLeft2.transform.position.x + backRight2.transform.position.x +
+				frontLeft2.transform.position.x + frontRight2.transform.position.x) / 5;
 
-					initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position +
-					frontLeft2.transform.position + frontRight2.transform.position) / 5;
-					initialPositionSetted = true;						
-				}
+		if ( !initialPositionSetted && ( elapsedTime > (2 * Mathf.PI / period) ) ) {
 
-		
->>>>>>> 978189f794baff46671c4a5b7b4fa4186a2ffd04
+			initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position +
+			frontLeft2.transform.position + frontRight2.transform.position) / 5;
+			initialPositionSetted = true;	
+		}
+
 		updates++;
 	}
 }
