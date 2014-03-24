@@ -21,7 +21,7 @@ public class MoveController : MonoBehaviour {
 	
 	public GameObject body;
 	
-	public Vector3 initialSpeed;
+	Vector3 initialSpeed;
 	
 	//float initialPositionX = 0;
 	float initialPositionY = 0;
@@ -388,4 +388,13 @@ public class MoveController : MonoBehaviour {
 
 		updates++;
 	}
+	
+	public void setInitialSpeed(Vector3 initial){
+		initialSpeed = initial;
+	}
+	
+	public Vector3 getInitialSpeed(){
+		return initialSpeed;
+	}
+		
 }

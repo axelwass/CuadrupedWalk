@@ -13,7 +13,9 @@ public class GeneticAlgorithm : MonoBehaviour {
 
 	public FunctioT functionType = FunctioT.Classic;
 
-	public string folder;
+	string folder;
+
+	public string description;
 	
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
 
@@ -41,11 +43,14 @@ public class GeneticAlgorithm : MonoBehaviour {
 			population.Add(new GenomeContainer(functionType));	
 		}
 		simManager.runTests(population);
+		folder = simManager.getName() + System.DateTime.Now.ToString("dd:MM:yyyy") + "(" + System.DateTime.Now.ToString("hh-mm-ss") + ") (" + description + ")";
 		Directory.CreateDirectory("./test/");
-		Directory.CreateDirectory("./test/"+folder);
+		Directory.CreateDirectory("./test/" + folder);
 		
 		StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",false);
-		writer.Write(writer.NewLine);
+		writer.WriteLine("Elite Size: " + ELITE_SIZE + ", roulete size: " + ROULET_SIZE+ ", random size: " + RANDOM_SIZE);
+		writer.WriteLine("Funcion: " + functionType + ", empujon inicial: (" + simManager.initialSpeed.x + "," + simManager.initialSpeed.y + "," + simManager.initialSpeed.z + ")");
+
 		writer.Close();
 	}
 	

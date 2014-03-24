@@ -116,4 +116,8 @@ public class WalkSimulationManager : SimulationManager {
 			}
 		}
 	}
+
+	public override string getName(){
+		return "walk";
+	}
 }
