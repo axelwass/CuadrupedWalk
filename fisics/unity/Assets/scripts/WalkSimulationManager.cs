@@ -77,11 +77,11 @@ public class WalkSimulationManager : SimulationManager {
 			
 		}
 	}
-	
+
 	void endActualTest(){
-			float evaluation = tester.getAdvance() * (1-(tester.getCuadraticErrorRotation()/180f));
+		float evaluation = tester.getAdvance() * tester.getCycleDiferenceEvaluation();
 			evaluation = tester.getAdvance()<0 || evaluation<0 ? 0: evaluation;
-		Debug.Log("test number: "  + testNumber + "= error position: " + tester.getCuadraticErrorPosition() + "-- error rotation: " + tester.getCuadraticErrorRotation() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation + ((tests[testNumber].getGenome().getFunctionType()==FunctioT.Olistic)? "(" + tests[testNumber].getGenome().getSelector() + ")":""));
+		Debug.Log("test number: "  + testNumber + "= cycle evaluation:" + tester.getCycleDiferenceEvaluation() + "-- error rotation: " + tester.getCuadraticErrorRotation() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation + ((tests[testNumber].getGenome().getFunctionType()==FunctioT.Olistic)? "(" + tests[testNumber].getGenome().getSelector() + ")":""));
 			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();
 			 

@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creaturePref: {fileID: 100034, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
-  timeScale: 10
-  testingTime: 20
+  timeScale: 50
+  testingTime: 25
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -1076,8 +1076,8 @@ MonoBehaviour:
   ROULET_SIZE: 30
   NEW_SIZE: 0
   simManager: {fileID: 362562917}
-  functionType: 6
-  folder: walk2000
+  functionType: 7
+  folder: walk2002
   generate: 1
 --- !u!4 &954359148
 Transform:
