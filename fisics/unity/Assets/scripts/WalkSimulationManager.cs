@@ -79,9 +79,9 @@ public class WalkSimulationManager : SimulationManager {
 	}
 
 	void endActualTest(){
-		float evaluation = tester.getAdvance() * tester.getCycleDiferenceEvaluation();
-			evaluation = tester.getAdvance()<0 || evaluation<0 ? 0: evaluation;
-		Debug.Log("test number: "  + testNumber + "= cycle evaluation:" + tester.getCycleDiferenceEvaluation() + "-- error rotation: " + tester.getCuadraticErrorRotation() + "-- advance: " + tester.getAdvance() + "-- evaluation: " + evaluation + ((tests[testNumber].getGenome().getFunctionType()==FunctioT.Olistic)? "(" + tests[testNumber].getGenome().getSelector() + ")":""));
+		float evaluation = tester.getMeanSpeed() * tester.getCycleDiferenceEvaluation() * tester.getMeanHeightEvaluation();
+		evaluation = tester.getMeanSpeed()<0 || evaluation<0 ? 0: evaluation;
+		Debug.Log("test number: "  + testNumber + "= cycle evaluation:" + tester.getCycleDiferenceEvaluation().ToString("F2") + "-- error rotation: " + tester.getCuadraticErrorRotation().ToString("F2") + "-- mean height evaluation: " + tester.getMeanHeightEvaluation().ToString("F2") + "-- speed: " + tester.getMeanSpeed().ToString("F2") + "-- evaluation: " + evaluation + ((tests[testNumber].getGenome().getFunctionType()==FunctioT.Olistic)? "(" + tests[testNumber].getGenome().getSelector() + ")":""));
 			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();
 			 

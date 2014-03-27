@@ -231,12 +231,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 362562916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
+  m_Script: {fileID: 11500000, guid: 565b7b61a1d241347a1a8fb5c37df750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creaturePref: {fileID: 100034, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
-  timeScale: 50
-  testingTime: 25
+  timeScale: 1
+  initialSpeed: {x: 0, y: 0, z: 4}
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -273,8 +273,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 399274225}
-  m_LocalRotation: {x: .397822678, y: .0256185737, z: .0029811596, w: .917099774}
-  m_LocalPosition: {x: 12.6151714, y: 11.0692911, z: -7.44242573}
+  m_LocalRotation: {x: 0, y: -.574290335, z: 0, w: .818651795}
+  m_LocalPosition: {x: 11.7052975, y: 1.2421366, z: .0340409279}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1134268344}
@@ -367,8 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: Buenos casos\23.51435\bestSoFar[74].genome
-  generate: 0
+  creatureFilePath: test\push23_03_2014...(4)\bestSoFar[476].genome
+  generate: 1
 --- !u!1 &453548666
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +911,50 @@ Prefab:
       propertyPath: initialSpeed.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400028, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400028, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.35000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400018, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_Mass
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900020, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.x
+      value: .0491569564
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900020, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.y
+      value: .608308017
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900008, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.x
+      value: .0491564386
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900008, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.y
+      value: -.608308136
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900002, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.x
+      value: .0491564386
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900002, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.y
+      value: -.608308136
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900014, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.x
+      value: .0491569564
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900014, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
+      propertyPath: m_ConnectedAnchor.y
+      value: .608308017
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
   m_RootGameObject: {fileID: 1565509116}
@@ -1071,14 +1115,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb10b68e359dc4bb36b540c5e22fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RANDOM_SIZE: 10
+  RANDOM_SIZE: 0
   ELITE_SIZE: 20
   ROULET_SIZE: 30
   NEW_SIZE: 0
+  mutation_t: 2
   simManager: {fileID: 362562917}
   functionType: 7
-  folder: walk2002
-  generate: 1
+  description: speed_cycle_meanheight_cuerpoMasArriva
+  generate: 0
 --- !u!4 &954359148
 Transform:
   m_ObjectHideFlags: 0
@@ -1579,7 +1624,6 @@ MonoBehaviour:
   frontRight2: {fileID: 2034527593}
   frontRightShoulder: {fileID: 585233419}
   body: {fileID: 1704091803}
-  initialSpeed: {x: .699999988, y: 0, z: 0}
   walkDirection: {x: 1, y: 0, z: 0}
 --- !u!1 &1638681643
 GameObject:
@@ -1742,7 +1786,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 701234963}
   m_GameObject: {fileID: 1704091803}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 8
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -1757,7 +1801,7 @@ Transform:
   m_PrefabInternal: {fileID: 701234963}
   m_GameObject: {fileID: 1704091803}
   m_LocalRotation: {x: 0, y: 0, z: .707106888, w: .707106769}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.35000002, z: 0}
   m_LocalScale: {x: 1.04999995, y: 1.25, z: 1.04999995}
   m_Children: []
   m_Father: {fileID: 1565509117}

@@ -1,17 +1,22 @@
 using System;
+using UnityEngine;
 
 public class GenomeContainer
 {
 	Genome genome;
 	float evaluation;
+
+	MutationType mutation_t;
 	
-	public GenomeContainer (FunctioT functionType)
+	public GenomeContainer (FunctioT functionType, MutationType mutation_t)
 	{
+		this.mutation_t = mutation_t;
 		this.genome = new Genome(functionType).init();
 	}
 	
-	public GenomeContainer (Genome genome)
+	public GenomeContainer (Genome genome, MutationType mutation_t)
 	{
+		this.mutation_t = mutation_t;
 		this.genome = genome;
 	}
 	
@@ -36,23 +41,49 @@ public class GenomeContainer
 			iterator.MoveNext();
 			
 			float rand = UnityEngine.Random.Range(0.0f,1.0f);
-			if(rand < 0.01){
-				gen.generateVal();		
+
+			switch(mutation_t){
+			case MutationType.Classic:
+				if(rand < 0.03){
+					gen.generateVal();		
+				}else
+				{
+					gen.setVal(((Gen)iterator.Current).getVal());
+				}
+				break;
+			case MutationType.Stepy:
+				if(rand < 0.01){
+					gen.generateVal();		
+				}
+				else if(rand < 0.03){
+					gen.setValMutation(((Gen)iterator.Current).getVal());
+				}
+				else if(rand < 0.08){
+					gen.setValMicroMutation(((Gen)iterator.Current).getVal());
+				}
+				else
+				{
+					gen.setVal(((Gen)iterator.Current).getVal());
+				}
+				break;
+			case MutationType.Gassian:
+				if(rand < 0.3){
+					gen.setValNormalMutation(((Gen)iterator.Current).getVal());		
+				}
+				else
+				{
+					gen.setVal(((Gen)iterator.Current).getVal());
+				}
+				break;
+			case MutationType.None:
+				Debug.LogError("Mutating a not mutable genome!");
+				break;
 			}
-			else if(rand < 0.05){
-				gen.setValMutation(((Gen)iterator.Current).getVal());
-			}
-			else if(rand < 0.15){
-				gen.setValMicroMutation(((Gen)iterator.Current).getVal());
-			}
-			else
-			{
-				gen.setVal(((Gen)iterator.Current).getVal());
-			}
+
 		}
 		
 		
-		return new GenomeContainer(newGenome);
+		return new GenomeContainer(newGenome, mutation_t);
 	}
 	
 	public GenomeContainer apariate(GenomeContainer couple){
@@ -75,7 +106,7 @@ public class GenomeContainer
 			}
 		}
 		
-		return new GenomeContainer(newGenome);
+		return new GenomeContainer(newGenome, mutation_t);
 	}
 	
 	public override bool Equals (object obj)

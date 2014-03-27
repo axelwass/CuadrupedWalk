@@ -8,7 +8,9 @@ public class GeneticAlgorithm : MonoBehaviour {
 	public int ELITE_SIZE = 4;
 	public int ROULET_SIZE = 20;
 	public int NEW_SIZE = 10;
-	
+
+	public MutationType mutation_t = MutationType.Stepy;
+
 	public SimulationManager simManager;
 
 	public FunctioT functionType = FunctioT.Classic;
@@ -40,10 +42,10 @@ public class GeneticAlgorithm : MonoBehaviour {
 	void Start () {
 		//GenomeContainer gc = new GenomeContainer();
 		for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE + NEW_SIZE; i++){
-			population.Add(new GenomeContainer(functionType));	
+			population.Add(new GenomeContainer(functionType, mutation_t));	
 		}
 		simManager.runTests(population);
-		folder = simManager.getName() + System.DateTime.Now.ToString("dd:MM:yyyy") + "(" + System.DateTime.Now.ToString("hh-mm-ss") + ") (" + description + ")";
+		folder = simManager.getName() + System.DateTime.Now.ToString("dd_MM_yyyy") + "(" + System.DateTime.Now.ToString("hh_mm_ss_tt") + ") (" + description + ")";
 		Directory.CreateDirectory("./test/");
 		Directory.CreateDirectory("./test/" + folder);
 		
@@ -146,7 +148,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 			}
 
 			for(int i =0; i<NEW_SIZE; i++){
-				newPopulation.Add(new GenomeContainer(functionType));	
+				newPopulation.Add(new GenomeContainer(functionType, mutation_t));	
 			}
 			/*for(int i =0; i<POPULATION / 2; i++){
 				newPoblation.Add(poblation[i]);

@@ -1,13 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Genome.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\PushSimulationManager.cs">
     <Files>
-      <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="84" Column="65" />
-      <File FileName="Assets\scripts\MoveController.cs" Line="211" Column="265" />
-      <File FileName="Assets\scripts\MoveFunctionPartidaFinalConstante.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\MoveFunctionPartida.cs" Line="18" Column="17" />
-      <File FileName="Assets\scripts\FunctionT.cs" Line="5" Column="105" />
-      <File FileName="Assets\scripts\Genome.cs" Line="88" Column="10" />
+      <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="14" Column="27" />
+      <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="82" Column="67" />
+      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveController.cs" Line="354" Column="87" />
+      <File FileName="Assets\scripts\MoveFunctionPartidaFinalConstante.cs" Line="32" Column="45" />
+      <File FileName="Assets\scripts\MoveFunctionPartida.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\FunctionT.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Genome.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\GenomeContainer.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Gen.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\TestCreature.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MutationType.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\PushSimulationManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

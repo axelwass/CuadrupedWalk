@@ -28,16 +28,20 @@ public class MoveController : MonoBehaviour {
 	//float initialPositionZ = 0;
 	Vector3 initialPosition;
 	Vector3 initialPositionAfterFirstPeriod;
+	float timeAfterFirstPeriod;
 	bool initialPositionSetted;
 	float period;
 
 	Quaternion initialRotation;
 	
 	float lastPositionX = 0;
+	float lastTime = 0;
+
 	int updates = 0;
 	//float cumulatedError = 0;
 	float cumulatedErrorPosition = 0;
 	float cumulatedErrorRotation = 0;
+	float cumulatedErrorHeight = 0;
 
 	float suposedPostionx =0;
 	
@@ -268,8 +272,13 @@ public class MoveController : MonoBehaviour {
 	}
 
 	public float getHeightEvaluation(){
-		return 1- (Mathf.Pow(body.rigidbody.transform.position.y - initialPosition.y,2)/initialPosition.y);
+		return 1- (Mathf.Abs(body.rigidbody.transform.position.y - initialPosition.y)/initialPosition.y);
 	}
+
+	public float getMeanHeightEvaluation(){
+		return 1- (cumulatedErrorHeight/updates)/initialPositionY;
+	}
+
 
 	public float getRotationEvaluation(){
 		return (1 - ((cumulatedErrorRotation / updates) / 180f));
@@ -291,7 +300,11 @@ public class MoveController : MonoBehaviour {
 		//return 	lastPositionX - initialPosition.x;
 		return lastPositionX - initialPositionAfterFirstPeriod.x;
 	}
-	
+
+	public float getMeanSpeed(){
+		return (lastPositionX - initialPositionAfterFirstPeriod.x)/(lastTime-timeAfterFirstPeriod);
+	}
+
 	public float getCuadraticErrorPosition(){
 		//Debug.Log("updates: " + updates);
 		return cumulatedErrorPosition/updates;	
@@ -339,6 +352,9 @@ public class MoveController : MonoBehaviour {
 		cumulatedErrorPosition += step_error>1?step_error:0;
 		//cumulatedErrorPosition += (body.transform.position - (initialPosition + elapsedTime * walkDirection)).magnitude;
 		cumulatedErrorRotation += Quaternion.Angle(body.transform.rotation,initialRotation);
+		cumulatedErrorHeight += Mathf.Abs (body.rigidbody.transform.position.y - initialPositionY);
+
+
 		if (elapsedTime > (2 * Mathf.PI * cycle / dominantPeriod) +  (2 * Mathf.PI / period) ) {
 			stepRotationsDiference = Quaternion.Angle(body.transform.rotation,RotationOldBody)+ 
 					Quaternion.Angle(backLeft1.transform.rotation,RotationOldbackLeft1)+ 
@@ -368,6 +384,7 @@ public class MoveController : MonoBehaviour {
 
 		lastPositionX = (body.transform.position.x + backLeft2.transform.position.x + backRight2.transform.position.x +
 				frontLeft2.transform.position.x + frontRight2.transform.position.x) / 5;
+		lastTime = elapsedTime;
 
 		if ( !initialPositionSetted && ( elapsedTime > (2 * Mathf.PI / period) ) ) {
 
@@ -383,6 +400,7 @@ public class MoveController : MonoBehaviour {
 
 			initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position +
 			frontLeft2.transform.position + frontRight2.transform.position) / 5;
+			timeAfterFirstPeriod = elapsedTime;
 			initialPositionSetted = true;	
 		}
 

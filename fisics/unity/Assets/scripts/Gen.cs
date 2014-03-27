@@ -36,7 +36,25 @@ public class Gen
 	public float getVal(){
 		return val;	
 	}
-	
+
+	public void setValNormalMutation(float val){
+
+		float sigma = (maxVal - minVal)/12;
+
+		float u1 = UnityEngine.Random.Range(0.0f,1.0f); //these are uniform(0,1) random doubles
+		float u2 = UnityEngine.Random.Range(0.0f,1.0f);
+		float randStdNormal = Mathf.Sqrt(-2.0f * Mathf.Log(u1)) *
+			Mathf.Sin(2.0f * Mathf.PI * u2); //random normal(0,1)
+		this.val = val + sigma * randStdNormal; //random normal(mean,stdDev^2)
+
+		if (this.val < minVal) {
+			this.val = maxVal + this.val- minVal;
+		}
+		if (this.val > maxVal) {
+			this.val = minVal + this.val - maxVal;
+		}
+	}
+
 	public void generateVal(){
 		val = UnityEngine.Random.Range(minVal,maxVal);	
 	}

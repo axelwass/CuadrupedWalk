@@ -31,7 +31,7 @@ public class TestCreature : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-			population.Add(new GenomeContainer(Genome.createFromFile(creatureFilePath)));	
+			population.Add(new GenomeContainer(Genome.createFromFile(creatureFilePath),MutationType.None));	
 	}
 	
 	// Update is called once per frame
