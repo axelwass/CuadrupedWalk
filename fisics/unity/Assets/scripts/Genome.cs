@@ -115,6 +115,13 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
+		case FunctioT.Partida_Classic_FaseSync_Fourier_Knee:
+			amplitudes = new Gen[24]; //3 más para cada rodillas 
+			fases = new Gen[24];
+			centerAngles = new Gen[24];
+			strength = new Gen[2];
+			period = new Gen[2];
+			break;
 		}
 		
 		for (int i = 0; i < amplitudes.Length; i++)
