@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 public abstract class SimulationManager : MonoBehaviour {
 	
-	
+	public bool accelEval = true;
+	public bool heightEval = true;
+	public bool cycleEval = true;
 	public GameObject creaturePref;
 	public float timeScale;
 	public Vector3 initialSpeed;

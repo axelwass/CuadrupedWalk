@@ -51,6 +51,8 @@ public class GeneticAlgorithm : MonoBehaviour {
 		
 		StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",false);
 		writer.WriteLine("Elite Size: " + ELITE_SIZE + ", roulete size: " + ROULET_SIZE+ ", random size: " + RANDOM_SIZE);
+		writer.WriteLine("Mutation type: " + mutation_t);
+		writer.WriteLine("CycleEval?: " + simManager.cycleEval + ", accelEval?: " + simManager.accelEval + ", heightEval?: " + simManager.heightEval);
 		writer.WriteLine("Funcion: " + functionType + ", empujon inicial: (" + simManager.initialSpeed.x + "," + simManager.initialSpeed.y + "," + simManager.initialSpeed.z + ")");
 
 		writer.Close();
