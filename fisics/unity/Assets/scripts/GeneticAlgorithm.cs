@@ -45,7 +45,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 			population.Add(new GenomeContainer(functionType, mutation_t));	
 		}
 		simManager.runTests(population);
-		folder = simManager.getName() + System.DateTime.Now.ToString("dd_MM_yyyy") + "(" + System.DateTime.Now.ToString("hh_mm_ss_tt") + ") (" + description + ")";
+		folder = simManager.getName() + System.DateTime.Now.ToString("dd_MM_yyyy") + "(" + System.DateTime.Now.ToString("tthh_mm_ss") + ") (" + description + ")";
 		Directory.CreateDirectory("./test/");
 		Directory.CreateDirectory("./test/" + folder);
 		

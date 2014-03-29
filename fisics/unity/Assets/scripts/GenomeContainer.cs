@@ -52,13 +52,13 @@ public class GenomeContainer
 				}
 				break;
 			case MutationType.Stepy:
-				if(rand < 0.01){
+				if(rand < 0.005){
 					gen.generateVal();		
 				}
-				else if(rand < 0.03){
+				else if(rand < 0.015){
 					gen.setValMutation(((Gen)iterator.Current).getVal());
 				}
-				else if(rand < 0.08){
+				else if(rand < 0.03){
 					gen.setValMicroMutation(((Gen)iterator.Current).getVal());
 				}
 				else

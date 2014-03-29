@@ -119,7 +119,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		
 		for (int i = 0; i < amplitudes.Length; i++)
 		{
-			amplitudes[i] = new Gen(0,45);
+			amplitudes[i] = new Gen(0,30);
 		}
 		for (int i = 0; i < fases.Length; i++)
 		{
@@ -127,12 +127,12 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		}
 		for (int i = 0; i < centerAngles.Length; i++)
 		{
-			centerAngles[i] = new Gen(-45,45);	
+			centerAngles[i] = new Gen(-30,30);
 		}
 		
 		
 		for (int i = 0; i < strength.Length; i++) {
-			strength[i] = new Gen (500, 3000);
+			strength[i] = new Gen (1000, 3000);
 		}
 		for (int i = 0; i < period.Length; i++) {
 			period[i] = new Gen(1,/*(Mathf.PI * 2.0f)*/5);
