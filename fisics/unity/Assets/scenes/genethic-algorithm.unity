@@ -145,7 +145,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 90}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0491569564, y: .608308017, z: .596833408}
+  m_ConnectedAnchor: {x: -.284176469, y: .608308136, z: .596833408}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -231,12 +231,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 362562916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 565b7b61a1d241347a1a8fb5c37df750, type: 3}
+  m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creaturePref: {fileID: 100034, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
   timeScale: 1
   initialSpeed: {x: 0, y: 0, z: 4}
+  testingTime: 200
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -367,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test\push23_03_2014...(4)\bestSoFar[476].genome
+  creatureFilePath: test\walk28_03_2014(PM02_42_48) (anglesLimitation)\bestSoFar[1235].genome
   generate: 1
 --- !u!1 &453548666
 GameObject:
@@ -424,7 +425,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 90}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0491564386, y: -.608308077, z: .596833408}
+  m_ConnectedAnchor: {x: -.284176975, y: -.608308017, z: .596833408}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -637,7 +638,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 90}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0491564386, y: -.608308077, z: -.596833408}
+  m_ConnectedAnchor: {x: -.284176975, y: -.608308017, z: -.596833408}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -1117,12 +1118,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RANDOM_SIZE: 0
   ELITE_SIZE: 20
-  ROULET_SIZE: 30
+  ROULET_SIZE: 40
   NEW_SIZE: 0
   mutation_t: 2
   simManager: {fileID: 362562917}
   functionType: 7
-  description: speed_cycle_meanheight_cuerpoMasArriva
+  description: anglesLimitation
   generate: 0
 --- !u!4 &954359148
 Transform:
@@ -2038,7 +2039,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 90}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0491569564, y: .608308017, z: -.596833408}
+  m_ConnectedAnchor: {x: -.284176469, y: .608308136, z: -.596833408}
   m_UseSpring: 1
   m_Spring:
     spring: 0

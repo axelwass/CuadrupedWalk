@@ -73,7 +73,7 @@ public class PushSimulationManager : SimulationManager {
 			tester.setInitialSpeed(instance.initialSpeed);
 			tester.testGenome(tests[testNumber].getGenome());
 			//tests[testNumber].getGenome().print();
-			elapsedTime=-0.02f;
+			elapsedTime=0;
 			//Random.seed = 0;
 			
 		}

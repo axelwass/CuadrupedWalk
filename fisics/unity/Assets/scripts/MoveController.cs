@@ -356,27 +356,39 @@ public class MoveController : MonoBehaviour {
 
 
 		if (elapsedTime > (2 * Mathf.PI * cycle / dominantPeriod) +  (2 * Mathf.PI / period) ) {
-			stepRotationsDiference = Quaternion.Angle(body.transform.rotation,RotationOldBody)+ 
-					Quaternion.Angle(backLeft1.transform.rotation,RotationOldbackLeft1)+ 
-					Quaternion.Angle(backLeft2.transform.rotation,RotationOldbackLeft2)+ 
-					Quaternion.Angle(backRight1.transform.rotation,RotationOldbackRight1)+
-					Quaternion.Angle(backRight2.transform.rotation,RotationOldbackRight2)+
-					Quaternion.Angle(frontRight1.transform.rotation,RotationOldfrontRight1)+
-					Quaternion.Angle(frontRight2.transform.rotation,RotationOldfrontRight2)+
-					Quaternion.Angle(frontLeft1.transform.rotation,RotationOldfrontLeft1)+
-					Quaternion.Angle(frontLeft2.transform.rotation,RotationOldfrontLeft2);
+
+			
+			Quaternion RotationNewBody = body.transform.rotation;
+			Quaternion RotationNewbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+
+			stepRotationsDiference = Quaternion.Angle(RotationNewBody,RotationOldBody)+ 
+				Quaternion.Angle(RotationNewbackLeft1,RotationOldbackLeft1)+ 
+				Quaternion.Angle(RotationNewbackLeft2,RotationOldbackLeft2)+ 
+				Quaternion.Angle(RotationNewbackRight1,RotationOldbackRight1)+
+				Quaternion.Angle(RotationNewbackRight2,RotationOldbackRight2)+
+				Quaternion.Angle(RotationNewfrontRight1,RotationOldfrontRight1)+
+				Quaternion.Angle(RotationNewfrontRight2,RotationOldfrontRight2)+
+				Quaternion.Angle(RotationNewfrontLeft1,RotationOldfrontLeft1)+
+				Quaternion.Angle(RotationNewfrontLeft2,RotationOldfrontLeft2);
 
 			cumulatedStepRotationsDiference += stepRotationsDiference;
 
-			RotationOldBody = body.transform.rotation;
-			RotationOldbackLeft1 = backLeft1.transform.rotation;
-			RotationOldbackLeft2 = backLeft2.transform.rotation;
-			RotationOldbackRight1 = backRight1.transform.rotation;
-			RotationOldbackRight2 = backRight2.transform.rotation;
-			RotationOldfrontRight1 = frontRight1.transform.rotation;
-			RotationOldfrontRight2 = frontRight2.transform.rotation;
-			RotationOldfrontLeft1 = frontLeft1.transform.rotation;
-			RotationOldfrontLeft2 = frontLeft2.transform.rotation;
+			RotationOldBody = RotationNewBody;
+			RotationOldbackLeft1 = RotationNewbackLeft1;
+			RotationOldbackLeft2 = RotationNewbackLeft2;
+			RotationOldbackRight1 = RotationNewbackRight1;
+			RotationOldbackRight2 = RotationNewbackRight2;
+			RotationOldfrontRight1 = RotationNewfrontRight1;
+			RotationOldfrontRight2 = RotationNewfrontRight2;
+			RotationOldfrontLeft1 = RotationNewfrontLeft1;
+			RotationOldfrontLeft2 = RotationNewfrontLeft2;
 
 			//Debug.Log("diferencias: " + stepRotationsDiference);
 			cycle++;
@@ -388,15 +400,16 @@ public class MoveController : MonoBehaviour {
 
 		if ( !initialPositionSetted && ( elapsedTime > (2 * Mathf.PI / period) ) ) {
 
+			
 			RotationOldBody = body.transform.rotation;
-			RotationOldbackLeft1 = backLeft1.transform.rotation;
-			RotationOldbackLeft2 = backLeft2.transform.rotation;
-			RotationOldbackRight1 = backRight1.transform.rotation;
-			RotationOldbackRight2 = backRight2.transform.rotation;
-			RotationOldfrontRight1 = frontRight1.transform.rotation;
-			RotationOldfrontRight2 = frontRight2.transform.rotation;
-			RotationOldfrontLeft1 = frontLeft1.transform.rotation;
-			RotationOldfrontLeft2 = frontLeft2.transform.rotation;
+			RotationOldbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
 
 			initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position +
 			frontLeft2.transform.position + frontRight2.transform.position) / 5;
