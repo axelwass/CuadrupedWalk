@@ -21,9 +21,14 @@ public class MoveController : MonoBehaviour {
 	
 	public GameObject body;
 	
+
 	Vector3 initialSpeed;
 
+
 	float initialPositionYSholders = 0;
+
+	float lastVelocity = 0;
+	float acceleration;
 	//float initialPositionX = 0;
 	//float initialPositionZ = 0;
 	Vector3 initialPosition;
@@ -62,6 +67,8 @@ public class MoveController : MonoBehaviour {
 	float stepRotationsDiference;
 
 	float cumulatedStepRotationsDiference;
+
+	float cumulatedAccelerationError = 0;
 
 	int cycle = 1;
 
@@ -339,6 +346,7 @@ public class MoveController : MonoBehaviour {
 
 		if(firstTime){
 			body.rigidbody.velocity = initialSpeed;//AddForce(new Vector3(0, 0, 20), ForceMode.Impulse); //TODO body.rigidbody.AddForce(new Vector3(1, 0, 0), ForceMode.Impulse);
+			lastVelocity = body.rigidbody.velocity.x;
 			firstTime = false;	
 		}
 				backLeft1.updateState (elapsedTime);
@@ -358,6 +366,11 @@ public class MoveController : MonoBehaviour {
 				frontRightShoulder.updateState (elapsedTime);
 	
 		suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
+		acceleration = (body.rigidbody.velocity.x - lastVelocity)/0.02f;
+		if(acceleration < -0.02f){
+			cumulatedAccelerationError-=acceleration;
+		}
+
 		float step_error = Mathf.Pow((body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((body.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
 		//Debug.Log("step_error: " + (step_error>1?step_error:0));
 		cumulatedErrorPosition += body.transform.position.y < initialPosition.y? Mathf.Pow((body.transform.position.y - initialPosition.y),4):0;
@@ -439,6 +452,10 @@ public class MoveController : MonoBehaviour {
 	
 	public Vector3 getInitialSpeed(){
 		return initialSpeed;
+	}
+
+	public float getCumulaterAccelerationError(){
+		return 1000/cumulatedAccelerationError;
 	}
 		
 }
