@@ -22,9 +22,9 @@ public class MoveController : MonoBehaviour {
 	public GameObject body;
 	
 	Vector3 initialSpeed;
-	
+
+	float initialPositionYSholders = 0;
 	//float initialPositionX = 0;
-	float initialPositionY = 0;
 	//float initialPositionZ = 0;
 	Vector3 initialPosition;
 	Vector3 initialPositionAfterFirstPeriod;
@@ -270,7 +270,8 @@ public class MoveController : MonoBehaviour {
 		initialRotation = body.transform.rotation;
 		//Debug.Log("initial angles: " + initialRotation);
 		//initialPositionX = body.transform.position.x;
-		initialPositionY = body.rigidbody.transform.position.y;
+		initialPositionYSholders = Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
+		                                     frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y );
 		//initialPositionZ = body.transform.position.z;
 		//Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
 	
@@ -295,7 +296,7 @@ public class MoveController : MonoBehaviour {
 	}
 
 	public float getMeanHeightEvaluation(){
-		return 1- (cumulatedErrorHeight/updates)/initialPositionY;
+		return 1- (cumulatedErrorHeight/updates)/initialPositionYSholders;
 	}
 
 
@@ -305,14 +306,6 @@ public class MoveController : MonoBehaviour {
 
 	public float getCycleDiferenceEvaluation(){
 		return (1 - ((cumulatedStepRotationsDiference / (cycle-1))/450f));
-	}
-
-	public float getHeight(){
-		return body.rigidbody.transform.position.y;
-	}
-
-	public float getInitialHeight(){
-		return initialPositionY;
 	}
 	
 	public float getAdvance(){
@@ -371,7 +364,8 @@ public class MoveController : MonoBehaviour {
 		cumulatedErrorPosition += step_error>1?step_error:0;
 		//cumulatedErrorPosition += (body.transform.position - (initialPosition + elapsedTime * walkDirection)).magnitude;
 		cumulatedErrorRotation += Quaternion.Angle(body.transform.rotation,initialRotation);
-		cumulatedErrorHeight += Mathf.Abs (body.rigidbody.transform.position.y - initialPositionY);
+		cumulatedErrorHeight += Mathf.Abs (Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
+		                                             frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y ) - initialPositionYSholders);
 
 
 		if (elapsedTime > (2 * Mathf.PI * cycle / dominantPeriod) +  (2 * Mathf.PI / period) ) {

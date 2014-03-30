@@ -80,9 +80,9 @@ public class PushSimulationManager : SimulationManager {
 	}
 	
 	void endActualTest(){
-		float evaluation = (1-Mathf.Abs(tester.getHeight()-tester.getInitialHeight())) +tester.getSpeedEvaluation() + tester.centered();
-		evaluation = evaluation<0 || tester.getHeight()<0? 0: evaluation;
-		Debug.Log("test number: " + testNumber + "=  speed evaluation: " + tester.getSpeedEvaluation() + "-- height: " + tester.getHeight() + "-- centered: " + tester.centered() + "-- evaluation: " + evaluation);
+		float evaluation = tester.getHeightEvaluation() +tester.getSpeedEvaluation() + tester.centered();
+		evaluation = evaluation<0 || tester.getHeightEvaluation()<0? 0: evaluation;
+		Debug.Log("test number: " + testNumber + "=  speed evaluation: " + tester.getSpeedEvaluation() + "-- height: " + tester.getHeightEvaluation() + "-- centered: " + tester.centered() + "-- evaluation: " + evaluation);
 		tests[testNumber].setEvaluation(evaluation);	
 		destroyTest();
 		
