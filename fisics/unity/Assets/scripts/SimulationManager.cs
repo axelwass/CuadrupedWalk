@@ -7,6 +7,7 @@ public abstract class SimulationManager : MonoBehaviour {
 	public bool accelEval = true;
 	public bool heightEval = true;
 	public bool cycleEval = true;
+	public bool directionEval = true;
 
 	public float timeScale;
 	public Vector3 initialSpeed;

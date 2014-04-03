@@ -307,7 +307,7 @@ public class MoveController : MonoBehaviour {
 	}
 
 
-	public float getRotationEvaluation(){
+	public float getMeanRotationEvaluation(){
 		return (1 - ((cumulatedErrorRotation / updates) / 180f));
 	}
 
@@ -385,14 +385,14 @@ public class MoveController : MonoBehaviour {
 
 			
 			Quaternion RotationNewBody = body.transform.rotation;
-			Quaternion RotationNewbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			Quaternion RotationNewbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			Quaternion RotationNewbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			Quaternion RotationNewbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			Quaternion RotationNewfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			Quaternion RotationNewfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			Quaternion RotationNewfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			Quaternion RotationNewfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			Quaternion RotationNewbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles/* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
 
 			stepRotationsDiference = Quaternion.Angle(RotationNewBody,RotationOldBody)+ 
 				Quaternion.Angle(RotationNewbackLeft1,RotationOldbackLeft1)+ 
@@ -428,14 +428,14 @@ public class MoveController : MonoBehaviour {
 
 			
 			RotationOldBody = body.transform.rotation;
-			RotationOldbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			RotationOldbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			RotationOldbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			RotationOldbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			RotationOldfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			RotationOldfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			RotationOldfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
-			RotationOldfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles - body.transform.rotation.eulerAngles );
+			RotationOldbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
 
 			initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position +
 			frontLeft2.transform.position + frontRight2.transform.position) / 5;

@@ -55,10 +55,10 @@ public class GenomeContainer
 				if(rand < 0.003){
 					gen.generateVal();		
 				}
-				else if(rand < 0.01){
+				else if(rand < 0.008){
 					gen.setValMutation(((Gen)iterator.Current).getVal());
 				}
-				else if(rand < 0.02){
+				else if(rand < 0.015){
 					gen.setValMicroMutation(((Gen)iterator.Current).getVal());
 				}
 				else
