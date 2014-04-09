@@ -798,8 +798,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -10
-    max: 10
+    min: 0
+    max: 0
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -1504,8 +1504,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -10
-    max: 10
+    min: 0
+    max: 0
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -2006,8 +2006,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -10
-    max: 10
+    min: 0
+    max: 0
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -2273,8 +2273,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -10
-    max: 10
+    min: 0
+    max: 0
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
