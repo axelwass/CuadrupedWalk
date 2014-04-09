@@ -370,6 +370,9 @@ public class MoveController : MonoBehaviour {
 		if(acceleration < -0.02f){
 			cumulatedAccelerationError-=acceleration;
 		}
+		if(lastVelocity < 0.2){
+			cumulatedAccelerationError += 0.02f;
+		}
 
 		float step_error = Mathf.Pow((body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((body.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
 		//Debug.Log("step_error: " + (step_error>1?step_error:0));
