@@ -265,7 +265,11 @@ public class MoveController : MonoBehaviour {
 			
 			break;
 		}
-
+//		Probar poner todas last fases iguales! y tambien todos los periodos (en rodillas con rodillas, hombros con hombros, etc)
+//		Mandar pelicula x email con el mejor y con momentos previos
+		// Mas fourier o una especia de campana chata.
+		// Probar tres estructuras distintas para ver distintas formas de caminar : reptil, perro, girafa.
+		// hacer informe del modelo exitoso.
 		dominantPeriod = genome.getPeriod (0);
 		
 		//initialPosition = body.transform.position;
