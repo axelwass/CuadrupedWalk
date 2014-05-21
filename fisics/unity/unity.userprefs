@@ -1,25 +1,26 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\WalkSimulationManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Genome.cs">
     <Files>
-      <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="84" Column="1" />
       <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="153" Column="55" />
+      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\PushSimulationManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\MoveController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\MoveFunctionPartidaFinalConstante.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveController.cs" Line="366" Column="34" />
+      <File FileName="Assets\scripts\MoveFunctionPartidaFinalConstante.cs" Line="30" Column="8" />
       <File FileName="Assets\scripts\MoveFunctionPartida.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\FunctionT.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Genome.cs" Line="41" Column="10" />
-      <File FileName="Assets\scripts\GenomeContainer.cs" Line="112" Column="23" />
+      <File FileName="Assets\scripts\Genome.cs" Line="137" Column="38" />
+      <File FileName="Assets\scripts\GenomeContainer.cs" Line="112" Column="36" />
       <File FileName="Assets\scripts\Gen.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\TestCreature.cs" Line="8" Column="2" />
+      <File FileName="Assets\scripts\TestCreature.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\MutationType.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\SimulationManager.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\MoveFunctionFourier2.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\MoveFunctionPartidaFourierRodilla.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveFunctionPartidaFourierRodilla.cs" Line="34" Column="2" />
       <File FileName="Assets\scripts\moveFunctionClassic.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\TestCreatureScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveFunction.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\JointMovementController.cs" Line="31" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

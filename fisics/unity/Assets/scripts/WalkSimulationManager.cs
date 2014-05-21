@@ -68,7 +68,7 @@ public class WalkSimulationManager : SimulationManager {
 	void OnLevelWasLoaded (int level) {
 		if (level == 0) {
 			//Debug.Log("testnumber: " + testNumber);
-			testingCreature = GameObject.Find("testingCreature");//(GameObject)Instantiate(creaturePref);
+			testingCreature = GameObject.FindWithTag("creature");//(GameObject)Instantiate(creaturePref);
 			tester = (MoveController)testingCreature.GetComponent("MoveController");
 			tester.testGenome(tests[testNumber].getGenome());
 			//tests[testNumber].getGenome().print();

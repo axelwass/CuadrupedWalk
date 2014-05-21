@@ -22,6 +22,11 @@ public class JointMovementController : MonoBehaviour {
 		if(function != null && joint != null){
 			JointSpring s = new JointSpring();
 			s.targetPosition = function.evalAngle(elapsedTime);
+			if ( s.targetPosition < joint.limits.min ) {
+				s.targetPosition = joint.limits.min;
+			} else if ( s.targetPosition > joint.limits.max ) {
+				s.targetPosition = joint.limits.max;
+			};
 			s.spring = function.evalStrength(elapsedTime);
 			joint.spring = s;
 			
