@@ -142,7 +142,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength[i] = new Gen (500, 3000);
 		}
 		for (int i = 0; i < period.Length; i++) {
-			period[i] = new Gen(1,/*(Mathf.PI * 2.0f)*/5);
+			period[i] = new Gen(1,/*(Mathf.PI * 2.0f)*/10); //cambiamos el periodo de (1,5) a (1,10)
 		}
 	}
 	
