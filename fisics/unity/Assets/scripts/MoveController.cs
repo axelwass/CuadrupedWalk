@@ -51,7 +51,8 @@ public class MoveController : MonoBehaviour {
 	float cumulatedErrorHeight = 0;
 
 	float suposedPostionx =0;
-	
+	float cumulatedWalkDirectionError = 0;
+
 	bool firstTime = true;
 	
 	public Vector3 walkDirection = new Vector3(1,0,0);
@@ -338,6 +339,10 @@ public class MoveController : MonoBehaviour {
 		return (suposedPostionx - lastPositionX)/suposedPostionx;
 	}
 
+	public float getMeanWalkDirectionError(float simulationTime){
+		return 1-((cumulatedWalkDirectionError/updates)/(walkDirection.x * simulationTime));
+	}
+
 	public float getHeightEvaluation(){
 		return 1- (Mathf.Abs(body.rigidbody.transform.position.y - initialPosition.y)/initialPosition.y);
 	}
@@ -411,6 +416,7 @@ public class MoveController : MonoBehaviour {
 		}
 	
 		suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
+		cumulatedWalkDirectionError += Mathf.Abs(body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x);
 		acceleration = (body.rigidbody.velocity.x - lastVelocity)/0.02f;
 		if(acceleration < -0.02f){
 			cumulatedAccelerationError-=acceleration;

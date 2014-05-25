@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class SimulationManager : MonoBehaviour {
-	
+
+	public bool fixSpeedEval = true;
 	public bool accelEval = true;
 	public bool heightEval = true;
 	public bool cycleEval = true;
