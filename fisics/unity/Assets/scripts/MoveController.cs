@@ -85,216 +85,41 @@ public class MoveController : MonoBehaviour {
 	public void testGenome(Genome genome){
 		//Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
 
+		
+		GenomeToFunctions transletor = new GenomeToFunctions(genome);
+		
+		backLeft1.setFunction(transletor.backLeft1);
+		backLeft2.setFunction(transletor.backLeft2);
+		backLeftShoulder.setFunction(transletor.backLeftShoulder);
 
-		switch (genome.getFunctionType()==FunctioT.Olistic? genome.getSelector() : genome.getFunctionType()) {
-		case FunctioT.Classic:
-			backLeft1.setFunction(new moveFunctionClassic(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0)));
-			backLeft2.setFunction(new moveFunctionClassic(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0)));
-			backLeftShoulder.setFunction(new moveFunctionClassic(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new moveFunctionClassic(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0)));
-			frontLeft2.setFunction(new moveFunctionClassic(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0)));
-			frontLeftShoulder.setFunction(new moveFunctionClassic(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0)));
-			}
-			backRight1.setFunction (new moveFunctionClassic (genome.getAmplitude (6), genome.getPeriod (0), genome.getFase (6), genome.getCenterAngle (6), genome.getStrength (0)));
-			backRight2.setFunction (new moveFunctionClassic (genome.getAmplitude (7), genome.getPeriod (0), genome.getFase (7), genome.getCenterAngle (7), genome.getStrength (0)));
-			backRightShoulder.setFunction (new moveFunctionClassic (genome.getAmplitude (8), genome.getPeriod (0), genome.getFase (8), genome.getCenterAngle (8), genome.getStrength (0)));
-			if(!twoLegs){
-			frontRight1.setFunction (new moveFunctionClassic (genome.getAmplitude (9), genome.getPeriod (0), genome.getFase (9), genome.getCenterAngle (9), genome.getStrength (0)));
-			frontRight2.setFunction (new moveFunctionClassic (genome.getAmplitude (10), genome.getPeriod (0), genome.getFase (10), genome.getCenterAngle (10), genome.getStrength (0)));
-			frontRightShoulder.setFunction (new moveFunctionClassic (genome.getAmplitude (11), genome.getPeriod (0), genome.getFase (11), genome.getCenterAngle (11), genome.getStrength (0)));
-			}
-			period = genome.getPeriod(0);
-
-			break;
-		case FunctioT.FaseSync:
-			backLeft1.setFunction(new moveFunctionClassic(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0)));
-			backLeft2.setFunction(new moveFunctionClassic(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0)));
-			backLeftShoulder.setFunction(new moveFunctionClassic(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new moveFunctionClassic(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0)));
-			frontLeft2.setFunction(new moveFunctionClassic(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0)));
-			frontLeftShoulder.setFunction(new moveFunctionClassic(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0)));
-			}
-			backRight1.setFunction (new moveFunctionClassic (genome.getAmplitude (0), genome.getPeriod (0), genome.getFase (0) + Mathf.PI, genome.getCenterAngle (0), genome.getStrength (0)));
-			backRight2.setFunction (new moveFunctionClassic (genome.getAmplitude (1), genome.getPeriod (0), genome.getFase (1) + Mathf.PI, genome.getCenterAngle (1), genome.getStrength (0)));
-			backRightShoulder.setFunction (new moveFunctionClassic (genome.getAmplitude (2), genome.getPeriod (0), genome.getFase (2) + Mathf.PI, genome.getCenterAngle (2), genome.getStrength (0)));
-			if(!twoLegs){
-			frontRight1.setFunction (new moveFunctionClassic (genome.getAmplitude (3), genome.getPeriod (0), genome.getFase (3) + Mathf.PI, genome.getCenterAngle (3), genome.getStrength (0)));
-			frontRight2.setFunction (new moveFunctionClassic (genome.getAmplitude (4), genome.getPeriod (0), genome.getFase (4) + Mathf.PI, genome.getCenterAngle (4), genome.getStrength (0)));
-			frontRightShoulder.setFunction (new moveFunctionClassic (genome.getAmplitude (5), genome.getPeriod (0), genome.getFase (5) + Mathf.PI, genome.getCenterAngle (5), genome.getStrength (0)));
-			}
-			period = genome.getPeriod(0);
-
-			break;
-		case FunctioT.FaseSuperSync:
-			backLeft1.setFunction(new moveFunctionClassic(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0)));
-			backLeft2.setFunction(new moveFunctionClassic(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0)));
-			backLeftShoulder.setFunction(new moveFunctionClassic(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new moveFunctionClassic(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(0) + Mathf.PI,genome.getCenterAngle(3),genome.getStrength(0)));
-			frontLeft2.setFunction(new moveFunctionClassic(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(1) + Mathf.PI,genome.getCenterAngle(4),genome.getStrength(0)));
-			frontLeftShoulder.setFunction(new moveFunctionClassic(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(2) + Mathf.PI,genome.getCenterAngle(5),genome.getStrength(0)));
-			}
-			backRight1.setFunction (new moveFunctionClassic (genome.getAmplitude (0), genome.getPeriod (0), genome.getFase (0) + Mathf.PI, genome.getCenterAngle (0), genome.getStrength (0)));
-			backRight2.setFunction (new moveFunctionClassic (genome.getAmplitude (1), genome.getPeriod (0), genome.getFase (1) + Mathf.PI, genome.getCenterAngle (1), genome.getStrength (0)));
-			backRightShoulder.setFunction (new moveFunctionClassic (genome.getAmplitude (2), genome.getPeriod (0), genome.getFase (2) + Mathf.PI, genome.getCenterAngle (2), genome.getStrength (0)));
-			if(!twoLegs){
-			frontRight1.setFunction (new moveFunctionClassic (genome.getAmplitude (3), genome.getPeriod (0), genome.getFase (0), genome.getCenterAngle (3), genome.getStrength (0)));
-			frontRight2.setFunction (new moveFunctionClassic (genome.getAmplitude (4), genome.getPeriod (0), genome.getFase (1), genome.getCenterAngle (4), genome.getStrength (0)));
-			frontRightShoulder.setFunction (new moveFunctionClassic (genome.getAmplitude (5), genome.getPeriod (0), genome.getFase (2), genome.getCenterAngle (5), genome.getStrength (0)));
-			}
-			period = genome.getPeriod(0);
-
-			break;
-		case FunctioT.Fourier2:
-			backLeft1.setFunction(new MoveFunctionFourier2(genome.getAmplitude(0),genome.getAmplitude(6),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0)));
-			backLeft2.setFunction(new MoveFunctionFourier2(genome.getAmplitude(1),genome.getAmplitude(7),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0)));
-			backLeftShoulder.setFunction(new MoveFunctionFourier2(genome.getAmplitude(2),genome.getAmplitude(8),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new MoveFunctionFourier2(genome.getAmplitude(3),genome.getAmplitude(9),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0)));
-			frontLeft2.setFunction(new MoveFunctionFourier2(genome.getAmplitude(4),genome.getAmplitude(10),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0)));
-			frontLeftShoulder.setFunction(new MoveFunctionFourier2(genome.getAmplitude(5),genome.getAmplitude(11),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0)));
-			}
-			backRight1.setFunction (new MoveFunctionFourier2 (genome.getAmplitude (0),genome.getAmplitude(6), genome.getPeriod (0), genome.getFase (0) + Mathf.PI, genome.getCenterAngle (0), genome.getStrength (0)));
-			backRight2.setFunction (new MoveFunctionFourier2 (genome.getAmplitude (1),genome.getAmplitude(7), genome.getPeriod (0), genome.getFase (1) + Mathf.PI, genome.getCenterAngle (1), genome.getStrength (0)));
-			backRightShoulder.setFunction (new MoveFunctionFourier2 (genome.getAmplitude (2),genome.getAmplitude(8), genome.getPeriod (0), genome.getFase (2) + Mathf.PI, genome.getCenterAngle (2), genome.getStrength (0)));
-			if(!twoLegs){
-			frontRight1.setFunction (new MoveFunctionFourier2 (genome.getAmplitude (3),genome.getAmplitude(9), genome.getPeriod (0), genome.getFase (3) + Mathf.PI, genome.getCenterAngle (3), genome.getStrength (0)));
-			frontRight2.setFunction (new MoveFunctionFourier2 (genome.getAmplitude (4),genome.getAmplitude(10), genome.getPeriod (0), genome.getFase (4) + Mathf.PI, genome.getCenterAngle (4), genome.getStrength (0)));
-			frontRightShoulder.setFunction (new MoveFunctionFourier2 (genome.getAmplitude (5),genome.getAmplitude(11), genome.getPeriod (0), genome.getFase (5) + Mathf.PI, genome.getCenterAngle (5), genome.getStrength (0)));
-			}
-			period = genome.getPeriod(0);
-
-			break;
-		case FunctioT.Partida:
-			backLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
-			backLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
-			backLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(15),genome.getPeriod(1),genome.getFase(15),genome.getCenterAngle(15),genome.getStrength(1)));
-			frontLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(16),genome.getPeriod(1),genome.getFase(16),genome.getCenterAngle(16),genome.getStrength(1)));
-			frontLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(17),genome.getPeriod(1),genome.getFase(17),genome.getCenterAngle(17),genome.getStrength(1)));
-			}
-			backRight1.setFunction (new MoveFunctionPartida (genome.getAmplitude (6), genome.getPeriod (0), genome.getFase (6), genome.getCenterAngle (6), genome.getStrength (0),genome.getAmplitude(18),genome.getPeriod(1),genome.getFase(18),genome.getCenterAngle(18),genome.getStrength(1)));
-			backRight2.setFunction (new MoveFunctionPartida (genome.getAmplitude (7), genome.getPeriod (0), genome.getFase (7), genome.getCenterAngle (7), genome.getStrength (0),genome.getAmplitude(19),genome.getPeriod(1),genome.getFase(19),genome.getCenterAngle(19),genome.getStrength(1)));
-			backRightShoulder.setFunction (new MoveFunctionPartida (genome.getAmplitude (8), genome.getPeriod (0), genome.getFase (8), genome.getCenterAngle (8), genome.getStrength (0),genome.getAmplitude(20),genome.getPeriod(1),genome.getFase(20),genome.getCenterAngle(20),genome.getStrength(1)));
-			if(!twoLegs){
-			frontRight1.setFunction (new MoveFunctionPartida (genome.getAmplitude (9), genome.getPeriod (0), genome.getFase (9), genome.getCenterAngle (9), genome.getStrength (0),genome.getAmplitude(21),genome.getPeriod(1),genome.getFase(21),genome.getCenterAngle(21),genome.getStrength(1)));
-			frontRight2.setFunction (new MoveFunctionPartida (genome.getAmplitude (10), genome.getPeriod (0), genome.getFase (10), genome.getCenterAngle (10), genome.getStrength (0),genome.getAmplitude(22),genome.getPeriod(1),genome.getFase(22),genome.getCenterAngle(22),genome.getStrength(1)));
-			frontRightShoulder.setFunction (new MoveFunctionPartida (genome.getAmplitude (11), genome.getPeriod (0), genome.getFase (11), genome.getCenterAngle (11), genome.getStrength (0),genome.getAmplitude(23),genome.getPeriod(1),genome.getFase(23),genome.getCenterAngle(23),genome.getStrength(1)));
-			}
-			period = genome.getPeriod(1);
-
-			break;
-		case FunctioT.Partida_FaseSync:
-			backLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
-			backLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7),genome.getCenterAngle(7),genome.getStrength(1)));
-			backLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8),genome.getCenterAngle(8),genome.getStrength(1)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9),genome.getCenterAngle(9),genome.getStrength(1)));
-			frontLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10),genome.getCenterAngle(10),genome.getStrength(1)));
-			frontLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11),genome.getCenterAngle(11),genome.getStrength(1)));
-			}
-			backRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0) + Mathf.PI,genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6) + Mathf.PI,genome.getCenterAngle(6),genome.getStrength(1)));
-			backRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1) + Mathf.PI,genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7) + Mathf.PI,genome.getCenterAngle(7),genome.getStrength(1)));
-			backRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2) + Mathf.PI,genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8) + Mathf.PI,genome.getCenterAngle(8),genome.getStrength(1)));
-			if(!twoLegs){
-			frontRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3) + Mathf.PI,genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9) + Mathf.PI,genome.getCenterAngle(9),genome.getStrength(1)));
-			frontRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4) + Mathf.PI,genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10) + Mathf.PI,genome.getCenterAngle(10),genome.getStrength(1)));
-			frontRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5) + Mathf.PI,genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11) + Mathf.PI,genome.getCenterAngle(11),genome.getStrength(1)));
-			}
-			period = genome.getPeriod(1);
-			
-			break;
-		case FunctioT.Partida_Classic_FaseSync:
-			backLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
-			backLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7),genome.getCenterAngle(7),genome.getStrength(1)));
-			backLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8),genome.getCenterAngle(8),genome.getStrength(1)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9),genome.getCenterAngle(9),genome.getStrength(1)));
-			frontLeft2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10),genome.getCenterAngle(10),genome.getStrength(1)));
-			frontLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11),genome.getCenterAngle(11),genome.getStrength(1)));
-			}
-			backRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0) + Mathf.PI,genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
-			backRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1) + Mathf.PI,genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
-			backRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2) + Mathf.PI,genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
-			if(!twoLegs){
-			frontRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3) + Mathf.PI,genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(15),genome.getPeriod(1),genome.getFase(15),genome.getCenterAngle(15),genome.getStrength(1)));
-			frontRight2.setFunction(new MoveFunctionPartida(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4) + Mathf.PI,genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(16),genome.getPeriod(1),genome.getFase(16),genome.getCenterAngle(16),genome.getStrength(1)));
-			frontRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5) + Mathf.PI,genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(17),genome.getPeriod(1),genome.getFase(17),genome.getCenterAngle(17),genome.getStrength(1)));
-			}
-			period = genome.getPeriod(1);
-			
-			break;
-		case FunctioT.PartidaFinalConstante:
-			backLeft1.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
-			backLeft2.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
-			backLeftShoulder.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
-			if(!twoLegs){
-			frontLeft1.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(15),genome.getPeriod(1),genome.getFase(15),genome.getCenterAngle(15),genome.getStrength(1)));
-			frontLeft2.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(16),genome.getPeriod(1),genome.getFase(16),genome.getCenterAngle(16),genome.getStrength(1)));
-			frontLeftShoulder.setFunction(new MoveFunctionPartidaFinalConstante(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(17),genome.getPeriod(1),genome.getFase(17),genome.getCenterAngle(17),genome.getStrength(1)));
-			}
-			backRight1.setFunction (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (6), genome.getPeriod (0), genome.getFase (6), genome.getCenterAngle (6), genome.getStrength (0),genome.getAmplitude(18),genome.getPeriod(1),genome.getFase(18),genome.getCenterAngle(18),genome.getStrength(1)));
-			backRight2.setFunction (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (7), genome.getPeriod (0), genome.getFase (7), genome.getCenterAngle (7), genome.getStrength (0),genome.getAmplitude(19),genome.getPeriod(1),genome.getFase(19),genome.getCenterAngle(19),genome.getStrength(1)));
-			backRightShoulder.setFunction (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (8), genome.getPeriod (0), genome.getFase (8), genome.getCenterAngle (8), genome.getStrength (0),genome.getAmplitude(20),genome.getPeriod(1),genome.getFase(20),genome.getCenterAngle(20),genome.getStrength(1)));
-			if(!twoLegs){
-			frontRight1.setFunction (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (9), genome.getPeriod (0), genome.getFase (9), genome.getCenterAngle (9), genome.getStrength (0),genome.getAmplitude(21),genome.getPeriod(1),genome.getFase(21),genome.getCenterAngle(21),genome.getStrength(1)));
-			frontRight2.setFunction (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (10), genome.getPeriod (0), genome.getFase (10), genome.getCenterAngle (10), genome.getStrength (0),genome.getAmplitude(22),genome.getPeriod(1),genome.getFase(22),genome.getCenterAngle(22),genome.getStrength(1)));
-			frontRightShoulder.setFunction (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (11), genome.getPeriod (0), genome.getFase (11), genome.getCenterAngle (11), genome.getStrength (0),genome.getAmplitude(23),genome.getPeriod(1),genome.getFase(23),genome.getCenterAngle(23),genome.getStrength(1)));
-			}
-			period = genome.getPeriod(1);
-			
-			break;
-		case FunctioT.Partida_Classic_FaseSync_Fourier_Knee:
-			backLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
-			backLeft2.setFunction(new MoveFunctionPartidaFourierRodilla(genome.getAmplitude(1),genome.getAmplitude(18),genome.getAmplitude(19),genome.getAmplitude(20),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7),genome.getCenterAngle(7),genome.getStrength(1)));
-			backLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8),genome.getCenterAngle(8),genome.getStrength(1)));
-			if(!twoLegs){
-				frontLeft1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9),genome.getCenterAngle(9),genome.getStrength(1)));
-				frontLeft2.setFunction(new MoveFunctionPartidaFourierRodilla(genome.getAmplitude(4),genome.getAmplitude(21),genome.getAmplitude(22),genome.getAmplitude(23),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10),genome.getCenterAngle(10),genome.getStrength(1)));
-				frontLeftShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11),genome.getCenterAngle(11),genome.getStrength(1)));
-			}
-			backRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0) + Mathf.PI,genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
-			backRight2.setFunction(new MoveFunctionPartidaFourierRodilla(genome.getAmplitude(1),genome.getAmplitude(18),genome.getAmplitude(19),genome.getAmplitude(20),genome.getPeriod(0),genome.getFase(1) + Mathf.PI,genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
-			backRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2) + Mathf.PI,genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
-			if(!twoLegs){
-				frontRight1.setFunction(new MoveFunctionPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3) + Mathf.PI,genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(15),genome.getPeriod(1),genome.getFase(15),genome.getCenterAngle(15),genome.getStrength(1)));
-				frontRight2.setFunction(new MoveFunctionPartidaFourierRodilla(genome.getAmplitude(4),genome.getAmplitude(21),genome.getAmplitude(22),genome.getAmplitude(23),genome.getPeriod(0),genome.getFase(4) + Mathf.PI,genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(16),genome.getPeriod(1),genome.getFase(16),genome.getCenterAngle(16),genome.getStrength(1)));
-				frontRightShoulder.setFunction(new MoveFunctionPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5) + Mathf.PI,genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(17),genome.getPeriod(1),genome.getFase(17),genome.getCenterAngle(17),genome.getStrength(1)));
-			}
-			period = genome.getPeriod(1);
-			
-			break;
-		case FunctioT.Media_Partida_Classic_FaseSync_Fourier_Knee:
-			backLeft1.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
-			backLeft2.setFunction(new MoveFunctionMediaPartidaFourierRodilla(genome.getAmplitude(1),genome.getAmplitude(18),genome.getAmplitude(19),genome.getAmplitude(20),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7),genome.getCenterAngle(7),genome.getStrength(1)));
-			backLeftShoulder.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8),genome.getCenterAngle(8),genome.getStrength(1)));
-			if(!twoLegs){
-				frontLeft1.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(9),genome.getCenterAngle(9),genome.getStrength(1)));
-				frontLeft2.setFunction(new MoveFunctionMediaPartidaFourierRodilla(genome.getAmplitude(4),genome.getAmplitude(21),genome.getAmplitude(22),genome.getAmplitude(23),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(10),genome.getPeriod(1),genome.getFase(10),genome.getCenterAngle(10),genome.getStrength(1)));
-				frontLeftShoulder.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(11),genome.getPeriod(1),genome.getFase(11),genome.getCenterAngle(11),genome.getStrength(1)));
-			}
-			backRight1.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0) + Mathf.PI,genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
-			backRight2.setFunction(new MoveFunctionMediaPartidaFourierRodilla(genome.getAmplitude(1),genome.getAmplitude(18),genome.getAmplitude(19),genome.getAmplitude(20),genome.getPeriod(0),genome.getFase(1) + Mathf.PI,genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
-			backRightShoulder.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2) + Mathf.PI,genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
-			if(!twoLegs){
-				frontRight1.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3) + Mathf.PI,genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(15),genome.getPeriod(1),genome.getFase(15),genome.getCenterAngle(15),genome.getStrength(1)));
-				frontRight2.setFunction(new MoveFunctionMediaPartidaFourierRodilla(genome.getAmplitude(4),genome.getAmplitude(21),genome.getAmplitude(22),genome.getAmplitude(23),genome.getPeriod(0),genome.getFase(4) + Mathf.PI,genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(16),genome.getPeriod(1),genome.getFase(16),genome.getCenterAngle(16),genome.getStrength(1)));
-				frontRightShoulder.setFunction(new MoveFunctionMediaPartida(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5) + Mathf.PI,genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(17),genome.getPeriod(1),genome.getFase(17),genome.getCenterAngle(17),genome.getStrength(1)));
-			}
-			period = genome.getPeriod(1);
-			
-			break;//Media_Partida_Classic_FaseSync_Fourier_Knee
+		if (!twoLegs) {
+				frontLeft1.setFunction (transletor.frontLeft1);
+				frontLeft2.setFunction (transletor.frontLeft2);
+				frontLeftShoulder.setFunction (transletor.frontLeftShoulder);
 		}
+
+		backRight1.setFunction (transletor.backRight1);
+		backRight2.setFunction (transletor.backRight2);
+		backRightShoulder.setFunction (transletor.backRightShoulder);
+
+		if (!twoLegs) {
+				frontRight1.setFunction (transletor.frontRight1);
+				frontRight2.setFunction (transletor.frontRight2);
+				frontRightShoulder.setFunction (transletor.frontRightShoulder);
+		}
+
+		period = transletor.secondPeriod;
+		dominantPeriod = transletor.dominantPeriod;
+
+
 //		Probar poner todas last fases iguales! y tambien todos los periodos (en rodillas con rodillas, hombros con hombros, etc)
 //		Mandar pelicula x email con el mejor y con momentos previos
 		// Mas fourier o una especia de campana chata.
 		// Probar tres estructuras distintas para ver distintas formas de caminar : reptil, perro, girafa.
 		// hacer informe del modelo exitoso.
-		dominantPeriod = genome.getPeriod (0);
-		
+
+
+
 		//initialPosition = body.transform.position;
 		if(!twoLegs){
 			initialPosition = (body.transform.position + backLeft2.transform.position + backRight2.transform.position +
@@ -340,7 +165,7 @@ public class MoveController : MonoBehaviour {
 	}
 
 	public float getMeanWalkDirectionError(float simulationTime){
-		return 1-((cumulatedWalkDirectionError/updates)/(walkDirection.x * simulationTime));
+		return 1-((cumulatedWalkDirectionError/updates)/(0.51f *walkDirection.x * simulationTime));
 	}
 
 	public float getHeightEvaluation(){
