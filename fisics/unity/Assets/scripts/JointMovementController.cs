@@ -36,7 +36,7 @@ public class JointMovementController : MonoBehaviour {
 				s.targetPosition = joint.limits.max;
 			};
 
-			if(showAngle){
+			if(showAngle && TestCreature.getInstance() != null){
 				writer = new StreamWriter(TestCreature.getInstance().creatureFilePath + "." + this.gameObject.transform.parent.gameObject.name + "." + this.gameObject.name,true);
 				writer.WriteLine(s.targetPosition + ", " + joint.angle);
 
