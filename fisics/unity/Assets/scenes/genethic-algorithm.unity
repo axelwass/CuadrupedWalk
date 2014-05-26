@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 112377217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.05161452, z: .550000012}
+  m_LocalPosition: {x: 0, y: 1.05161452, z: .25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 563280969}
@@ -1109,16 +1109,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 362562916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
+  m_Script: {fileID: 11500000, guid: f166952cdc8e547e6b6c11d7250f7d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelEval: 0
+  fixSpeedEval: 1
+  accelEval: 1
   heightEval: 1
   cycleEval: 1
   directionEval: 1
   timeScale: 1
-  initialSpeed: {x: 0, y: 0, z: 0}
-  testingTime: 10
+  initialSpeed: {x: 1, y: 0, z: 2}
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -1249,8 +1249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test/walk25_05_2014(PM02_20_19) (persona)/bestSoFar[1005].genome
-  generate: 1
+  creatureFilePath: test/push25_05_2014(PM08_11_39) (empujon oveja)/bestSoFar[210].genome
+  generate: 0
 --- !u!1 &447846594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,7 +1887,7 @@ HingeJoint:
   m_UseLimits: 1
   m_Limits:
     min: 0
-    max: 0
+    max: 10
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -2245,8 +2245,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: 0
-    max: 0
+    min: 10
+    max: -50
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -2412,7 +2412,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.496770829, y: 1.48049253e-07, z: .458333343}
+  m_ConnectedAnchor: {x: -.496770829, y: 1.48049253e-07, z: .625}
   m_UseSpring: 1
   m_Spring:
     spring: 1000
@@ -3182,12 +3182,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RANDOM_SIZE: 0
   ELITE_SIZE: 25
-  ROULET_SIZE: 40
+  ROULET_SIZE: 20
   NEW_SIZE: 0
   mutation_t: 2
   simManager: {fileID: 362562917}
-  functionType: 9
-  description: persona
+  functionType: 5
+  description: empujon oveja
   generate: 0
 --- !u!4 &954359148
 Transform:
@@ -3644,7 +3644,7 @@ Transform:
   m_GameObject: {fileID: 1014740193}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
   m_LocalPosition: {x: 0, y: 1.29999995, z: 0}
-  m_LocalScale: {x: .5, y: .200000003, z: 1.20000005}
+  m_LocalScale: {x: .5, y: .200000003, z: .400000006}
   m_Children: []
   m_Father: {fileID: 1506949869}
 --- !u!54 &1014740195
@@ -3779,7 +3779,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.496770829, y: 1.48049253e-07, z: -.458333343}
+  m_ConnectedAnchor: {x: -.496770829, y: 1.48049253e-07, z: -.625}
   m_UseSpring: 1
   m_Spring:
     spring: 1000
@@ -4607,13 +4607,55 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1309378723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.05161452, z: -.550000012}
+  m_LocalPosition: {x: 0, y: 1.05161452, z: -.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1999850154}
   - {fileID: 1981971912}
   - {fileID: 1080344568}
   m_Father: {fileID: 1506949869}
+--- !u!1 &1389523847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1389523849}
+  - 114: {fileID: 1389523848}
+  m_Layer: 0
+  m_Name: Grnn Creature Tester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1389523848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389523847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f59abe61dfbc2944a05f2d115eb7411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simManager: {fileID: 362562917}
+  creatureFilePath001: test/push25_05_2014(PM08_56_18) (empujon oveja)/bestSoFar[25].genome
+  creatureFilePath002: 
+  generate: 1
+--- !u!4 &1389523849
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389523847}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 37.9629707, y: -54.669529, z: -4.96225262}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1396919418
 GameObject:
   m_ObjectHideFlags: 0
@@ -4940,7 +4982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1506949869
 Transform:
   m_ObjectHideFlags: 0
@@ -4948,7 +4990,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1506949868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .067805998, z: 0}
+  m_LocalPosition: {x: 0, y: .160435677, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 112377218}
@@ -4981,7 +5023,7 @@ MonoBehaviour:
   frontRightShoulder: {fileID: 0}
   twoLegs: 1
   body: {fileID: 1014740193}
-  walkDirection: {x: 1, y: 0, z: 0}
+  walkDirection: {x: .5, y: 0, z: 0}
 --- !u!1 &1565509116
 GameObject:
   m_ObjectHideFlags: 0
@@ -4997,7 +5039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1565509117
 Transform:
   m_ObjectHideFlags: 0
@@ -5395,8 +5437,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: 0
-    max: 0
+    min: 10
+    max: -50
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -6285,8 +6327,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: 0
-    max: 0
+    min: 10
+    max: -50
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -6866,7 +6908,7 @@ HingeJoint:
   m_UseLimits: 1
   m_Limits:
     min: 0
-    max: 0
+    max: 10
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity
@@ -7000,8 +7042,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: 0
-    max: 0
+    min: 10
+    max: -50
     minBounce: 0
     maxBounce: 0
   m_BreakForce: Infinity

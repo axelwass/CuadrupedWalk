@@ -86,30 +86,30 @@ public class MoveController : MonoBehaviour {
 		//Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
 
 		
-		GenomeToFunctions transletor = new GenomeToFunctions(genome);
+		GenomeToFunctions translator = new GenomeToFunctions(genome);
 		
-		backLeft1.setFunction(transletor.backLeft1);
-		backLeft2.setFunction(transletor.backLeft2);
-		backLeftShoulder.setFunction(transletor.backLeftShoulder);
+		backLeft1.setFunction(translator.backLeft1);
+		backLeft2.setFunction(translator.backLeft2);
+		backLeftShoulder.setFunction(translator.backLeftShoulder);
 
 		if (!twoLegs) {
-				frontLeft1.setFunction (transletor.frontLeft1);
-				frontLeft2.setFunction (transletor.frontLeft2);
-				frontLeftShoulder.setFunction (transletor.frontLeftShoulder);
+				frontLeft1.setFunction (translator.frontLeft1);
+				frontLeft2.setFunction (translator.frontLeft2);
+				frontLeftShoulder.setFunction (translator.frontLeftShoulder);
 		}
 
-		backRight1.setFunction (transletor.backRight1);
-		backRight2.setFunction (transletor.backRight2);
-		backRightShoulder.setFunction (transletor.backRightShoulder);
+		backRight1.setFunction (translator.backRight1);
+		backRight2.setFunction (translator.backRight2);
+		backRightShoulder.setFunction (translator.backRightShoulder);
 
 		if (!twoLegs) {
-				frontRight1.setFunction (transletor.frontRight1);
-				frontRight2.setFunction (transletor.frontRight2);
-				frontRightShoulder.setFunction (transletor.frontRightShoulder);
+				frontRight1.setFunction (translator.frontRight1);
+				frontRight2.setFunction (translator.frontRight2);
+				frontRightShoulder.setFunction (translator.frontRightShoulder);
 		}
 
-		period = transletor.secondPeriod;
-		dominantPeriod = transletor.dominantPeriod;
+		period = translator.secondPeriod;
+		dominantPeriod = translator.dominantPeriod;
 
 
 //		Probar poner todas last fases iguales! y tambien todos los periodos (en rodillas con rodillas, hombros con hombros, etc)
@@ -143,6 +143,44 @@ public class MoveController : MonoBehaviour {
 	
 	}
 
+	public void testGrnn(System.Collections.Generic.List<GrnnData> data){
+		backLeft1.setFunction(new GrnnFunction(BodyParts.BackLeft1,data,body));
+		backLeft2.setFunction(new GrnnFunction(BodyParts.BackLeft2,data,body));
+		backLeftShoulder.setFunction(new GrnnFunction(BodyParts.BackLeftShoulder,data,body));
+		
+		frontLeft1.setFunction(new GrnnFunction(BodyParts.FrontLeft1,data,body));
+		frontLeft2.setFunction(new GrnnFunction(BodyParts.FrontLeft2,data,body));
+		frontLeftShoulder.setFunction(new GrnnFunction(BodyParts.FrontLeftShoulder,data,body));
+		
+		backRight1.setFunction (new GrnnFunction(BodyParts.BackRight1,data,body));
+		backRight2.setFunction (new GrnnFunction(BodyParts.BackRight2,data,body));
+		backRightShoulder.setFunction (new GrnnFunction(BodyParts.BackRightShoulder,data,body));
+		
+		frontRight1.setFunction (new GrnnFunction(BodyParts.FrontRight1,data,body));
+		frontRight2.setFunction (new GrnnFunction(BodyParts.FrontRight2,data,body));
+		frontRightShoulder.setFunction (new GrnnFunction(BodyParts.FrontRightShoulder,data,body));
+
+		
+		//initialPosition = body.transform.position;
+		if(!twoLegs){
+			initialPosition = (body.transform.position + backLeft2.transform.position + backRight2.transform.position +
+			                   frontLeft2.transform.position + frontRight2.transform.position) / 5;
+		}else{
+			initialPosition = (body.transform.position + backLeft2.transform.position + backRight2.transform.position) / 3;
+			
+		}
+		
+		initialRotation = body.transform.rotation;
+		//Debug.Log("initial angles: " + initialRotation);
+		//initialPositionX = body.transform.position.x;
+		if(!twoLegs){
+			initialPositionYSholders = Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
+			                                     frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y );
+		}else{
+			initialPositionYSholders = Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y);
+		}
+	}
+
 	public float centered(){
 		float xAverage;
 		float zAverage;
@@ -169,7 +207,9 @@ public class MoveController : MonoBehaviour {
 	}
 
 	public float getHeightEvaluation(){
-		return 1- (Mathf.Abs(body.rigidbody.transform.position.y - initialPosition.y)/initialPosition.y);
+		
+		return 1- (Mathf.Abs (Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
+		                                frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y ) - initialPositionYSholders)/initialPositionYSholders);
 	}
 
 	public float getMeanHeightEvaluation(){

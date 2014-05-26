@@ -1,12 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/MoveFunctionPartidaFourierRodilla.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/PushSimulationManager.cs">
     <Files>
-      <File FileName="Assets/scripts/MoveController.cs" Line="263" Column="55" />
-      <File FileName="Assets/scripts/JointMovementController.cs" Line="40" Column="159" />
-      <File FileName="Assets/scripts/WalkSimulationManager.cs" Line="84" Column="179" />
-      <File FileName="Assets/scripts/Genome.cs" Line="129" Column="29" />
+      <File FileName="Assets/scripts/WalkSimulationManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/MoveController.cs" Line="147" Column="21" />
+      <File FileName="Assets/scripts/JointMovementController.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/WalkSimulationManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/Genome.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/MoveFunctionPartidaFourierRodilla.cs" Line="37" Column="32" />
+      <File FileName="Assets/scripts/GrnnData.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/PushSimulationManager.cs" Line="74" Column="53" />
+      <File FileName="Assets/scripts/GrnnTester.cs" Line="55" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

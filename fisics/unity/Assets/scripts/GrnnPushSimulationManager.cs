@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PushSimulationManager : SimulationManager {
-		
-		
-		
-		
+public class GrnnPushSimulationManager : SimulationManager {
+	
+	
+	
+	
 	GameObject testingCreature;
 	MoveController tester;
 	
@@ -14,11 +14,11 @@ public class PushSimulationManager : SimulationManager {
 	bool runingTests = false;
 	
 	bool nextTest = false;
-
-	System.Collections.Generic.List<GenomeContainer> tests = new System.Collections.Generic.List<GenomeContainer>();
+	
+	System.Collections.Generic.List<GrnnData> tests = new System.Collections.Generic.List<GrnnData>();
 	
 	
-	private static PushSimulationManager instance;
+	private static GrnnPushSimulationManager instance;
 	
 	void Awake(){
 		if(instance != null){
@@ -39,18 +39,18 @@ public class PushSimulationManager : SimulationManager {
 	public override bool isRuningTest(){
 		return runingTests;	
 	}
-	
-	public override void runTests(System.Collections.Generic.List<GenomeContainer> tests){
+
+	public override void runTests(System.Collections.Generic.List<GenomeContainer> tests){}
+
+	public void runGrnnTests(System.Collections.Generic.List<GrnnData> tests){
 		if(runingTests){
 			Debug.Log("No se pueden correr dos sries de tests al mismo tiempo");	
 		}
 		else{
 			runingTests = true;
 			this.tests = tests;
-			
 			testNumber = -1;
 			nextTest=true;
-			
 		}
 	}
 	
@@ -71,10 +71,8 @@ public class PushSimulationManager : SimulationManager {
 			testingCreature = GameObject.FindWithTag("creature");//(GameObject)Instantiate(creaturePref);
 			tester = (MoveController)testingCreature.GetComponent("MoveController");
 			tester.setInitialSpeed(instance.initialSpeed);
-			tester.testGenome(tests[testNumber].getGenome());
-			//tests[testNumber].getGenome().print();
+			tester.testGrnn(tests);
 			elapsedTime=0;
-			//Random.seed = 0;
 			
 		}
 	}
@@ -83,12 +81,12 @@ public class PushSimulationManager : SimulationManager {
 		float evaluation = tester.getHeightEvaluation() +tester.getSpeedEvaluation() + tester.centered() + tester.getMeanHeightEvaluation();
 		evaluation = evaluation<0 || tester.getHeightEvaluation()<0? 0: evaluation;
 		Debug.Log("test number: " + testNumber + "=  speed evaluation: " + tester.getSpeedEvaluation() + "-- height: " + tester.getHeightEvaluation()+ "-- meanheight: " + tester.getMeanHeightEvaluation() + "-- centered: " + tester.centered() + "-- evaluation: " + evaluation);
-		tests[testNumber].setEvaluation(evaluation);	
+//		tests[testNumber].setEvaluation(evaluation);	
 		destroyTest();
 		
 	}
-
-
+	
+	
 	
 	
 	// Update is called once per 
@@ -99,7 +97,7 @@ public class PushSimulationManager : SimulationManager {
 			nextTest = false;
 			
 		}else{
-			if(tester != null && testNumber >= 0 && elapsedTime > 3 + (Mathf.PI*2/tests[testNumber].getGenome().getPeriod(0)) + (tests[testNumber].getGenome().getFunctionType() == FunctioT.Partida?(Mathf.PI*2/tests[testNumber].getGenome().getPeriod(1)):0)){
+			if(tester != null && testNumber >= 0 && elapsedTime > 10){
 				endActualTest();
 				//testNumber++;
 				if(testNumber+1<tests.Count){
@@ -121,5 +119,5 @@ public class PushSimulationManager : SimulationManager {
 	public override string getName(){
 		return "push";
 	}
-
+	
 }

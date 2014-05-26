@@ -4,7 +4,7 @@ using System.Collections;
 public class GrnnTester : MonoBehaviour {
 
 	
-	public PushSimulationManager simManager;
+	public GrnnPushSimulationManager simManager;
 
 	public Hashtable files; 
 
@@ -21,7 +21,7 @@ public class GrnnTester : MonoBehaviour {
 
 
 
-	GrnnData[] data = new GrnnData[1];
+	System.Collections.Generic.List<GrnnData> data = new System.Collections.Generic.List<GrnnData>();
 	
 	private static GrnnTester instance;
 	
@@ -45,14 +45,14 @@ public class GrnnTester : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//population.Add(new GenomeContainer(Genome.createFromFile(creatureFilePath),MutationType.None));
-		data[0] = new GrnnData(0,1,Genome.createFromFile(creatureFilePath001));
+		data.Add(new GrnnData(0,1,Genome.createFromFile(creatureFilePath001)));
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(!simManager.isRuningTest()){
-			//simManager.runGrnnTest(data);
+			simManager.runGrnnTests(data);
 		}
 	}
 }

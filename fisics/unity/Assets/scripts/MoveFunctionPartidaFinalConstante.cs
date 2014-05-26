@@ -27,13 +27,13 @@ public class MoveFunctionPartidaFinalConstante : MoveFunction {
 	}
 	
 	public override float evalAngle(float t){
-		return t<(2*Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D:
-			t<(2*Mathf.PI/B2)+(2*Mathf.PI/B)?A2*(float)Mathf.Sin(t*B2+C2) + D2:
-				A2*(float)Mathf.Sin(2*Mathf.PI+C2) + D2;
+		return t<(Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D: //le saco el 2 pi a todos
+			t<(Mathf.PI/B2)+(Mathf.PI/B)?A2*(float)Mathf.Sin(t*B2+C2) + D2:
+				0/*A2*(float)Mathf.Sin(Mathf.PI+C2) + D2*/;
 				
 	}
 	
 	public override float evalStrength(float t){
-		return t<(2*Mathf.PI/B)?strength:strength2;
+		return t<(Mathf.PI/B)?strength:strength2; // le sacoel 2 pi
 	}
 }

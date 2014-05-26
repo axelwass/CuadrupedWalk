@@ -5,14 +5,14 @@ public class GrnnFunction : MoveFunction {
 
 	GameObject body;
 
-	float startTime = 0;
+	float startTime = -100;
 
 	ArrayList functions = new ArrayList();
 
 	float period1;
 	float period2;
 
-	public GrnnFunction(BodyParts part,GrnnData[] datas,GameObject body){
+	public GrnnFunction(BodyParts part,System.Collections.Generic.List<GrnnData> datas,GameObject body){
 		foreach(GrnnData data in datas){
 			switch(part){
 			case BodyParts.BackLeft1:
@@ -73,10 +73,10 @@ public class GrnnFunction : MoveFunction {
 
 
 	public override float evalAngle (float t){
-		if(body.rigidbody.velocity.magnitude >0.7 && (startTime == 0 || t-startTime > 3 + (Mathf.PI*2/period2) + (Mathf.PI*2/period1))){
+		if(body.rigidbody.velocity.magnitude >0.7 && (t-startTime > 3 + (Mathf.PI*2/period2) + (Mathf.PI*2/period1))){
 			startTime = t;
 		}
-		if(startTime != 0){
+		if(startTime >= 0){
 			foreach(GrnnMaper func in functions){
 				return func.function.evalAngle(t-startTime);
 			}
