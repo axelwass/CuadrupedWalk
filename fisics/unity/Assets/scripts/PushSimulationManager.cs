@@ -80,9 +80,9 @@ public class PushSimulationManager : SimulationManager {
 	}
 	
 	void endActualTest(){
-		float evaluation = tester.getHeightEvaluation() +tester.getSpeedEvaluation() + tester.centered() + tester.getMeanHeightEvaluation();
-		evaluation = evaluation<0 || tester.getHeightEvaluation()<0? 0: evaluation;
-		Debug.Log("test number: " + testNumber + "=  speed evaluation: " + tester.getSpeedEvaluation() + "-- height: " + tester.getHeightEvaluation()+ "-- meanheight: " + tester.getMeanHeightEvaluation() + "-- centered: " + tester.centered() + "-- evaluation: " + evaluation);
+		float evaluation = tester.getHeightEvaluation()  * tester.getSpeedEvaluation() * tester.centered() * tester.getMeanHeightEvaluation() * tester.getBodyRotation();
+		evaluation = evaluation<0 || tester.getHeightEvaluation()<0 || tester.getSpeedEvaluation()<0 || tester.centered()<0 || tester.getMeanHeightEvaluation() < 0 || tester.getBodyRotation()<0? 0: evaluation;
+		Debug.Log("test number: " + testNumber + "=  speed evaluation: " + tester.getSpeedEvaluation() + "-- height: " + tester.getHeightEvaluation()+ "-- meanheight: " + tester.getMeanHeightEvaluation() + "-- centered: " + tester.centered()+ "-- body rotation: " + tester.getBodyRotation() + "-- evaluation: " + evaluation);
 		tests[testNumber].setEvaluation(evaluation);	
 		destroyTest();
 		

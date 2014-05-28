@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 362562916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f166952cdc8e547e6b6c11d7250f7d75, type: 3}
+  m_Script: {fileID: 11500000, guid: 565b7b61a1d241347a1a8fb5c37df750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fixSpeedEval: 1
@@ -1117,8 +1117,8 @@ MonoBehaviour:
   heightEval: 1
   cycleEval: 1
   directionEval: 1
-  timeScale: 1
-  initialSpeed: {x: 1, y: 0, z: 2}
+  timeScale: .100000001
+  initialSpeed: {x: 0, y: 0, z: 4}
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -1249,8 +1249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test/push25_05_2014(PM08_11_39) (empujon oveja)/bestSoFar[210].genome
-  generate: 0
+  creatureFilePath: Buenos casos\push28_05_2014(PM12_38_33) (empujon oveja 4 reloaded)/bestSoFar[349].genome
+  generate: 1
 --- !u!1 &447846594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,7 +3642,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400028, guid: 4c1ec3f0f9bde4021b78229a68fc048c, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1014740193}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
+  m_LocalRotation: {x: 0, y: 0, z: .707106888, w: .707106769}
   m_LocalPosition: {x: 0, y: 1.29999995, z: 0}
   m_LocalScale: {x: .5, y: .200000003, z: .400000006}
   m_Children: []
@@ -4641,10 +4641,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f59abe61dfbc2944a05f2d115eb7411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simManager: {fileID: 362562917}
+  simManager: {fileID: 0}
   creatureFilePath001: test/push25_05_2014(PM08_56_18) (empujon oveja)/bestSoFar[25].genome
   creatureFilePath002: 
-  generate: 1
+  generate: 0
 --- !u!4 &1389523849
 Transform:
   m_ObjectHideFlags: 0

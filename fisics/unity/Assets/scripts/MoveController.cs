@@ -249,7 +249,12 @@ public class MoveController : MonoBehaviour {
 	}
 	
 	public float getSpeedEvaluation(){
-		return 1- body.rigidbody.velocity.magnitude/initialSpeed.magnitude;
+		float speedEvalLineal = 1- body.rigidbody.velocity.magnitude/initialSpeed.magnitude;
+		return speedEvalLineal<0.5f?speedEvalLineal*0.75f:0.75f + (speedEvalLineal-0.5f)*0.5f;
+	}
+	
+	public float getBodyRotation(){
+		return 1 - body.transform.rotation.eulerAngles.x/180;
 	}
 	
 	// Update is called once every 0.02 sec.
