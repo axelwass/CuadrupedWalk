@@ -117,7 +117,12 @@ public class GrnnPushSimulationManager : SimulationManager {
 		}
 	}
 	public override string getName(){
-		return "push";
+		return "grnn";
+	}
+
+	
+	public override string simulationOptions(){
+		return "grnn options";
 	}
 	
 }

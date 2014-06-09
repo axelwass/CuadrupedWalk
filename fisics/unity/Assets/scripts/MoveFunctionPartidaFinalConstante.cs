@@ -8,32 +8,65 @@ public class MoveFunctionPartidaFinalConstante : MoveFunction {
 	float C2;
 	float D2;
 	float strength2;
+
+	float A3;
+	float B3;
+	float C3;
+	float D3;
+	float strength3;
+
+	float A4;
+	float B4;
+	float C4;
+	float D4;
+	float strength4;
+
 	
-	
-	public MoveFunctionPartidaFinalConstante(float amplitude, float period, float fase, float centerAngle, float strength,
-	                           float amplitude2, float period2, float fase2, float centerAngle2, float strength2)
+	public MoveFunctionPartidaFinalConstante(CircularEnumerator aEnum,
+	                                         CircularEnumerator caEnum,
+	                                         CircularEnumerator pEnum,
+	                                         CircularEnumerator fEnum,
+	                                         CircularEnumerator sEnum)
 	{
-		this.A= amplitude2;
-		this.B= period2;
-		this.C= fase2;
-		this.D= centerAngle2;
-		this.strength = strength2;
+		this.A= aEnum.nextValue();
+		this.B= pEnum.nextValue();
+		this.C= fEnum.nextValue();
+		this.D= caEnum.nextValue();
+		this.strength = sEnum.nextValue();
 		
-		this.A2= amplitude;
-		this.B2= period;
-		this.C2= fase;
-		this.D2= centerAngle;
-		this.strength2 = strength;
+		this.A2= aEnum.nextValue();
+		this.B2= pEnum.nextValue();
+		this.C2= fEnum.nextValue();
+		this.D2= caEnum.nextValue();
+		this.strength2 = sEnum.nextValue();
+		
+		this.A3= aEnum.nextValue();
+		this.B3= pEnum.nextValue();
+		this.C3= fEnum.nextValue();
+		this.D3= caEnum.nextValue();
+		this.strength3 = sEnum.nextValue();
+		
+		this.A4= aEnum.nextValue();
+		this.B4= pEnum.nextValue();
+		this.C4= fEnum.nextValue();
+		this.D4= caEnum.nextValue();
+		this.strength4 = sEnum.nextValue();
 	}
 	
 	public override float evalAngle(float t){
 		return t<(Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D: //le saco el 2 pi a todos
 			t<(Mathf.PI/B2)+(Mathf.PI/B)?A2*(float)Mathf.Sin(t*B2+C2) + D2:
-				0/*A2*(float)Mathf.Sin(Mathf.PI+C2) + D2*/;
+			t<(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?A3*(float)Mathf.Sin(t*B3+C3) + D3:
+			t<(Mathf.PI/B4)+(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?A4*(float)Mathf.Sin(t*B4+C4) + D4:
+				0;
 				
 	}
 	
 	public override float evalStrength(float t){
-		return t<(Mathf.PI/B)?strength:strength2; // le sacoel 2 pi
+		return t<(Mathf.PI/B)? strength: //le saco el 2 pi a todos
+			t<(Mathf.PI/B2)+(Mathf.PI/B)?strength2:
+				t<(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?strength3:
+				t<(Mathf.PI/B4)+(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?strength4:
+				0;
 	}
 }

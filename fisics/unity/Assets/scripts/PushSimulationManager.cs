@@ -122,4 +122,8 @@ public class PushSimulationManager : SimulationManager {
 		return "push";
 	}
 
+	public override string simulationOptions(){
+		return "all";
+	}
+
 }

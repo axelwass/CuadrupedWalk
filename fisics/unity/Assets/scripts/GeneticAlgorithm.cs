@@ -26,7 +26,9 @@ public class GeneticAlgorithm : MonoBehaviour {
 	int generation = 0;
 	
 	public bool generate = true;
-	
+
+	public string loadFromFile;
+
 	void Awake(){
 		if(!generate || instance != null){
 			
@@ -41,8 +43,16 @@ public class GeneticAlgorithm : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//GenomeContainer gc = new GenomeContainer();
-		for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE + NEW_SIZE; i++){
-			population.Add(new GenomeContainer(functionType, mutation_t));	
+		if (string.IsNullOrEmpty(loadFromFile)) {
+			for (int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE + NEW_SIZE; i++) {
+				population.Add (new GenomeContainer (functionType, mutation_t));	
+			}
+
+		} else {
+			for(int i = 0;File.Exists(loadFromFile + "/population["+ i +"].genome");i++){
+				//Debug.Log(loadFromFile + "/population["+ i +"].genome");
+				population.Add (new GenomeContainer(Genome.createFromFile(loadFromFile + "/population["+ i +"].genome"),mutation_t));
+			}
 		}
 		simManager.runTests(population);
 		folder = simManager.getName() + System.DateTime.Now.ToString("dd_MM_yyyy") + "(" + System.DateTime.Now.ToString("tthh_mm_ss") + ") (" + description + ")";
@@ -52,7 +62,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 		StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",false);
 		writer.WriteLine("Elite Size: " + ELITE_SIZE + ", roulete size: " + ROULET_SIZE+ ", random size: " + RANDOM_SIZE);
 		writer.WriteLine("Mutation type: " + mutation_t);
-		writer.WriteLine("CycleEval?: " + simManager.cycleEval + ", accelEval?: " + simManager.accelEval + ", heightEval?: " + simManager.heightEval);
+		writer.WriteLine (simManager.simulationOptions());
 		writer.WriteLine("Funcion: " + functionType + ", empujon inicial: (" + simManager.initialSpeed.x + "," + simManager.initialSpeed.y + "," + simManager.initialSpeed.z + ")");
 
 		writer.Close();
@@ -90,7 +100,17 @@ public class GeneticAlgorithm : MonoBehaviour {
 			}
 		return totalEvaluation;
 	}
-	
+
+	void OnGUI () {
+		if (GUI.Button (new Rect (10,10,130,20), "Guardar generacion")) {
+			Directory.CreateDirectory("./test/" + folder + "/generation" + generation);
+			int i =0;
+			foreach(GenomeContainer gc in population){
+				gc.getGenome().saveToFile("test/"+folder + "/generation" + generation + "/population["+ (i++) +"].genome");
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if(!simManager.isRuningTest()){

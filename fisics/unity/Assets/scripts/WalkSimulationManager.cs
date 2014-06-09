@@ -3,7 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class WalkSimulationManager : SimulationManager {
+
 	
+	public bool fixSpeedEval = true;
+	public bool accelEval = false;
+	public bool heightEval = true;
+	public bool cycleEval = true;
+	public bool directionEval = true;
+
+
 	public float testingTime;
 	
 	GameObject testingCreature;
@@ -120,5 +128,9 @@ public class WalkSimulationManager : SimulationManager {
 
 	public override string getName(){
 		return "walk";
+	}
+
+	public override string simulationOptions(){
+			return "CycleEval?: " + cycleEval + ", accelEval?: " + accelEval + ", heightEval?: " + heightEval;
 	}
 }

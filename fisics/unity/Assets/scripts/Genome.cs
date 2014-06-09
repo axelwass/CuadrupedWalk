@@ -101,11 +101,11 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			period = new Gen[2];
 			break;
 		case FunctioT.PartidaFinalConstante:
-			amplitudes = new Gen[24];
-			fases = new Gen[24];
-			centerAngles = new Gen[24];
-			strength = new Gen[2];
-			period = new Gen[2];
+			amplitudes = new Gen[48];
+			fases = new Gen[48];
+			centerAngles = new Gen[48];
+			strength = new Gen[4];
+			period = new Gen[4];
 			break;
 		case FunctioT.Olistic:
 			selector = new Gen(0,(float)(int)FunctioT.Olistic-0.01f);
@@ -212,6 +212,26 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	
 	public float getCenterAngle(int i){
 		return centerAngles[i].getVal();
+	}
+
+	public CircularEnumerator getStrengthEnumerator(){
+		return new CircularEnumerator(strength.GetEnumerator());
+	}
+	
+	public CircularEnumerator getPeriodEnumerator(){
+		return new CircularEnumerator(period.GetEnumerator());
+	}
+	
+	public CircularEnumerator getAmplitudeEnumerator(){
+		return new CircularEnumerator(amplitudes.GetEnumerator());	
+	}
+	
+	public CircularEnumerator getFaseEnumerator(){
+		return new CircularEnumerator(fases.GetEnumerator());	
+	}
+	
+	public CircularEnumerator getCenterAngleEnumerator(){
+		return new CircularEnumerator(centerAngles.GetEnumerator());
 	}
 
 	public FunctioT getSelector(){

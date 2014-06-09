@@ -168,21 +168,29 @@ public class GenomeToFunctions {
 			
 			break;
 		case FunctioT.PartidaFinalConstante:
-			backLeft1 = (new MoveFunctionPartidaFinalConstante(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
-			backLeft2 = (new MoveFunctionPartidaFinalConstante(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
-			backLeftShoulder = (new MoveFunctionPartidaFinalConstante(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
+
+			CircularEnumerator aEnum = genome.getAmplitudeEnumerator();
+			CircularEnumerator caEnum = genome.getCenterAngleEnumerator();
+			CircularEnumerator pEnum = genome.getPeriodEnumerator();
+			CircularEnumerator fEnum = genome.getFaseEnumerator();
+			CircularEnumerator sEnum = genome.getStrengthEnumerator();
+
+
+			backLeft1 = (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			backLeft2 = (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			backLeftShoulder = (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
 			
-			frontLeft1 = (new MoveFunctionPartidaFinalConstante(genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(0),genome.getAmplitude(15),genome.getPeriod(1),genome.getFase(15),genome.getCenterAngle(15),genome.getStrength(1)));
-			frontLeft2 = (new MoveFunctionPartidaFinalConstante(genome.getAmplitude(4),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(16),genome.getPeriod(1),genome.getFase(16),genome.getCenterAngle(16),genome.getStrength(1)));
-			frontLeftShoulder = (new MoveFunctionPartidaFinalConstante(genome.getAmplitude(5),genome.getPeriod(0),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(0),genome.getAmplitude(17),genome.getPeriod(1),genome.getFase(17),genome.getCenterAngle(17),genome.getStrength(1)));
+			frontLeft1 = (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			frontLeft2 = (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			frontLeftShoulder = (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
 			
-			backRight1 =  (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (6), genome.getPeriod (0), genome.getFase (6), genome.getCenterAngle (6), genome.getStrength (0),genome.getAmplitude(18),genome.getPeriod(1),genome.getFase(18),genome.getCenterAngle(18),genome.getStrength(1)));
-			backRight2 =  (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (7), genome.getPeriod (0), genome.getFase (7), genome.getCenterAngle (7), genome.getStrength (0),genome.getAmplitude(19),genome.getPeriod(1),genome.getFase(19),genome.getCenterAngle(19),genome.getStrength(1)));
-			backRightShoulder =  (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (8), genome.getPeriod (0), genome.getFase (8), genome.getCenterAngle (8), genome.getStrength (0),genome.getAmplitude(20),genome.getPeriod(1),genome.getFase(20),genome.getCenterAngle(20),genome.getStrength(1)));
+			backRight1 =  (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			backRight2 =  (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			backRightShoulder =  (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
 			
-			frontRight1 =  (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (9), genome.getPeriod (0), genome.getFase (9), genome.getCenterAngle (9), genome.getStrength (0),genome.getAmplitude(21),genome.getPeriod(1),genome.getFase(21),genome.getCenterAngle(21),genome.getStrength(1)));
-			frontRight2 =  (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (10), genome.getPeriod (0), genome.getFase (10), genome.getCenterAngle (10), genome.getStrength (0),genome.getAmplitude(22),genome.getPeriod(1),genome.getFase(22),genome.getCenterAngle(22),genome.getStrength(1)));
-			frontRightShoulder =  (new MoveFunctionPartidaFinalConstante (genome.getAmplitude (11), genome.getPeriod (0), genome.getFase (11), genome.getCenterAngle (11), genome.getStrength (0),genome.getAmplitude(23),genome.getPeriod(1),genome.getFase(23),genome.getCenterAngle(23),genome.getStrength(1)));
+			frontRight1 = (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			frontRight2 =  (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
+			frontRightShoulder =  (new MoveFunctionPartidaFinalConstante(aEnum,caEnum ,pEnum,fEnum,sEnum));
 			
 			secondPeriod = genome.getPeriod(1);
 			
