@@ -1,21 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GeneticAlgorithm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\MoveFunctionSinDoubleFrecuency.cs">
     <Files>
-      <File FileName="unity.sln" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Genome.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GenomeToFunctions.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\FunctionT.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\MoveFunctionMediaPartida.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GenomeContainer.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\MoveFunctionPartidaFinalConstante.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\CircularEnumerator.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\PushSimulationManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveFunctionSinDoubleFrecuency.cs" Line="38" Column="26" />
       <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="54" Column="33" />
+      <File FileName="Assets\scripts\MoveFunctionSinDoubleFrecuency.cs" Line="50" Column="1" />
+      <File FileName="Assets\scripts\GenomeToFunctions.cs" Line="246" Column="1" />
+      <File FileName="Assets\scripts\MoveFunctionPartidaFourierRodilla.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\CircularEnumerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\GenomeContainer.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Genome.cs" Line="132" Column="72" />
       <File FileName="Assets\scripts\SimulationManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="53" Column="103" />
-      <File FileName="Assets\scripts\GrnnPushSimulationManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\TestCreature.cs" Line="34" Column="97" />
+      <File FileName="Assets\scripts\Gen.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MoveFunctionCosDoubleFrecuency.cs" Line="38" Column="35" />
+      <File FileName="Assets\scripts\MoveFunction1.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\FunctionT.cs" Line="16" Column="56" />
+      <File FileName="Assets\scripts\GrnnTester.cs" Line="54" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

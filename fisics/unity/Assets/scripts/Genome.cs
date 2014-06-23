@@ -129,6 +129,14 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
+		case FunctioT.Media_Partida_Classic_FaseSync_CosDoubleFrecuency_Knee:
+		case FunctioT.Media_Partida_Classic_FaseSync_DoubleFrecuency_Knee:
+			amplitudes = new Gen[18];
+			fases = new Gen[18];
+			centerAngles = new Gen[18];
+			strength = new Gen[2];
+			period = new Gen[3];
+			break;
 		}
 		
 		for (int i = 0; i < amplitudes.Length; i++)

@@ -12,7 +12,6 @@ public class WalkSimulationManager : SimulationManager {
 	public bool directionEval = true;
 
 
-	public float testingTime;
 	
 	GameObject testingCreature;
 	MoveController tester;

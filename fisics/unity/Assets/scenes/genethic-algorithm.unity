@@ -1112,14 +1112,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4077fca798b45949b1645a91340c956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 50
+  testingTime: 100
+  timeScale: 1
   initialSpeed: {x: 0, y: 0, z: 0}
   fixSpeedEval: 1
   accelEval: 0
   heightEval: 1
   cycleEval: 1
   directionEval: 1
-  testingTime: 25
 --- !u!4 &362562918
 Transform:
   m_ObjectHideFlags: 0
@@ -1250,8 +1250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: Buenos casos\walk24_05_2014(PM04_23_58) (walk direction 0.5)/bestSoFar[1493].genome
-  generate: 0
+  creatureFilePath: test\walk15_06_2014(PM06_26_56) (seno doble frecuencia_ continuacion)/bestSoFar[555].genome
+  generate: 1
 --- !u!1 &447846594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,14 +3182,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RANDOM_SIZE: 0
-  ELITE_SIZE: 25
-  ROULET_SIZE: 20
+  ELITE_SIZE: 20
+  ROULET_SIZE: 25
   NEW_SIZE: 0
   mutation_t: 2
   simManager: {fileID: 362562917}
-  functionType: 9
-  description: empujon oveja
-  generate: 1
+  functionType: 11
+  description: coseno doble frecuencia_ continuacion
+  generate: 0
   loadFromFile: 
 --- !u!4 &954359148
 Transform:
@@ -5623,7 +5623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f91fe97400f8694bbf93e738e8d9785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAngle: 0
+  showAngle: 1
 --- !u!59 &1680773750
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -6573,7 +6573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f91fe97400f8694bbf93e738e8d9785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAngle: 1
+  showAngle: 0
 --- !u!59 &1944457821
 HingeJoint:
   m_ObjectHideFlags: 0

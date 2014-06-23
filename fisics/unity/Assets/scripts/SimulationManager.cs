@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class SimulationManager : MonoBehaviour {
+	
+	public float testingTime;
 
 	public float timeScale;
 	public Vector3 initialSpeed;
