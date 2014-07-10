@@ -67,6 +67,6 @@ public class MoveFunctionPartidaFinalConstante : MoveFunction {
 			t<(Mathf.PI/B2)+(Mathf.PI/B)?strength2:
 				t<(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?strength3:
 				t<(Mathf.PI/B4)+(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?strength4:
-				0;
+				Mathf.Max(strength,strength2,strength3,strength4);
 	}
 }

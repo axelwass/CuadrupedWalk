@@ -39,7 +39,8 @@ public class MoveFunctionCosDoubleFrecuency : MoveFunction {
 			return A2 * (float)Mathf.Cos (t_local * B2 + C2) + D2;
 		}
 		else {
-			return A2 * (float)Mathf.Cos (t_local * B3 + C2) + D2;
+
+			return A2 * (float)Mathf.Cos ((t_local-(Mathf.PI/B2) + (Mathf.PI/B3)) * B3 + C2) + D2;
 		}
 	}
 	

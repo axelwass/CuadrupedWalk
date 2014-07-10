@@ -131,7 +131,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 			
 			System.Collections.Generic.List<GenomeContainer> newPopulation = new System.Collections.Generic.List<GenomeContainer>();
 			System.Collections.Generic.List<GenomeContainer> oldPopulation = new System.Collections.Generic.List<GenomeContainer>();
-			for(int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE + NEW_SIZE; i++){
+			for(int i =0; i<population.Count; i++){
 				oldPopulation.Add(population[i]);
 			}
 			
