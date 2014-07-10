@@ -3,7 +3,7 @@ using System.Collections;
 
 public enum FunctioT{
 	FaseSuperSync,
-	Fourier2,
+	Fourier_Med_Partida_FaseSync,
 	FaseSync,
 	Classic,
 	Partida,
