@@ -17,8 +17,6 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	Gen[] centerAngles;
 
 	
-	Gen selector;
-	
 	public static Genome createFromFile(String filename){
 		Genome instance  = null;
 
@@ -58,31 +56,10 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[1];
 			period = new Gen[1];
 			break;
-		case FunctioT.FaseSync:
-			amplitudes = new Gen[6];
-			fases = new Gen[6];
-			centerAngles = new Gen[6];
-			strength = new Gen[1];
-			period = new Gen[1];
-			break;
-		case FunctioT.FaseSuperSync:
-			amplitudes = new Gen[6];
-			fases = new Gen[3];
-			centerAngles = new Gen[6];
-			strength = new Gen[1];
-			period = new Gen[1];
-			break;
 		case FunctioT.Fourier_Med_Partida_FaseSync:
 			amplitudes = new Gen[36];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
-			strength = new Gen[2];
-			period = new Gen[2];
-			break;
-		case FunctioT.Partida_FaseSync:
-			amplitudes = new Gen[12];
-			fases = new Gen[12];
-			centerAngles = new Gen[12];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
@@ -107,21 +84,6 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			strength = new Gen[4];
 			period = new Gen[4];
 			break;
-		case FunctioT.Olistic:
-			selector = new Gen(0,(float)(int)FunctioT.Olistic-0.01f);
-			amplitudes = new Gen[24];
-			fases = new Gen[24];
-			centerAngles = new Gen[24];
-			strength = new Gen[2];
-			period = new Gen[2];
-			break;
-		case FunctioT.Partida_Classic_FaseSync_Fourier_Knee:
-			amplitudes = new Gen[24]; //3 más para cada rodillas 
-			fases = new Gen[24];
-			centerAngles = new Gen[24];
-			strength = new Gen[2];
-			period = new Gen[2];
-			break;
 		case FunctioT.Media_Partida_Classic_FaseSync_Fourier_Knee:
 			amplitudes = new Gen[24]; //3 más para cada rodillas 
 			fases = new Gen[24];
@@ -130,7 +92,6 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			period = new Gen[2];
 			break;
 		case FunctioT.Media_Partida_Classic_FaseSync_CosDoubleFrecuency_Knee:
-		case FunctioT.Media_Partida_Classic_FaseSync_DoubleFrecuency_Knee:
 			amplitudes = new Gen[18];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
@@ -195,9 +156,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			period[i].generateVal();
 		}
 
-		if (functionType == FunctioT.Olistic) {
-			selector.generateVal();
-		}
+
 		
 		return this;
 	}
@@ -241,10 +200,6 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 	public CircularEnumerator getCenterAngleEnumerator(){
 		return new CircularEnumerator(centerAngles.GetEnumerator());
 	}
-
-	public FunctioT getSelector(){
-		return (FunctioT)(int)selector.getVal();
-	}
 	
 	public System.Collections.IEnumerator GetEnumerator()
     {
@@ -271,9 +226,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
         }
 
 		
-		if (functionType == FunctioT.Olistic) {
-			yield return selector;
-		}
+
     }
 	
 	public void print(){
@@ -360,9 +313,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			info.AddValue("period" + i , period[i].getVal(), typeof(float));
 		}
 
-		if (functionType == FunctioT.Olistic) {
-			info.AddValue("selector" , selector.getVal(), typeof(float));
-		}
+
 
 		//writer.Close();
     }
@@ -373,7 +324,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 		try{
 			functionType = (FunctioT)info.GetValue ("functionType", typeof(FunctioT));
 		}catch(SerializationException e){
-			functionType = FunctioT.FaseSync;
+			functionType = FunctioT.Partida_Classic_FaseSync;
 		}
 
 		createVectors (functionType);
@@ -409,9 +360,7 @@ public class Genome:System.Collections.IEnumerable, System.Runtime.Serialization
 			period[0].setVal((float) info.GetValue("period", typeof(float)));
 		}
 
-		if (functionType == FunctioT.Olistic) {
-			selector.setVal((float)info.GetValue("selector" , typeof(float)));
-		}
+
 
 		//writer.Close();
     }
