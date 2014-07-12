@@ -27,10 +27,10 @@ public class MoveFunctionPartida : MoveFunction {
 	}
 	
 	public override float evalAngle(float t){
-		return t<(2*Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D:A2*(float)Mathf.Sin(t*B2+C2) + D2;
+		return t<(Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D:A2*(float)Mathf.Sin(t*B2+C2) + D2;
 	}
 	
 	public override float evalStrength(float t){
-			return t<(2*Mathf.PI/B)?strength:strength2;
+			return t<(Mathf.PI/B)?strength:strength2;
 	}
 }

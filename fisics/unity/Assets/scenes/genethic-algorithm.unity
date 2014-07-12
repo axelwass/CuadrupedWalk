@@ -1250,8 +1250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test\walk10_07_2014(AM12_58_24) (COCO coseno doble frecuencia
-    arreglado)/bestSoFar[300].genome
+  creatureFilePath: test\walk10_07_2014(PM03_28_29) (classic - sin nada)/bestSoFar[213].genome
   generate: 1
 --- !u!1 &447846594
 GameObject:
@@ -3188,10 +3187,10 @@ MonoBehaviour:
   NEW_SIZE: 0
   mutation_t: 2
   simManager: {fileID: 362562917}
-  functionType: 11
-  description: COCO coseno doble frecuencia arreglado
+  functionType: 3
+  description: classic - sin nada
   generate: 0
-  loadFromFile: test\walk09_07_2014(PM03_57_48) (coseno doble frecuencia arreglado)\generation2303
+  loadFromFile: 
 --- !u!4 &954359148
 Transform:
   m_ObjectHideFlags: 0
@@ -5042,7 +5041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1565509117
 Transform:
   m_ObjectHideFlags: 0
@@ -7289,7 +7288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2119279330
 Transform:
   m_ObjectHideFlags: 0
