@@ -159,7 +159,7 @@ public class GenomeToFunctions {
 
 		case FunctioT.Media_Partida_Classic_FaseSync_CosDoubleFrecuency_Knee:
 			
-			dominantPeriod = (genome.getPeriod (0) + genome.getPeriod (1))/2;
+			dominantPeriod = 2 * genome.getPeriod (0) * genome.getPeriod (1) /(genome.getPeriod (0) + genome.getPeriod (1));
 			secondPeriod = genome.getPeriod(2);
 			
 			backLeft1 = (new MoveFunctionMediaPartida(genome.getAmplitude(0),dominantPeriod,genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),secondPeriod,genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));

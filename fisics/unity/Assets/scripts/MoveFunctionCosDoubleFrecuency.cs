@@ -28,19 +28,18 @@ public class MoveFunctionCosDoubleFrecuency : MoveFunction {
 		this.D = centerAngle2;
 		this.strength = strength2;
 	}
-	
 	public override float evalAngle(float t){
 		if (t < (2 * Mathf.PI / B)) {
-			return  A * (float)Mathf.Sin (t / 2 * B + C);
+			return  A * (float)Mathf.Cos (t / 2 * B + C);
 		}
-		float t2 = t - (2 * Mathf.PI / B);
-		float t_local = t2 - Mathf.Floor(t2 /(2 * Mathf.PI / ((B2+B3)/2))) * (2 * Mathf.PI / ((B2+B3)/2));
-		if (t_local * B2 + C2 < Mathf.PI) {
-			return A2 * (float)Mathf.Cos (t_local * B2 + C2) + D2;
+		float t2 = t - (2 * Mathf.PI / B) + C2 /((B2+B3)/2);
+		float t_local = t2 - Mathf.Floor(t2 /(Mathf.PI / B2 + Mathf.PI / B3)) * (Mathf.PI / B2 + Mathf.PI / B3);
+		if (t_local * B2 < Mathf.PI) {
+			return A2 * (float)Mathf.Cos (t_local * B2) + D2;
 		}
 		else {
-
-			return A2 * (float)Mathf.Cos ((t_local-(Mathf.PI/B2) + (Mathf.PI/B3)) * B3 + C2) + D2;
+			float t_local2 = (t_local - ((Mathf.PI)/B2) + ((Mathf.PI)/B3));
+			return A2 * (float)Mathf.Cos (t_local2 * B3) + D2;
 		}
 	}
 	

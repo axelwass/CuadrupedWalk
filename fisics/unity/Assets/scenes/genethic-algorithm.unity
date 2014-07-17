@@ -1250,7 +1250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test\walk10_07_2014(PM03_28_29) (classic - sin nada)/bestSoFar[213].genome
+  creatureFilePath: test\walk17_07_2014(AM02_25_00) (OBEJA coseno doble frecuaencai
+    reloaded)\bestSoFar[2900].genome
   generate: 1
 --- !u!1 &447846594
 GameObject:
@@ -3187,8 +3188,8 @@ MonoBehaviour:
   NEW_SIZE: 0
   mutation_t: 2
   simManager: {fileID: 362562917}
-  functionType: 3
-  description: classic - sin nada
+  functionType: 11
+  description: OBEJA coseno doble frecuaencai reloaded
   generate: 0
   loadFromFile: 
 --- !u!4 &954359148
@@ -3516,7 +3517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f91fe97400f8694bbf93e738e8d9785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAngle: 0
+  showAngle: 1
 --- !u!59 &973999435
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -4212,6 +4213,8 @@ MonoBehaviour:
   frontRightShoulder: {fileID: 795630173}
   twoLegs: 0
   body: {fileID: 564776697}
+  showWalkDirecction: 0
+  showHeight: 0
   walkDirection: {x: 1, y: 0, z: 0}
 --- !u!1 &1134151216
 GameObject:
@@ -5025,6 +5028,8 @@ MonoBehaviour:
   frontRightShoulder: {fileID: 0}
   twoLegs: 1
   body: {fileID: 1014740193}
+  showWalkDirecction: 0
+  showHeight: 0
   walkDirection: {x: .5, y: 0, z: 0}
 --- !u!1 &1565509116
 GameObject:
@@ -5084,6 +5089,8 @@ MonoBehaviour:
   frontRightShoulder: {fileID: 585233419}
   twoLegs: 0
   body: {fileID: 1704091803}
+  showWalkDirecction: 0
+  showHeight: 0
   walkDirection: {x: 1, y: 0, z: 0}
 --- !u!1 &1570335961
 GameObject:
@@ -7331,4 +7338,6 @@ MonoBehaviour:
   frontRightShoulder: {fileID: 1847375421}
   twoLegs: 0
   body: {fileID: 1671421533}
+  showWalkDirecction: 0
+  showHeight: 0
   walkDirection: {x: 1, y: 0, z: 0}

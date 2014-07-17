@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class MoveController : MonoBehaviour {
 	
@@ -23,6 +24,9 @@ public class MoveController : MonoBehaviour {
 
 	public GameObject body;
 	
+
+	public bool showWalkDirecction = false;
+	public bool showHeight = false;
 
 	Vector3 initialSpeed;
 
@@ -77,9 +81,20 @@ public class MoveController : MonoBehaviour {
 
 	float dominantPeriod;
 
+	StreamWriter walkDirectionWriter;
+	StreamWriter heightWriter;
 	// Use this for initialization
 	void Start () {
-		
+		if(showWalkDirecction && TestCreature.getInstance() != null){
+			if(showWalkDirecction){
+				walkDirectionWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".walkDirection",false);
+				walkDirectionWriter.Close();
+			}
+			if(showHeight){
+				heightWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".height",false);
+				heightWriter.Close();
+			}
+		}
 	}
 	
 	public void testGenome(Genome genome){
@@ -223,9 +238,9 @@ public class MoveController : MonoBehaviour {
 
 	public float getCycleDiferenceEvaluation(){
 		if(!twoLegs){
-			return (1 - ((cumulatedStepRotationsDiference / (cycle-1))/450f));
+			return (1 - ((cumulatedStepRotationsDiference / (cycle==1?1:cycle-1))/450f));
 		}else{
-			return (1 - ((cumulatedStepRotationsDiference / (cycle-1))/250f));
+			return (1 - ((cumulatedStepRotationsDiference / (cycle==1?1:cycle-1))/250f));
 		}
 	}
 	
@@ -287,6 +302,19 @@ public class MoveController : MonoBehaviour {
 	
 		suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
 		cumulatedWalkDirectionError += Mathf.Abs(body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x);
+		if(TestCreature.getInstance() != null){
+			if(showWalkDirecction){
+				walkDirectionWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".walkDirection",true);
+				walkDirectionWriter.WriteLine(body.transform.position.x + ", " + (initialPosition + elapsedTime * walkDirection).x);
+				walkDirectionWriter.Close();
+			}
+			if(showHeight){
+				heightWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".height",true);
+				heightWriter.WriteLine(Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
+				                                 frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y ) + ", " + initialPositionYSholders);
+				heightWriter.Close();
+			}
+		}
 		acceleration = (body.rigidbody.velocity.x - lastVelocity)/0.02f;
 		if(acceleration < -0.02f){
 			cumulatedAccelerationError-=acceleration;
@@ -296,6 +324,7 @@ public class MoveController : MonoBehaviour {
 		}
 
 		float step_error = Mathf.Pow((body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((body.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
+
 		//Debug.Log("step_error: " + (step_error>1?step_error:0));
 		cumulatedErrorPosition += body.transform.position.y < initialPosition.y? Mathf.Pow((body.transform.position.y - initialPosition.y),4):0;
 		cumulatedErrorPosition += step_error>1?step_error:0;
