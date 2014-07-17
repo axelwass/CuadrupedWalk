@@ -27,6 +27,7 @@ public class MoveController : MonoBehaviour {
 
 	public bool showWalkDirecction = false;
 	public bool showHeight = false;
+	public bool showErrorRotation = false;
 
 	Vector3 initialSpeed;
 
@@ -83,6 +84,7 @@ public class MoveController : MonoBehaviour {
 
 	StreamWriter walkDirectionWriter;
 	StreamWriter heightWriter;
+	StreamWriter errorRotationWriter;
 	// Use this for initialization
 	void Start () {
 		if(showWalkDirecction && TestCreature.getInstance() != null){
@@ -93,6 +95,10 @@ public class MoveController : MonoBehaviour {
 			if(showHeight){
 				heightWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".height",false);
 				heightWriter.Close();
+			}
+			if(showErrorRotation){
+				errorRotationWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".rotation",false);
+				errorRotationWriter.Close();
 			}
 		}
 	}
@@ -313,6 +319,11 @@ public class MoveController : MonoBehaviour {
 				heightWriter.WriteLine(Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
 				                                 frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y ) + ", " + initialPositionYSholders);
 				heightWriter.Close();
+			}
+			if(showErrorRotation){
+				errorRotationWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".rotation",true);
+				errorRotationWriter.WriteLine( body.transform.rotation + ", " + initialRotation);
+				errorRotationWriter.Close();
 			}
 		}
 		acceleration = (body.rigidbody.velocity.x - lastVelocity)/0.02f;
