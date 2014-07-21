@@ -1250,8 +1250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simManager: {fileID: 362562917}
-  creatureFilePath: test\walk17_07_2014(AM02_25_00) (OBEJA coseno doble frecuaencai
-    reloaded)\bestSoFar[2900].genome
+  creatureFilePath: bestSoFar[<generacion>].genome
   generate: 1
 --- !u!1 &447846594
 GameObject:
@@ -2844,7 +2843,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cb423db65111fac4f9e11aac67351daa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3188,10 +3187,10 @@ MonoBehaviour:
   NEW_SIZE: 0
   mutation_t: 2
   simManager: {fileID: 362562917}
-  functionType: 11
-  description: OBEJA coseno doble frecuaencai reloaded
+  functionType: 9
+  description: OVEJA fourier rodilla - con todo - CONT
   generate: 0
-  loadFromFile: 
+  loadFromFile: test\walk15_07_2014(AM11_47_10) (OVEJA fourier rodilla - con todo)\generation169
 --- !u!4 &954359148
 Transform:
   m_ObjectHideFlags: 0
@@ -3595,7 +3594,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 973999432}
   m_Material: {fileID: 13400000, guid: fa9a139ead11e8d6d00011d98d76c639, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: .5
   m_Height: 2
   m_Direction: 1
@@ -4215,6 +4214,7 @@ MonoBehaviour:
   body: {fileID: 564776697}
   showWalkDirecction: 0
   showHeight: 0
+  showErrorRotation: 0
   walkDirection: {x: 1, y: 0, z: 0}
 --- !u!1 &1134151216
 GameObject:
@@ -4619,48 +4619,6 @@ Transform:
   - {fileID: 1981971912}
   - {fileID: 1080344568}
   m_Father: {fileID: 1506949869}
---- !u!1 &1389523847
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1389523849}
-  - 114: {fileID: 1389523848}
-  m_Layer: 0
-  m_Name: Grnn Creature Tester
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1389523848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1389523847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f59abe61dfbc2944a05f2d115eb7411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  simManager: {fileID: 0}
-  creatureFilePath001: test/push25_05_2014(PM08_56_18) (empujon oveja)/bestSoFar[25].genome
-  creatureFilePath002: 
-  generate: 0
---- !u!4 &1389523849
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1389523847}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.9629707, y: -54.669529, z: -4.96225262}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1 &1396919418
 GameObject:
   m_ObjectHideFlags: 0
@@ -5030,6 +4988,7 @@ MonoBehaviour:
   body: {fileID: 1014740193}
   showWalkDirecction: 0
   showHeight: 0
+  showErrorRotation: 0
   walkDirection: {x: .5, y: 0, z: 0}
 --- !u!1 &1565509116
 GameObject:
@@ -5089,8 +5048,9 @@ MonoBehaviour:
   frontRightShoulder: {fileID: 585233419}
   twoLegs: 0
   body: {fileID: 1704091803}
-  showWalkDirecction: 0
-  showHeight: 0
+  showWalkDirecction: 1
+  showHeight: 1
+  showErrorRotation: 1
   walkDirection: {x: 1, y: 0, z: 0}
 --- !u!1 &1570335961
 GameObject:
@@ -7340,4 +7300,5 @@ MonoBehaviour:
   body: {fileID: 1671421533}
   showWalkDirecction: 0
   showHeight: 0
+  showErrorRotation: 0
   walkDirection: {x: 1, y: 0, z: 0}

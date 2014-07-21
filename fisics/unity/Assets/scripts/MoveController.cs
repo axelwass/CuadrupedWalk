@@ -322,7 +322,7 @@ public class MoveController : MonoBehaviour {
 			}
 			if(showErrorRotation){
 				errorRotationWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".rotation",true);
-				errorRotationWriter.WriteLine( body.transform.rotation + ", " + initialRotation);
+				errorRotationWriter.WriteLine( body.transform.rotation.eulerAngles.y);
 				errorRotationWriter.Close();
 			}
 		}
