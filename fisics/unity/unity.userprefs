@@ -1,21 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\BodyParts.cs">
-    <Files>
-      <File FileName="Assets\scripts\GeneticAlgorithm.cs" Line="7" Column="2" />
-      <File FileName="Assets\scripts\WalkSimulationManager.cs" Line="136" Column="1" />
-      <File FileName="Assets\scripts\MoveController.cs" Line="30" Column="24" />
-      <File FileName="Assets\scripts\JointMovementController.cs" Line="13" Column="22" />
-      <File FileName="Assets\scripts\MoveFunctionCosDoubleFrecuency.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Genome.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GenomeToFunctions.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GenomeContainer.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\TestCreature.cs" Line="25" Column="4" />
-      <File FileName="Assets\scripts\SimulationManager.cs" Line="7" Column="33" />
-      <File FileName="Assets\scripts\GrnnPushSimulationManager.cs" Line="35" Column="1" />
-      <File FileName="Assets\scripts\BodyParts.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
