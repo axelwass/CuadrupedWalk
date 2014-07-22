@@ -9,14 +9,14 @@ public class JointMovementController : MonoBehaviour {
 	MoveFunction function;
 	HingeJoint joint;
 
-	public bool showAngle = false;
+	public bool imprimir_angulo = false;
 	StreamWriter writer;
 
 	// Use this for initialization
 	void Start () {
 		joint = (HingeJoint)GetComponent("HingeJoint");
-		if(showAngle && TestCreature.getInstance() != null){
-			writer = new StreamWriter(TestCreature.getInstance().creatureFilePath + "." + this.gameObject.transform.parent.gameObject.name + "." + this.gameObject.name,false);
+		if(imprimir_angulo && TestCreature.getInstance() != null){
+			writer = new StreamWriter(TestCreature.getInstance().archivo + "." + this.gameObject.transform.parent.gameObject.name + "." + this.gameObject.name,false);
 			writer.Close();
 		}
 	}
@@ -36,8 +36,8 @@ public class JointMovementController : MonoBehaviour {
 				s.targetPosition = joint.limits.max;
 			};
 
-			if(showAngle && TestCreature.getInstance() != null){
-				writer = new StreamWriter(TestCreature.getInstance().creatureFilePath + "." + this.gameObject.transform.parent.gameObject.name + "." + this.gameObject.name,true);
+			if(imprimir_angulo && TestCreature.getInstance() != null){
+				writer = new StreamWriter(TestCreature.getInstance().archivo + "." + this.gameObject.transform.parent.gameObject.name + "." + this.gameObject.name,true);
 				writer.WriteLine(s.targetPosition + ", " + joint.angle);
 
 				writer.Close();

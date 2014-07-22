@@ -4,30 +4,30 @@ using System.IO;
 
 public class MoveController : MonoBehaviour {
 	
-	public JointMovementController backLeft1;
-	public JointMovementController backLeft2;
-	public JointMovementController backLeftShoulder;
+	public JointMovementController antebrazo_izquierdo_tracero;
+	public JointMovementController brazo_izquierdo_tracero;
+	public JointMovementController hombro_izquierdo_tracero;
 	
-	public JointMovementController backRight1;
-	public JointMovementController backRight2;
-	public JointMovementController backRightShoulder;
+	public JointMovementController antebrazo_derecho_tracero;
+	public JointMovementController brazo_derecho_tracero;
+	public JointMovementController hombro_derecho_tracero;
 	
-	public JointMovementController frontLeft1;
-	public JointMovementController frontLeft2;
-	public JointMovementController frontLeftShoulder;
+	public JointMovementController antebrazo_izquierdo_delantero;
+	public JointMovementController brazo_izquierdo_delantero;
+	public JointMovementController hombro_izquierdo_delantero;
 	
-	public JointMovementController frontRight1;
-	public JointMovementController frontRight2;
-	public JointMovementController frontRightShoulder;
+	public JointMovementController antebrazo_derecho_delantero;
+	public JointMovementController brazo_derecho_delantero;
+	public JointMovementController hombro_derecho_delantero;
 
-	public bool twoLegs = false;
+	public bool dos_piernas = false;
 
-	public GameObject body;
+	public GameObject torso;
 	
 
-	public bool showWalkDirecction = false;
-	public bool showHeight = false;
-	public bool showErrorRotation = false;
+	public bool imprimir_V2 = false;
+	public bool imprimir_H = false;
+	public bool imprimir_D = false;
 
 	Vector3 initialSpeed;
 
@@ -87,17 +87,17 @@ public class MoveController : MonoBehaviour {
 	StreamWriter errorRotationWriter;
 	// Use this for initialization
 	void Start () {
-		if(showWalkDirecction && TestCreature.getInstance() != null){
-			if(showWalkDirecction){
-				walkDirectionWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".walkDirection",false);
+		if(imprimir_V2 && TestCreature.getInstance() != null){
+			if(imprimir_V2){
+				walkDirectionWriter = new StreamWriter(TestCreature.getInstance().archivo + ".walkDirection",false);
 				walkDirectionWriter.Close();
 			}
-			if(showHeight){
-				heightWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".height",false);
+			if(imprimir_H){
+				heightWriter = new StreamWriter(TestCreature.getInstance().archivo + ".height",false);
 				heightWriter.Close();
 			}
-			if(showErrorRotation){
-				errorRotationWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".rotation",false);
+			if(imprimir_D){
+				errorRotationWriter = new StreamWriter(TestCreature.getInstance().archivo + ".rotation",false);
 				errorRotationWriter.Close();
 			}
 		}
@@ -109,24 +109,24 @@ public class MoveController : MonoBehaviour {
 		
 		GenomeToFunctions translator = new GenomeToFunctions(genome);
 		
-		backLeft1.setFunction(translator.backLeft1);
-		backLeft2.setFunction(translator.backLeft2);
-		backLeftShoulder.setFunction(translator.backLeftShoulder);
+		antebrazo_izquierdo_tracero.setFunction(translator.backLeft1);
+		brazo_izquierdo_tracero.setFunction(translator.backLeft2);
+		hombro_izquierdo_tracero.setFunction(translator.backLeftShoulder);
 
-		if (!twoLegs) {
-				frontLeft1.setFunction (translator.frontLeft1);
-				frontLeft2.setFunction (translator.frontLeft2);
-				frontLeftShoulder.setFunction (translator.frontLeftShoulder);
+		if (!dos_piernas) {
+				antebrazo_izquierdo_delantero.setFunction (translator.frontLeft1);
+				brazo_izquierdo_delantero.setFunction (translator.frontLeft2);
+				hombro_izquierdo_delantero.setFunction (translator.frontLeftShoulder);
 		}
 
-		backRight1.setFunction (translator.backRight1);
-		backRight2.setFunction (translator.backRight2);
-		backRightShoulder.setFunction (translator.backRightShoulder);
+		antebrazo_derecho_tracero.setFunction (translator.backRight1);
+		brazo_derecho_tracero.setFunction (translator.backRight2);
+		hombro_derecho_tracero.setFunction (translator.backRightShoulder);
 
-		if (!twoLegs) {
-				frontRight1.setFunction (translator.frontRight1);
-				frontRight2.setFunction (translator.frontRight2);
-				frontRightShoulder.setFunction (translator.frontRightShoulder);
+		if (!dos_piernas) {
+				antebrazo_derecho_delantero.setFunction (translator.frontRight1);
+				brazo_derecho_delantero.setFunction (translator.frontRight2);
+				hombro_derecho_delantero.setFunction (translator.frontRightShoulder);
 		}
 
 		period = translator.secondPeriod;
@@ -142,22 +142,22 @@ public class MoveController : MonoBehaviour {
 
 
 		//initialPosition = body.transform.position;
-		if(!twoLegs){
-			initialPosition = (body.transform.position + backLeft2.transform.position + backRight2.transform.position +
-						frontLeft2.transform.position + frontRight2.transform.position) / 5;
+		if(!dos_piernas){
+			initialPosition = (torso.transform.position + brazo_izquierdo_tracero.transform.position + brazo_derecho_tracero.transform.position +
+						brazo_izquierdo_delantero.transform.position + brazo_derecho_delantero.transform.position) / 5;
 		}else{
-			initialPosition = (body.transform.position + backLeft2.transform.position + backRight2.transform.position) / 3;
+			initialPosition = (torso.transform.position + brazo_izquierdo_tracero.transform.position + brazo_derecho_tracero.transform.position) / 3;
 
 		}
 
-		initialRotation = body.transform.rotation;
+		initialRotation = torso.transform.rotation;
 		//Debug.Log("initial angles: " + initialRotation);
 		//initialPositionX = body.transform.position.x;
-		if(!twoLegs){
-			initialPositionYSholders = Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
-		                                     frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y );
+		if(!dos_piernas){
+			initialPositionYSholders = Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y,
+		                                     hombro_izquierdo_delantero.transform.position.y,hombro_derecho_delantero.transform.position.y );
 		}else{
-			initialPositionYSholders = Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y);
+			initialPositionYSholders = Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y);
 		}
 		//initialPositionZ = body.transform.position.z;
 		//Debug.Log("x: " + body.transform.position.x + "y: " + body.transform.position.y + "z: " + body.transform.position.z);
@@ -165,57 +165,57 @@ public class MoveController : MonoBehaviour {
 	}
 
 	public void testGrnn(System.Collections.Generic.List<GrnnData> data){
-		backLeft1.setFunction(new GrnnFunction(BodyParts.BackLeft1,data,body));
-		backLeft2.setFunction(new GrnnFunction(BodyParts.BackLeft2,data,body));
-		backLeftShoulder.setFunction(new GrnnFunction(BodyParts.BackLeftShoulder,data,body));
+		antebrazo_izquierdo_tracero.setFunction(new GrnnFunction(BodyParts.BackLeft1,data,torso));
+		brazo_izquierdo_tracero.setFunction(new GrnnFunction(BodyParts.BackLeft2,data,torso));
+		hombro_izquierdo_tracero.setFunction(new GrnnFunction(BodyParts.BackLeftShoulder,data,torso));
 		
-		frontLeft1.setFunction(new GrnnFunction(BodyParts.FrontLeft1,data,body));
-		frontLeft2.setFunction(new GrnnFunction(BodyParts.FrontLeft2,data,body));
-		frontLeftShoulder.setFunction(new GrnnFunction(BodyParts.FrontLeftShoulder,data,body));
+		antebrazo_izquierdo_delantero.setFunction(new GrnnFunction(BodyParts.FrontLeft1,data,torso));
+		brazo_izquierdo_delantero.setFunction(new GrnnFunction(BodyParts.FrontLeft2,data,torso));
+		hombro_izquierdo_delantero.setFunction(new GrnnFunction(BodyParts.FrontLeftShoulder,data,torso));
 		
-		backRight1.setFunction (new GrnnFunction(BodyParts.BackRight1,data,body));
-		backRight2.setFunction (new GrnnFunction(BodyParts.BackRight2,data,body));
-		backRightShoulder.setFunction (new GrnnFunction(BodyParts.BackRightShoulder,data,body));
+		antebrazo_derecho_tracero.setFunction (new GrnnFunction(BodyParts.BackRight1,data,torso));
+		brazo_derecho_tracero.setFunction (new GrnnFunction(BodyParts.BackRight2,data,torso));
+		hombro_derecho_tracero.setFunction (new GrnnFunction(BodyParts.BackRightShoulder,data,torso));
 		
-		frontRight1.setFunction (new GrnnFunction(BodyParts.FrontRight1,data,body));
-		frontRight2.setFunction (new GrnnFunction(BodyParts.FrontRight2,data,body));
-		frontRightShoulder.setFunction (new GrnnFunction(BodyParts.FrontRightShoulder,data,body));
+		antebrazo_derecho_delantero.setFunction (new GrnnFunction(BodyParts.FrontRight1,data,torso));
+		brazo_derecho_delantero.setFunction (new GrnnFunction(BodyParts.FrontRight2,data,torso));
+		hombro_derecho_delantero.setFunction (new GrnnFunction(BodyParts.FrontRightShoulder,data,torso));
 
 		
 		//initialPosition = body.transform.position;
-		if(!twoLegs){
-			initialPosition = (body.transform.position + backLeft2.transform.position + backRight2.transform.position +
-			                   frontLeft2.transform.position + frontRight2.transform.position) / 5;
+		if(!dos_piernas){
+			initialPosition = (torso.transform.position + brazo_izquierdo_tracero.transform.position + brazo_derecho_tracero.transform.position +
+			                   brazo_izquierdo_delantero.transform.position + brazo_derecho_delantero.transform.position) / 5;
 		}else{
-			initialPosition = (body.transform.position + backLeft2.transform.position + backRight2.transform.position) / 3;
+			initialPosition = (torso.transform.position + brazo_izquierdo_tracero.transform.position + brazo_derecho_tracero.transform.position) / 3;
 			
 		}
 		
-		initialRotation = body.transform.rotation;
+		initialRotation = torso.transform.rotation;
 		//Debug.Log("initial angles: " + initialRotation);
 		//initialPositionX = body.transform.position.x;
-		if(!twoLegs){
-			initialPositionYSholders = Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
-			                                     frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y );
+		if(!dos_piernas){
+			initialPositionYSholders = Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y,
+			                                     hombro_izquierdo_delantero.transform.position.y,hombro_derecho_delantero.transform.position.y );
 		}else{
-			initialPositionYSholders = Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y);
+			initialPositionYSholders = Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y);
 		}
 	}
 
 	public float centered(){
 		float xAverage;
 		float zAverage;
-		if(!twoLegs){
-			xAverage = (backLeft2.rigidbody.transform.position.x + backRight2.rigidbody.transform.position.x + frontLeft2.rigidbody.transform.position.x + frontRight2.rigidbody.transform.position.x) / 4;
+		if(!dos_piernas){
+			xAverage = (brazo_izquierdo_tracero.rigidbody.transform.position.x + brazo_derecho_tracero.rigidbody.transform.position.x + brazo_izquierdo_delantero.rigidbody.transform.position.x + brazo_derecho_delantero.rigidbody.transform.position.x) / 4;
 		
-			zAverage = (backLeft2.rigidbody.transform.position.z + backRight2.rigidbody.transform.position.z + frontLeft2.rigidbody.transform.position.z + frontRight2.rigidbody.transform.position.z) / 4;
+			zAverage = (brazo_izquierdo_tracero.rigidbody.transform.position.z + brazo_derecho_tracero.rigidbody.transform.position.z + brazo_izquierdo_delantero.rigidbody.transform.position.z + brazo_derecho_delantero.rigidbody.transform.position.z) / 4;
 		}else{
-			xAverage = (backLeft2.rigidbody.transform.position.x + backRight2.rigidbody.transform.position.x) / 2;
+			xAverage = (brazo_izquierdo_tracero.rigidbody.transform.position.x + brazo_derecho_tracero.rigidbody.transform.position.x) / 2;
 			
-			zAverage = (backLeft2.rigidbody.transform.position.z + backRight2.rigidbody.transform.position.z) / 2;
+			zAverage = (brazo_izquierdo_tracero.rigidbody.transform.position.z + brazo_derecho_tracero.rigidbody.transform.position.z) / 2;
 
 		}
-		return 1 - Mathf.Sqrt(Mathf.Pow (body.rigidbody.transform.position.x - xAverage, 2) + Mathf.Pow (body.rigidbody.transform.position.z - zAverage, 2));
+		return 1 - Mathf.Sqrt(Mathf.Pow (torso.rigidbody.transform.position.x - xAverage, 2) + Mathf.Pow (torso.rigidbody.transform.position.z - zAverage, 2));
 			
 	}
 
@@ -229,8 +229,8 @@ public class MoveController : MonoBehaviour {
 
 	public float getHeightEvaluation(){
 		
-		return 1- (Mathf.Abs (Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
-		                                frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y ) - initialPositionYSholders)/initialPositionYSholders);
+		return 1- (Mathf.Abs (Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y,
+		                                hombro_izquierdo_delantero.transform.position.y,hombro_derecho_delantero.transform.position.y ) - initialPositionYSholders)/initialPositionYSholders);
 	}
 
 	public float getMeanHeightEvaluation(){
@@ -243,7 +243,7 @@ public class MoveController : MonoBehaviour {
 	}
 
 	public float getCycleDiferenceEvaluation(){
-		if(!twoLegs){
+		if(!dos_piernas){
 			return (1 - ((cumulatedStepRotationsDiference / (cycle==1?1:cycle-1))/450f));
 		}else{
 			return (1 - ((cumulatedStepRotationsDiference / (cycle==1?1:cycle-1))/250f));
@@ -270,12 +270,12 @@ public class MoveController : MonoBehaviour {
 	}
 	
 	public float getSpeedEvaluation(){
-		float speedEvalLineal = 1- body.rigidbody.velocity.magnitude/initialSpeed.magnitude;
+		float speedEvalLineal = 1- torso.rigidbody.velocity.magnitude/initialSpeed.magnitude;
 		return speedEvalLineal<0.5f?speedEvalLineal*0.75f:0.75f + (speedEvalLineal-0.5f)*0.5f;
 	}
 	
 	public float getBodyRotation(){
-		return 1 - body.transform.rotation.eulerAngles.x/180;
+		return 1 - torso.transform.rotation.eulerAngles.x/180;
 	}
 	
 	// Update is called once every 0.02 sec.
@@ -285,48 +285,48 @@ public class MoveController : MonoBehaviour {
 				}
 
 		if(firstTime){
-			body.rigidbody.velocity = initialSpeed;//AddForce(new Vector3(0, 0, 20), ForceMode.Impulse); //TODO body.rigidbody.AddForce(new Vector3(1, 0, 0), ForceMode.Impulse);
-			lastVelocity = body.rigidbody.velocity.x;
+			torso.rigidbody.velocity = initialSpeed;//AddForce(new Vector3(0, 0, 20), ForceMode.Impulse); //TODO body.rigidbody.AddForce(new Vector3(1, 0, 0), ForceMode.Impulse);
+			lastVelocity = torso.rigidbody.velocity.x;
 			firstTime = false;	
 		}
-				backLeft1.updateState (elapsedTime);
-				backLeft2.updateState (elapsedTime);
-				backLeftShoulder.updateState (elapsedTime);
+				antebrazo_izquierdo_tracero.updateState (elapsedTime);
+				brazo_izquierdo_tracero.updateState (elapsedTime);
+				hombro_izquierdo_tracero.updateState (elapsedTime);
 		
-				backRight1.updateState (elapsedTime);
-				backRight2.updateState (elapsedTime);
-				backRightShoulder.updateState (elapsedTime);
-		if(!twoLegs){
-				frontLeft1.updateState (elapsedTime);
-				frontLeft2.updateState (elapsedTime);
-				frontLeftShoulder.updateState (elapsedTime);
+				antebrazo_derecho_tracero.updateState (elapsedTime);
+				brazo_derecho_tracero.updateState (elapsedTime);
+				hombro_derecho_tracero.updateState (elapsedTime);
+		if(!dos_piernas){
+				antebrazo_izquierdo_delantero.updateState (elapsedTime);
+				brazo_izquierdo_delantero.updateState (elapsedTime);
+				hombro_izquierdo_delantero.updateState (elapsedTime);
 		
-				frontRight1.updateState (elapsedTime);
-				frontRight2.updateState (elapsedTime);
-				frontRightShoulder.updateState (elapsedTime);
+				antebrazo_derecho_delantero.updateState (elapsedTime);
+				brazo_derecho_delantero.updateState (elapsedTime);
+				hombro_derecho_delantero.updateState (elapsedTime);
 		}
 	
 		suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
-		cumulatedWalkDirectionError += Mathf.Abs(body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x);
+		cumulatedWalkDirectionError += Mathf.Abs(torso.transform.position.x - (initialPosition + elapsedTime * walkDirection).x);
 		if(TestCreature.getInstance() != null){
-			if(showWalkDirecction){
-				walkDirectionWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".walkDirection",true);
-				walkDirectionWriter.WriteLine(body.transform.position.x + ", " + (initialPosition + elapsedTime * walkDirection).x);
+			if(imprimir_V2){
+				walkDirectionWriter = new StreamWriter(TestCreature.getInstance().archivo + ".walkDirection",true);
+				walkDirectionWriter.WriteLine(torso.transform.position.x + ", " + (initialPosition + elapsedTime * walkDirection).x);
 				walkDirectionWriter.Close();
 			}
-			if(showHeight){
-				heightWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".height",true);
-				heightWriter.WriteLine(Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
-				                                 frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y ) + ", " + initialPositionYSholders);
+			if(imprimir_H){
+				heightWriter = new StreamWriter(TestCreature.getInstance().archivo + ".height",true);
+				heightWriter.WriteLine(Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y,
+				                                 hombro_izquierdo_delantero.transform.position.y,hombro_derecho_delantero.transform.position.y ) + ", " + initialPositionYSholders);
 				heightWriter.Close();
 			}
-			if(showErrorRotation){
-				errorRotationWriter = new StreamWriter(TestCreature.getInstance().creatureFilePath + ".rotation",true);
-				errorRotationWriter.WriteLine( body.transform.rotation.eulerAngles.y);
+			if(imprimir_D){
+				errorRotationWriter = new StreamWriter(TestCreature.getInstance().archivo + ".rotation",true);
+				errorRotationWriter.WriteLine( torso.transform.rotation.eulerAngles.y);
 				errorRotationWriter.Close();
 			}
 		}
-		acceleration = (body.rigidbody.velocity.x - lastVelocity)/0.02f;
+		acceleration = (torso.rigidbody.velocity.x - lastVelocity)/0.02f;
 		if(acceleration < -0.02f){
 			cumulatedAccelerationError-=acceleration;
 		}
@@ -334,40 +334,40 @@ public class MoveController : MonoBehaviour {
 			cumulatedAccelerationError += 0.02f;
 		}
 
-		float step_error = Mathf.Pow((body.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((body.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
+		float step_error = Mathf.Pow((torso.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((torso.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
 
 		//Debug.Log("step_error: " + (step_error>1?step_error:0));
-		cumulatedErrorPosition += body.transform.position.y < initialPosition.y? Mathf.Pow((body.transform.position.y - initialPosition.y),4):0;
+		cumulatedErrorPosition += torso.transform.position.y < initialPosition.y? Mathf.Pow((torso.transform.position.y - initialPosition.y),4):0;
 		cumulatedErrorPosition += step_error>1?step_error:0;
 		//cumulatedErrorPosition += (body.transform.position - (initialPosition + elapsedTime * walkDirection)).magnitude;
-		cumulatedErrorRotation += Quaternion.Angle(body.transform.rotation,initialRotation);
-		if(!twoLegs){
-		cumulatedErrorHeight += Mathf.Abs (Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y,
-		                                             frontLeftShoulder.transform.position.y,frontRightShoulder.transform.position.y ) - initialPositionYSholders);
+		cumulatedErrorRotation += Quaternion.Angle(torso.transform.rotation,initialRotation);
+		if(!dos_piernas){
+		cumulatedErrorHeight += Mathf.Abs (Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y,
+		                                             hombro_izquierdo_delantero.transform.position.y,hombro_derecho_delantero.transform.position.y ) - initialPositionYSholders);
 		}else{
-			cumulatedErrorHeight += Mathf.Abs (Mathf.Min(backLeftShoulder.transform.position.y,backRightShoulder.transform.position.y) - initialPositionYSholders);
+			cumulatedErrorHeight += Mathf.Abs (Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y) - initialPositionYSholders);
 		}
 
 		if (elapsedTime > (2 * Mathf.PI * cycle / dominantPeriod) +  (2 * Mathf.PI / period) ) {
 
 			
-			Quaternion RotationNewBody = body.transform.rotation;
-			Quaternion RotationNewbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles/* - body.transform.rotation.eulerAngles*/ );
-			Quaternion RotationNewbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-			Quaternion RotationNewbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-			Quaternion RotationNewbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewBody = torso.transform.rotation;
+			Quaternion RotationNewbackLeft1 = Quaternion.Euler(antebrazo_izquierdo_tracero.transform.rotation.eulerAngles/* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewbackLeft2 = Quaternion.Euler(brazo_izquierdo_tracero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewbackRight1 = Quaternion.Euler(antebrazo_derecho_tracero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			Quaternion RotationNewbackRight2 = Quaternion.Euler(brazo_derecho_tracero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
 
 			Quaternion RotationNewfrontRight1 = Quaternion.Euler(0,0,0);;
 			Quaternion RotationNewfrontRight2 = Quaternion.Euler(0,0,0);;
 			Quaternion RotationNewfrontLeft1 = Quaternion.Euler(0,0,0);;
 			Quaternion RotationNewfrontLeft2 = Quaternion.Euler(0,0,0);;
-			if(!twoLegs){
-				RotationNewfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-				RotationNewfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-				RotationNewfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-				RotationNewfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			if(!dos_piernas){
+				RotationNewfrontRight1 = Quaternion.Euler(antebrazo_derecho_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+				RotationNewfrontRight2 = Quaternion.Euler(brazo_derecho_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+				RotationNewfrontLeft1 = Quaternion.Euler(antebrazo_izquierdo_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+				RotationNewfrontLeft2 = Quaternion.Euler(brazo_izquierdo_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
 			}
-			if(!twoLegs){
+			if(!dos_piernas){
 			stepRotationsDiference = Quaternion.Angle(RotationNewBody,RotationOldBody)+ 
 				Quaternion.Angle(RotationNewbackLeft1,RotationOldbackLeft1)+ 
 				Quaternion.Angle(RotationNewbackLeft2,RotationOldbackLeft2)+ 
@@ -391,7 +391,7 @@ public class MoveController : MonoBehaviour {
 			RotationOldbackLeft2 = RotationNewbackLeft2;
 			RotationOldbackRight1 = RotationNewbackRight1;
 			RotationOldbackRight2 = RotationNewbackRight2;
-			if(!twoLegs){
+			if(!dos_piernas){
 				RotationOldfrontRight1 = RotationNewfrontRight1;
 				RotationOldfrontRight2 = RotationNewfrontRight2;
 				RotationOldfrontLeft1 = RotationNewfrontLeft1;
@@ -400,33 +400,33 @@ public class MoveController : MonoBehaviour {
 			//Debug.Log("diferencias: " + stepRotationsDiference);
 			cycle++;
 		}
-		if(!twoLegs){
-		lastPositionX = (body.transform.position.x + backLeft2.transform.position.x + backRight2.transform.position.x +
-				frontLeft2.transform.position.x + frontRight2.transform.position.x) / 5;
+		if(!dos_piernas){
+		lastPositionX = (torso.transform.position.x + brazo_izquierdo_tracero.transform.position.x + brazo_derecho_tracero.transform.position.x +
+				brazo_izquierdo_delantero.transform.position.x + brazo_derecho_delantero.transform.position.x) / 5;
 		}else{
-			lastPositionX = (body.transform.position.x + backLeft2.transform.position.x + backRight2.transform.position.x) / 3;
+			lastPositionX = (torso.transform.position.x + brazo_izquierdo_tracero.transform.position.x + brazo_derecho_tracero.transform.position.x) / 3;
 		}
 		lastTime = elapsedTime;
 
 		if ( !initialPositionSetted && ( elapsedTime > (2 * Mathf.PI / period) ) ) {
 
 			
-			RotationOldBody = body.transform.rotation;
-			RotationOldbackLeft1 = Quaternion.Euler(backLeft1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-			RotationOldbackLeft2 = Quaternion.Euler(backLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-			RotationOldbackRight1 = Quaternion.Euler(backRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-			RotationOldbackRight2 = Quaternion.Euler(backRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-			if(!twoLegs){
-				RotationOldfrontRight1 = Quaternion.Euler(frontRight1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-				RotationOldfrontRight2 = Quaternion.Euler(frontRight2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-				RotationOldfrontLeft1 = Quaternion.Euler(frontLeft1.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
-				RotationOldfrontLeft2 = Quaternion.Euler(frontLeft2.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldBody = torso.transform.rotation;
+			RotationOldbackLeft1 = Quaternion.Euler(antebrazo_izquierdo_tracero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldbackLeft2 = Quaternion.Euler(brazo_izquierdo_tracero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldbackRight1 = Quaternion.Euler(antebrazo_derecho_tracero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			RotationOldbackRight2 = Quaternion.Euler(brazo_derecho_tracero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+			if(!dos_piernas){
+				RotationOldfrontRight1 = Quaternion.Euler(antebrazo_derecho_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+				RotationOldfrontRight2 = Quaternion.Euler(brazo_derecho_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+				RotationOldfrontLeft1 = Quaternion.Euler(antebrazo_izquierdo_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
+				RotationOldfrontLeft2 = Quaternion.Euler(brazo_izquierdo_delantero.transform.rotation.eulerAngles /* - body.transform.rotation.eulerAngles*/ );
 			}
-			if(!twoLegs){
-			initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position +
-			frontLeft2.transform.position + frontRight2.transform.position) / 5;
+			if(!dos_piernas){
+			initialPositionAfterFirstPeriod = ( torso.transform.position + brazo_izquierdo_tracero.transform.position + brazo_derecho_tracero.transform.position +
+			brazo_izquierdo_delantero.transform.position + brazo_derecho_delantero.transform.position) / 5;
 			}else{
-				initialPositionAfterFirstPeriod = ( body.transform.position + backLeft2.transform.position + backRight2.transform.position) / 3;
+				initialPositionAfterFirstPeriod = ( torso.transform.position + brazo_izquierdo_tracero.transform.position + brazo_derecho_tracero.transform.position) / 3;
 			}
 			timeAfterFirstPeriod = elapsedTime;
 			initialPositionSetted = true;	

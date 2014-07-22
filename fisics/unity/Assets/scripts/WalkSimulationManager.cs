@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class WalkSimulationManager : SimulationManager {
 
 	
-	public bool fixSpeedEval = true;
-	public bool accelEval = false;
-	public bool heightEval = true;
-	public bool cycleEval = true;
-	public bool directionEval = true;
+	public bool V2 = true;
+	private bool accelEval = false;
+	public bool H = true;
+	public bool K = true;
+	public bool D = true;
 
 
 	
@@ -39,7 +39,7 @@ public class WalkSimulationManager : SimulationManager {
 	
 	// Use this for initialization
 	void Start () {
-		Time.timeScale = timeScale;
+		Time.timeScale = escala_temporal;
 		
 	}
 	
@@ -86,10 +86,10 @@ public class WalkSimulationManager : SimulationManager {
 	}
 
 	void endActualTest(){
-		float evaluation = (fixSpeedEval?tester.getMeanWalkDirectionError(testingTime):tester.getMeanSpeed()*10)* (this.cycleEval?tester.getCycleDiferenceEvaluation():1) * (this.heightEval?tester.getMeanHeightEvaluation():1) * (this.accelEval?tester.getCumulaterAccelerationError():1) *(this.directionEval?tester.getMeanRotationEvaluation():1);
+		float evaluation = (V2?tester.getMeanWalkDirectionError(tiempo_simulacion):tester.getMeanSpeed()*10)* (this.K?tester.getCycleDiferenceEvaluation():1) * (this.H?tester.getMeanHeightEvaluation():1) * (this.accelEval?tester.getCumulaterAccelerationError():1) *(this.D?tester.getMeanRotationEvaluation():1);
 		evaluation = tester.getMeanSpeed()<0 || evaluation<0 ? 0: evaluation;
 
-		Debug.Log("test number: "  + testNumber + "= cycle evaluation:" + tester.getCycleDiferenceEvaluation().ToString("F2") + "-- error rotation: " + tester.getMeanRotationEvaluation().ToString("F2") + "-- mean height evaluation: " + (tester.getMeanHeightEvaluation()).ToString("F2") + "-- speed: " + (tester.getMeanSpeed()*10).ToString("F2") + "-- walk direction error: " + (tester.getMeanWalkDirectionError(testingTime)).ToString("F2") + "-- evaluation: " + evaluation);
+		Debug.Log("test number: "  + testNumber + "= cycle evaluation:" + tester.getCycleDiferenceEvaluation().ToString("F2") + "-- error rotation: " + tester.getMeanRotationEvaluation().ToString("F2") + "-- mean height evaluation: " + (tester.getMeanHeightEvaluation()).ToString("F2") + "-- speed: " + (tester.getMeanSpeed()*10).ToString("F2") + "-- walk direction error: " + (tester.getMeanWalkDirectionError(tiempo_simulacion)).ToString("F2") + "-- evaluation: " + evaluation);
 			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();
 			 
@@ -105,7 +105,7 @@ public class WalkSimulationManager : SimulationManager {
 			nextTest = false;
 			
 		}else{
-			if(tester != null && testNumber >= 0 && elapsedTime >testingTime){
+			if(tester != null && testNumber >= 0 && elapsedTime >tiempo_simulacion){
 				endActualTest();
 				//testNumber++;
 				if(testNumber+1<tests.Count){
@@ -130,6 +130,6 @@ public class WalkSimulationManager : SimulationManager {
 	}
 
 	public override string simulationOptions(){
-			return "CycleEval?: " + cycleEval + ", accelEval?: " + accelEval + ", heightEval?: " + heightEval;
+			return "CycleEval?: " + K + ", accelEval?: " + accelEval + ", heightEval?: " + H;
 	}
 }

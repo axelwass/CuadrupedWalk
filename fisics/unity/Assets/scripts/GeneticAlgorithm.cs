@@ -4,20 +4,21 @@ using System.IO;
 
 public class GeneticAlgorithm : MonoBehaviour {
 	
-	public int RANDOM_SIZE = 30; // DEBE SER MAYOR QUE 10!
-	public int ELITE_SIZE = 4;
-	public int ROULET_SIZE = 20;
-	public int NEW_SIZE = 10;
+	
+	public SimulationManager simulador;
 
-	public MutationType mutation_t = MutationType.Stepy;
+	public int TAMANIO_ALEATORIO = 30; // DEBE SER MAYOR QUE 10!
+	public int TAMANIO_ELITE = 4;
+	public int TAMANIO_RULETA = 20;
+	public int TAMANIO_NUEVO = 10;
 
-	public SimulationManager simManager;
+	public MutationType tipo_mutacion = MutationType.Stepy;
 
-	public FunctioT functionType = FunctioT.Classic;
+	public FunctioT tipo_funcion = FunctioT.Classic;
 
 	string folder;
 
-	public string description;
+	public string descripcion;
 	
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
 
@@ -25,12 +26,13 @@ public class GeneticAlgorithm : MonoBehaviour {
 	
 	int generation = 0;
 	
-	public bool generate = true;
+	public string continuar_de_carpeta;
 
-	public string loadFromFile;
+	public bool usar = true;
+
 
 	void Awake(){
-		if(!generate || instance != null){
+		if(!usar || instance != null){
 			
 			DestroyImmediate(this.gameObject);
 		}
@@ -43,27 +45,27 @@ public class GeneticAlgorithm : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//GenomeContainer gc = new GenomeContainer();
-		if (string.IsNullOrEmpty(loadFromFile)) {
-			for (int i =0; i<RANDOM_SIZE + ELITE_SIZE + ROULET_SIZE + NEW_SIZE; i++) {
-				population.Add (new GenomeContainer (functionType, mutation_t));	
+		if (string.IsNullOrEmpty(continuar_de_carpeta)) {
+			for (int i =0; i<TAMANIO_ALEATORIO + TAMANIO_ELITE + TAMANIO_RULETA + TAMANIO_NUEVO; i++) {
+				population.Add (new GenomeContainer (tipo_funcion, tipo_mutacion));	
 			}
 
 		} else {
-			for(int i = 0;File.Exists(loadFromFile + "/population["+ i +"].genome");i++){
+			for(int i = 0;File.Exists(continuar_de_carpeta + "/population["+ i +"].genome");i++){
 				//Debug.Log(loadFromFile + "/population["+ i +"].genome");
-				population.Add (new GenomeContainer(Genome.createFromFile(loadFromFile + "/population["+ i +"].genome"),mutation_t));
+				population.Add (new GenomeContainer(Genome.createFromFile(continuar_de_carpeta + "/population["+ i +"].genome"),tipo_mutacion));
 			}
 		}
-		simManager.runTests(population);
-		folder = simManager.getName() + System.DateTime.Now.ToString("dd_MM_yyyy") + "(" + System.DateTime.Now.ToString("tthh_mm_ss") + ") (" + description + ")";
+		simulador.runTests(population);
+		folder = simulador.getName() + System.DateTime.Now.ToString("dd_MM_yyyy") + "(" + System.DateTime.Now.ToString("tthh_mm_ss") + ") (" + descripcion + ")";
 		Directory.CreateDirectory("./test/");
 		Directory.CreateDirectory("./test/" + folder);
 		
 		StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",false);
-		writer.WriteLine("Elite Size: " + ELITE_SIZE + ", roulete size: " + ROULET_SIZE+ ", random size: " + RANDOM_SIZE);
-		writer.WriteLine("Mutation type: " + mutation_t);
-		writer.WriteLine (simManager.simulationOptions());
-		writer.WriteLine("Funcion: " + functionType + ", empujon inicial: (" + simManager.initialSpeed.x + "," + simManager.initialSpeed.y + "," + simManager.initialSpeed.z + ")");
+		writer.WriteLine("Elite Size: " + TAMANIO_ELITE + ", roulete size: " + TAMANIO_RULETA+ ", random size: " + TAMANIO_ALEATORIO);
+		writer.WriteLine("Mutation type: " + tipo_mutacion);
+		writer.WriteLine (simulador.simulationOptions());
+		writer.WriteLine("Funcion: " + tipo_funcion + ", empujon inicial: (" + simulador.velocidad_de_inicio.x + "," + simulador.velocidad_de_inicio.y + "," + simulador.velocidad_de_inicio.z + ")");
 
 		writer.Close();
 	}
@@ -113,7 +115,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(!simManager.isRuningTest()){
+		if(!simulador.isRuningTest()){
 			population.Sort(delegate(GenomeContainer gc1, GenomeContainer gc2) { //no elimina repetidos!
 				return gc2.getEvaluation().CompareTo(gc1.getEvaluation());
               });
@@ -136,11 +138,11 @@ public class GeneticAlgorithm : MonoBehaviour {
 			}
 			
 			
-			for(int i =0; i<ELITE_SIZE; i++){
+			for(int i =0; i<TAMANIO_ELITE; i++){
 				newPopulation.Add(population[i]);
 			}
 
-			for(int i =0; i< ROULET_SIZE/2 + ROULET_SIZE%2; i++){
+			for(int i =0; i< TAMANIO_RULETA/2 + TAMANIO_RULETA%2; i++){
 				GenomeContainer c1 = getRouletteParent(oldPopulation);
 				oldPopulation.Remove(c1);
 				GenomeContainer c2 = getRouletteParent(oldPopulation);
@@ -160,7 +162,7 @@ public class GeneticAlgorithm : MonoBehaviour {
 				//Debug.Log("newPop size: " + newPopulation.Count);
 			}
 			
-			for(int i =0; i< RANDOM_SIZE; i++){
+			for(int i =0; i< TAMANIO_ALEATORIO; i++){
 				GenomeContainer son = getRandomParent(oldPopulation).apariate(getRandomParent(oldPopulation));
 				if(UnityEngine.Random.Range(0.0f,1.0f)<0.45f){
 					son = son.mutate();
@@ -169,8 +171,8 @@ public class GeneticAlgorithm : MonoBehaviour {
 				//Debug.Log("newPop size: " + newPopulation.Count);
 			}
 
-			for(int i =0; i<NEW_SIZE; i++){
-				newPopulation.Add(new GenomeContainer(functionType, mutation_t));	
+			for(int i =0; i<TAMANIO_NUEVO; i++){
+				newPopulation.Add(new GenomeContainer(tipo_funcion, tipo_mutacion));	
 			}
 			/*for(int i =0; i<POPULATION / 2; i++){
 				newPoblation.Add(poblation[i]);
@@ -186,9 +188,9 @@ public class GeneticAlgorithm : MonoBehaviour {
 				gc.setEvaluation(0);	
 			}*/
 
-			System.Collections.Generic.List<GenomeContainer> toTest = population.GetRange(ELITE_SIZE,RANDOM_SIZE+ROULET_SIZE+NEW_SIZE);
+			System.Collections.Generic.List<GenomeContainer> toTest = population.GetRange(TAMANIO_ELITE,TAMANIO_ALEATORIO+TAMANIO_RULETA+TAMANIO_NUEVO);
 
-			simManager.runTests(toTest);
+			simulador.runTests(toTest);
 		}
 	}
 }

@@ -4,18 +4,18 @@ using System.IO;
 
 public class TestCreature : MonoBehaviour {
 	
-	public SimulationManager simManager;
+	public SimulationManager simulador;
 	
-	public string creatureFilePath;
+	public string archivo;
 	
 	System.Collections.Generic.List<GenomeContainer> population = new System.Collections.Generic.List<GenomeContainer>();
 
 	private static TestCreature instance;
 	
-	public bool generate = true;
+	public bool usar = true;
 	
 	void Awake(){
-		if(!generate ||instance != null){
+		if(!usar ||instance != null){
 			
 			DestroyImmediate(this.gameObject);
 		}
@@ -31,13 +31,13 @@ public class TestCreature : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-			population.Add(new GenomeContainer(Genome.createFromFile(creatureFilePath),MutationType.None));	
+			population.Add(new GenomeContainer(Genome.createFromFile(archivo),MutationType.None));	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(!simManager.isRuningTest()){
-			simManager.runTests(population);
+		if(!simulador.isRuningTest()){
+			simulador.runTests(population);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PushSimulationManager : SimulationManager {
@@ -32,7 +32,7 @@ public class PushSimulationManager : SimulationManager {
 	
 	// Use this for initialization
 	void Start () {
-		Time.timeScale = timeScale;
+		Time.timeScale = escala_temporal;
 		
 	}
 	
@@ -70,7 +70,7 @@ public class PushSimulationManager : SimulationManager {
 			//Debug.Log("testnumber: " + testNumber);
 			testingCreature = GameObject.FindWithTag("creature");//(GameObject)Instantiate(creaturePref);
 			tester = (MoveController)testingCreature.GetComponent("MoveController");
-			tester.setInitialSpeed(instance.initialSpeed);
+			tester.setInitialSpeed(instance.velocidad_de_inicio);
 			tester.testGenome(tests[testNumber].getGenome());
 			//tests[testNumber].getGenome().print();
 			elapsedTime=0;
@@ -99,7 +99,7 @@ public class PushSimulationManager : SimulationManager {
 			nextTest = false;
 			
 		}else{
-			if(tester != null && testNumber >= 0 && elapsedTime > testingTime){
+			if(tester != null && testNumber >= 0 && elapsedTime > tiempo_simulacion){
 				endActualTest();
 				//testNumber++;
 				if(testNumber+1<tests.Count){

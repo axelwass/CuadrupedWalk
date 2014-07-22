@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GrnnPushSimulationManager : SimulationManager {
@@ -32,7 +32,7 @@ public class GrnnPushSimulationManager : SimulationManager {
 	
 	// Use this for initialization
 	void Start () {
-		Time.timeScale = timeScale;
+		Time.timeScale = escala_temporal;
 		
 	}
 	
@@ -70,7 +70,7 @@ public class GrnnPushSimulationManager : SimulationManager {
 			//Debug.Log("testnumber: " + testNumber);
 			testingCreature = GameObject.FindWithTag("creature");//(GameObject)Instantiate(creaturePref);
 			tester = (MoveController)testingCreature.GetComponent("MoveController");
-			tester.setInitialSpeed(instance.initialSpeed);
+			tester.setInitialSpeed(instance.velocidad_de_inicio);
 			tester.testGrnn(tests);
 			elapsedTime=0;
 			
