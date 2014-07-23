@@ -31,7 +31,7 @@ public class Probador : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-			population.Add(new ContenedorGenoma(Genoma.createFromFile(archivo),TipoMutacion.None));	
+			population.Add(new ContenedorGenoma(Genoma.createFromFile(archivo),TipoMutacion.Ninguna));	
 	}
 	
 	// Update is called once per frame

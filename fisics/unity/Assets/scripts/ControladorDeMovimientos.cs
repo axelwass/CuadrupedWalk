@@ -60,7 +60,7 @@ public class ControladorDeMovimientos : MonoBehaviour {
 
 	bool firstTime = true;
 	
-	public Vector3 walkDirection = new Vector3(1,0,0);
+	public Vector3 Velocidad_objetivo = new Vector3(1,0,0);
 
 	Quaternion RotationOldBody = Quaternion.Euler(0,0,0);
 	Quaternion RotationOldbackLeft1 = Quaternion.Euler(0,0,0);
@@ -89,15 +89,15 @@ public class ControladorDeMovimientos : MonoBehaviour {
 	void Start () {
 		if(imprimir_V2 && Probador.getInstance() != null){
 			if(imprimir_V2){
-				walkDirectionWriter = new StreamWriter(Probador.getInstance().archivo + ".walkDirection",false);
+				walkDirectionWriter = new StreamWriter(Probador.getInstance().archivo + ".V2",false);
 				walkDirectionWriter.Close();
 			}
 			if(imprimir_H){
-				heightWriter = new StreamWriter(Probador.getInstance().archivo + ".height",false);
+				heightWriter = new StreamWriter(Probador.getInstance().archivo + ".H",false);
 				heightWriter.Close();
 			}
 			if(imprimir_D){
-				errorRotationWriter = new StreamWriter(Probador.getInstance().archivo + ".rotation",false);
+				errorRotationWriter = new StreamWriter(Probador.getInstance().archivo + ".D",false);
 				errorRotationWriter.Close();
 			}
 		}
@@ -186,7 +186,7 @@ public class ControladorDeMovimientos : MonoBehaviour {
 	}
 
 	public float getMeanWalkDirectionError(float simulationTime){
-		return 1-((cumulatedWalkDirectionError/updates)/(0.51f *walkDirection.x * simulationTime));
+		return 1-((cumulatedWalkDirectionError/updates)/(0.51f *Velocidad_objetivo.x * simulationTime));
 	}
 
 	public float getHeightEvaluation(){
@@ -268,22 +268,22 @@ public class ControladorDeMovimientos : MonoBehaviour {
 				hombro_derecho_delantero.updateState (elapsedTime);
 		}
 	
-		suposedPostionx = (initialPosition + elapsedTime * walkDirection).x;
-		cumulatedWalkDirectionError += Mathf.Abs(torso.transform.position.x - (initialPosition + elapsedTime * walkDirection).x);
+		suposedPostionx = (initialPosition + elapsedTime * Velocidad_objetivo).x;
+		cumulatedWalkDirectionError += Mathf.Abs(torso.transform.position.x - (initialPosition + elapsedTime * Velocidad_objetivo).x);
 		if(Probador.getInstance() != null){
 			if(imprimir_V2){
-				walkDirectionWriter = new StreamWriter(Probador.getInstance().archivo + ".walkDirection",true);
-				walkDirectionWriter.WriteLine(torso.transform.position.x + ", " + (initialPosition + elapsedTime * walkDirection).x);
+				walkDirectionWriter = new StreamWriter(Probador.getInstance().archivo + ".V2",true);
+				walkDirectionWriter.WriteLine(torso.transform.position.x + ", " + (initialPosition + elapsedTime * Velocidad_objetivo).x);
 				walkDirectionWriter.Close();
 			}
 			if(imprimir_H){
-				heightWriter = new StreamWriter(Probador.getInstance().archivo + ".height",true);
+				heightWriter = new StreamWriter(Probador.getInstance().archivo + ".H",true);
 				heightWriter.WriteLine(Mathf.Min(hombro_izquierdo_tracero.transform.position.y,hombro_derecho_tracero.transform.position.y,
 				                                 hombro_izquierdo_delantero.transform.position.y,hombro_derecho_delantero.transform.position.y ) + ", " + initialPositionYSholders);
 				heightWriter.Close();
 			}
 			if(imprimir_D){
-				errorRotationWriter = new StreamWriter(Probador.getInstance().archivo + ".rotation",true);
+				errorRotationWriter = new StreamWriter(Probador.getInstance().archivo + ".D",true);
 				errorRotationWriter.WriteLine( torso.transform.rotation.eulerAngles.y);
 				errorRotationWriter.Close();
 			}
@@ -296,7 +296,7 @@ public class ControladorDeMovimientos : MonoBehaviour {
 			cumulatedAccelerationError += 0.02f;
 		}
 
-		float step_error = Mathf.Pow((torso.transform.position.x - (initialPosition + elapsedTime * walkDirection).x),2) + Mathf.Pow((torso.transform.position.z - (initialPosition + elapsedTime * walkDirection).z),2);
+		float step_error = Mathf.Pow((torso.transform.position.x - (initialPosition + elapsedTime * Velocidad_objetivo).x),2) + Mathf.Pow((torso.transform.position.z - (initialPosition + elapsedTime * Velocidad_objetivo).z),2);
 
 		//Debug.Log("step_error: " + (step_error>1?step_error:0));
 		cumulatedErrorPosition += torso.transform.position.y < initialPosition.y? Mathf.Pow((torso.transform.position.y - initialPosition.y),4):0;

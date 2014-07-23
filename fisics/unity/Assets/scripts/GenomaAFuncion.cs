@@ -27,7 +27,7 @@ public class GenomaAFuncion {
 		dominantPeriod = genome.getPeriod (0);
 
 		switch (genome.getFunctionType()) {
-		case TipoFuncion.Classic:
+		case TipoFuncion.Clasica:
 			backLeft1 = (new FM_Clasica(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0)));
 			backLeft2 = (new FM_Clasica(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0)));
 			backLeftShoulder = (new FM_Clasica(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0)));
@@ -47,7 +47,7 @@ public class GenomaAFuncion {
 			secondPeriod = genome.getPeriod(0);
 			
 			break;
-		case TipoFuncion.Fourier_Med_Partida_FaseSync:
+		case TipoFuncion.Fourier_Partida_FaseSync:
 			backLeft1 = (new FM_Fourier_Partida(genome.getAmplitude(0),genome.getAmplitude(1),genome.getAmplitude(2),genome.getAmplitude(3),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(4),genome.getPeriod(1),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(1)));
 			backLeft2 = (new FM_Fourier_Partida(genome.getAmplitude(5),genome.getAmplitude(6),genome.getAmplitude(7),genome.getAmplitude(8),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(9),genome.getPeriod(1),genome.getFase(3),genome.getCenterAngle(3),genome.getStrength(1)));
 			backLeftShoulder = (new FM_Fourier_Partida(genome.getAmplitude(10),genome.getAmplitude(11),genome.getAmplitude(12),genome.getAmplitude(13),genome.getPeriod(0),genome.getFase(4),genome.getCenterAngle(4),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(5),genome.getCenterAngle(5),genome.getStrength(1)));
@@ -67,7 +67,7 @@ public class GenomaAFuncion {
 			secondPeriod = genome.getPeriod(1);
 			
 			break;
-		case TipoFuncion.Partida:
+		case TipoFuncion.Clasica_Partida:
 			backLeft1 = (new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(12),genome.getPeriod(1),genome.getFase(12),genome.getCenterAngle(12),genome.getStrength(1)));
 			backLeft2 = (new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(13),genome.getPeriod(1),genome.getFase(13),genome.getCenterAngle(13),genome.getStrength(1)));
 			backLeftShoulder = (new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(14),genome.getPeriod(1),genome.getFase(14),genome.getCenterAngle(14),genome.getStrength(1)));
@@ -87,7 +87,7 @@ public class GenomaAFuncion {
 			secondPeriod = genome.getPeriod(1);
 			
 			break;
-		case TipoFuncion.Partida_Classic_FaseSync:
+		case TipoFuncion.Classic_Partida_FaseSync:
 			backLeft1 = (new MoveFunctionPartida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
 			backLeft2 = (new MoveFunctionPartida(genome.getAmplitude(1),genome.getPeriod(0),genome.getFase(1),genome.getCenterAngle(1),genome.getStrength(0),genome.getAmplitude(7),genome.getPeriod(1),genome.getFase(7),genome.getCenterAngle(7),genome.getStrength(1)));
 			backLeftShoulder = (new MoveFunctionPartida(genome.getAmplitude(2),genome.getPeriod(0),genome.getFase(2),genome.getCenterAngle(2),genome.getStrength(0),genome.getAmplitude(8),genome.getPeriod(1),genome.getFase(8),genome.getCenterAngle(8),genome.getStrength(1)));
@@ -107,35 +107,7 @@ public class GenomaAFuncion {
 			secondPeriod = genome.getPeriod(1);
 			
 			break;
-		case TipoFuncion.PartidaFinalConstante:
-
-			EnumeradorCircular aEnum = genome.getAmplitudeEnumerator();
-			EnumeradorCircular caEnum = genome.getCenterAngleEnumerator();
-			EnumeradorCircular pEnum = genome.getPeriodEnumerator();
-			EnumeradorCircular fEnum = genome.getFaseEnumerator();
-			EnumeradorCircular sEnum = genome.getStrengthEnumerator();
-
-
-			backLeft1 = (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			backLeft2 = (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			backLeftShoulder = (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			
-			frontLeft1 = (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			frontLeft2 = (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			frontLeftShoulder = (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			
-			backRight1 =  (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			backRight2 =  (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			backRightShoulder =  (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			
-			frontRight1 = (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			frontRight2 =  (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			frontRightShoulder =  (new FM_Caidas(aEnum,caEnum ,pEnum,fEnum,sEnum));
-			
-			secondPeriod = genome.getPeriod(1);
-			
-			break;
-		case TipoFuncion.Media_Partida_Classic_FaseSync_Fourier_Knee:
+		case TipoFuncion.Rodilla_Fourier_Classic_FaseSync:
 			secondPeriod = genome.getPeriod(1);
 
 			backLeft1 = (new FM_Clasica_Partida(genome.getAmplitude(0),genome.getPeriod(0),genome.getFase(0),genome.getCenterAngle(0),genome.getStrength(0),genome.getAmplitude(6),genome.getPeriod(1),genome.getFase(6),genome.getCenterAngle(6),genome.getStrength(1)));
@@ -157,7 +129,7 @@ public class GenomaAFuncion {
 			
 			break;
 
-		case TipoFuncion.Media_Partida_Classic_FaseSync_CosDoubleFrecuency_Knee:
+		case TipoFuncion.Rodilla_CosDoubleFrecuency_Partida_FaseSync:
 			
 			dominantPeriod = 2 * genome.getPeriod (0) * genome.getPeriod (1) /(genome.getPeriod (0) + genome.getPeriod (1));
 			secondPeriod = genome.getPeriod(2);

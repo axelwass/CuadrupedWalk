@@ -12,9 +12,9 @@ public class AlgoritmoGenetico : MonoBehaviour {
 	public int TAMANIO_RULETA = 20;
 	public int TAMANIO_NUEVO = 10;
 
-	public TipoMutacion tipo_mutacion = TipoMutacion.Stepy;
+	public TipoMutacion tipo_mutacion = TipoMutacion.Escalonada;
 
-	public TipoFuncion tipo_funcion = TipoFuncion.Classic;
+	public TipoFuncion tipo_funcion = TipoFuncion.Clasica;
 
 	string folder;
 
@@ -51,9 +51,13 @@ public class AlgoritmoGenetico : MonoBehaviour {
 			}
 
 		} else {
-			for(int i = 0;File.Exists(continuar_de_carpeta + "/population["+ i +"].genome");i++){
+			for(int i = 0;File.Exists(continuar_de_carpeta + "/population["+ i +"].genome") || File.Exists(continuar_de_carpeta + "/poblacion["+ i +"].genoma");i++){
 				//Debug.Log(loadFromFile + "/population["+ i +"].genome");
-				population.Add (new ContenedorGenoma(Genoma.createFromFile(continuar_de_carpeta + "/population["+ i +"].genome"),tipo_mutacion));
+				if(File.Exists(continuar_de_carpeta + "/population["+ i +"].genome")){
+					population.Add (new ContenedorGenoma(Genoma.createFromFile(continuar_de_carpeta + "/population["+ i +"].genome"),tipo_mutacion));
+				}else{
+					population.Add (new ContenedorGenoma(Genoma.createFromFile(continuar_de_carpeta + "/poblacion["+ i +"].genoma"),tipo_mutacion));
+				}
 			}
 		}
 		simulador.runTests(population);
@@ -61,11 +65,8 @@ public class AlgoritmoGenetico : MonoBehaviour {
 		Directory.CreateDirectory("./test/");
 		Directory.CreateDirectory("./test/" + folder);
 		
-		StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",false);
-		writer.WriteLine("Elite Size: " + TAMANIO_ELITE + ", roulete size: " + TAMANIO_RULETA+ ", random size: " + TAMANIO_ALEATORIO);
-		writer.WriteLine("Mutation type: " + tipo_mutacion);
-		writer.WriteLine (simulador.simulationOptions());
-		writer.WriteLine("Funcion: " + tipo_funcion + ", empujon inicial: (" + simulador.velocidad_de_inicio.x + "," + simulador.velocidad_de_inicio.y + "," + simulador.velocidad_de_inicio.z + ")");
+		StreamWriter writer = new StreamWriter("test/"+folder+"/aptitud.txt",false);
+		writer.WriteLine("individuo tipo: " + tipo_funcion + ", empujon inicial: (" + simulador.velocidad_de_inicio.x + "," + simulador.velocidad_de_inicio.y + "," + simulador.velocidad_de_inicio.z + ")");
 
 		writer.Close();
 	}
@@ -105,10 +106,10 @@ public class AlgoritmoGenetico : MonoBehaviour {
 
 	void OnGUI () {
 		if (GUI.Button (new Rect (10,10,130,20), "Guardar generacion")) {
-			Directory.CreateDirectory("./test/" + folder + "/generation" + generation);
+			Directory.CreateDirectory("./test/" + folder + "/generacion" + generation);
 			int i =0;
 			foreach(ContenedorGenoma gc in population){
-				gc.getGenome().saveToFile("test/"+folder + "/generation" + generation + "/population["+ (i++) +"].genome");
+				gc.getGenome().saveToFile("test/"+folder + "/generacion" + generation + "/poblacion["+ (i++) +"].genoma");
 			}
 		}
 	}
@@ -120,7 +121,7 @@ public class AlgoritmoGenetico : MonoBehaviour {
 				return gc2.getEvaluation().CompareTo(gc1.getEvaluation());
               });
 
-			StreamWriter writer = new StreamWriter("test/"+folder+"/fitness.txt",true);
+			StreamWriter writer = new StreamWriter("test/"+folder+"/aptitud.txt",true);
 			foreach(ContenedorGenoma gc in population){
 				writer.Write(gc.getEvaluation());
 				writer.Write("\t");
@@ -128,8 +129,8 @@ public class AlgoritmoGenetico : MonoBehaviour {
 			writer.Write(writer.NewLine);
 			writer.Close();
 
-			Debug.Log("Best sofar["+generation+"]: " + population[0].getEvaluation());
-			population[0].getGenome().saveToFile("test/"+folder+"/bestSoFar["+(generation++)+"].genome");
+			Debug.Log("mejor["+generation+"]: " + population[0].getEvaluation());
+			population[0].getGenome().saveToFile("test/"+folder+"/mejor["+(generation++)+"].genoma");
 			
 			System.Collections.Generic.List<ContenedorGenoma> newPopulation = new System.Collections.Generic.List<ContenedorGenoma>();
 			System.Collections.Generic.List<ContenedorGenoma> oldPopulation = new System.Collections.Generic.List<ContenedorGenoma>();

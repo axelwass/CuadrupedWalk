@@ -89,7 +89,7 @@ public class SimuladorDeCaminata : Simulador {
 		float evaluation = (V2?tester.getMeanWalkDirectionError(tiempo_simulacion):tester.getMeanSpeed()*10)* (this.K?tester.getCycleDiferenceEvaluation():1) * (this.H?tester.getMeanHeightEvaluation():1) * (this.accelEval?tester.getCumulaterAccelerationError():1) *(this.D?tester.getMeanRotationEvaluation():1);
 		evaluation = tester.getMeanSpeed()<0 || evaluation<0 ? 0: evaluation;
 
-		Debug.Log("test number: "  + testNumber + "= cycle evaluation:" + tester.getCycleDiferenceEvaluation().ToString("F2") + "-- error rotation: " + tester.getMeanRotationEvaluation().ToString("F2") + "-- mean height evaluation: " + (tester.getMeanHeightEvaluation()).ToString("F2") + "-- speed: " + (tester.getMeanSpeed()*10).ToString("F2") + "-- walk direction error: " + (tester.getMeanWalkDirectionError(tiempo_simulacion)).ToString("F2") + "-- evaluation: " + evaluation);
+		Debug.Log("Individuo: "  + testNumber + "= K:" + tester.getCycleDiferenceEvaluation().ToString("F2") + "-- D: " + tester.getMeanRotationEvaluation().ToString("F2") + "-- H: " + (tester.getMeanHeightEvaluation()).ToString("F2") + "-- V: " + (tester.getMeanSpeed()*10).ToString("F2") + "-- V2: " + (tester.getMeanWalkDirectionError(tiempo_simulacion)).ToString("F2") + "-- Aptitud: " + evaluation);
 			tests[testNumber].setEvaluation(evaluation);	
 			destroyTest();
 			 

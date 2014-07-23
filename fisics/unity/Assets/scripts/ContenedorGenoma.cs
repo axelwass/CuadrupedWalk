@@ -43,7 +43,7 @@ public class ContenedorGenoma
 			float rand = UnityEngine.Random.Range(0.0f,1.0f);
 
 			switch(mutation_t){
-			case TipoMutacion.Classic:
+			case TipoMutacion.Clasica:
 				if(rand < 0.03){
 					gen.generateVal();		
 				}else
@@ -51,7 +51,7 @@ public class ContenedorGenoma
 					gen.setVal(((Gen)iterator.Current).getVal());
 				}
 				break;
-			case TipoMutacion.Stepy:
+			case TipoMutacion.Escalonada:
 				if(rand < 0.003){
 					gen.generateVal();		
 				}
@@ -66,7 +66,7 @@ public class ContenedorGenoma
 					gen.setVal(((Gen)iterator.Current).getVal());
 				}
 				break;
-			case TipoMutacion.Gassian:
+			case TipoMutacion.Gausiana:
 				if(rand < 0.05){
 					gen.setValNormalMutation(((Gen)iterator.Current).getVal());		
 				}
@@ -75,8 +75,7 @@ public class ContenedorGenoma
 					gen.setVal(((Gen)iterator.Current).getVal());
 				}
 				break;
-			case TipoMutacion.None:
-				Debug.LogError("Mutating a not mutable genome!");
+			case TipoMutacion.Ninguna:
 				break;
 			}
 

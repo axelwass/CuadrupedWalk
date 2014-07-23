@@ -62,49 +62,42 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 
 	private void createVectors(TipoFuncion functionType){
 		switch (functionType) {
-		case TipoFuncion.Classic:
+		case TipoFuncion.Clasica:
 			amplitudes = new Gen[12];
 			fases = new Gen[12];
 			centerAngles = new Gen[12];
 			strength = new Gen[1];
 			period = new Gen[1];
 			break;
-		case TipoFuncion.Fourier_Med_Partida_FaseSync:
+		case TipoFuncion.Fourier_Partida_FaseSync:
 			amplitudes = new Gen[36];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.Partida_Classic_FaseSync:
+		case TipoFuncion.Classic_Partida_FaseSync:
 			amplitudes = new Gen[18];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.Partida:
+		case TipoFuncion.Clasica_Partida:
 			amplitudes = new Gen[24];
 			fases = new Gen[24];
 			centerAngles = new Gen[24];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.PartidaFinalConstante:
-			amplitudes = new Gen[48];
-			fases = new Gen[48];
-			centerAngles = new Gen[48];
-			strength = new Gen[4];
-			period = new Gen[4];
-			break;
-		case TipoFuncion.Media_Partida_Classic_FaseSync_Fourier_Knee:
+		case TipoFuncion.Rodilla_Fourier_Classic_FaseSync:
 			amplitudes = new Gen[24]; //3 más para cada rodillas 
 			fases = new Gen[24];
 			centerAngles = new Gen[24];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.Media_Partida_Classic_FaseSync_CosDoubleFrecuency_Knee:
+		case TipoFuncion.Rodilla_CosDoubleFrecuency_Partida_FaseSync:
 			amplitudes = new Gen[18];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
@@ -337,7 +330,7 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 		try{
 			functionType = (TipoFuncion)info.GetValue ("functionType", typeof(TipoFuncion));
 		}catch(SerializationException e){
-			functionType = TipoFuncion.Partida_Classic_FaseSync;
+			functionType = TipoFuncion.Classic_Partida_FaseSync;
 		}
 
 		createVectors (functionType);

@@ -1083,8 +1083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d35760730faa9843b56eda63690f07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempo_simulacion: 100
-  escala_temporal: 1
+  tiempo_simulacion: 10
+  escala_temporal: 50
   velocidad_de_inicio: {x: 0, y: 0, z: 0}
   V2: 1
   H: 1
@@ -1221,7 +1221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simulador: {fileID: 362562917}
   archivo: test\walk21_07_2014(PM05_58_06) (CABALLO doble frec - CONT)\bestSoFar[209].genome
-  usar: 1
+  usar: 0
 --- !u!1 &447846594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,8 +2890,8 @@ MonoBehaviour:
   tipo_mutacion: 2
   tipo_funcion: 11
   descripcion: 
-  continuar_de_carpeta: 
-  usar: 0
+  continuar_de_carpeta: test\walk23_07_2014(AM03_17_00) ()\generacion1
+  usar: 1
 --- !u!4 &954359148
 Transform:
   m_ObjectHideFlags: 0
@@ -3692,7 +3692,7 @@ MonoBehaviour:
   imprimir_V2: 0
   imprimir_H: 0
   imprimir_D: 0
-  walkDirection: {x: 1, y: 0, z: 0}
+  Velocidad_objetivo: {x: 1, y: 0, z: 0}
 --- !u!1 &1134151216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4438,7 +4438,7 @@ MonoBehaviour:
   imprimir_V2: 0
   imprimir_H: 0
   imprimir_D: 0
-  walkDirection: {x: 1, y: 0, z: 0}
+  Velocidad_objetivo: {x: 1, y: 0, z: 0}
 --- !u!1 &1570335961
 GameObject:
   m_ObjectHideFlags: 0
@@ -6257,4 +6257,4 @@ MonoBehaviour:
   imprimir_V2: 0
   imprimir_H: 0
   imprimir_D: 0
-  walkDirection: {x: 1, y: 0, z: 0}
+  Velocidad_objetivo: {x: 1, y: 0, z: 0}

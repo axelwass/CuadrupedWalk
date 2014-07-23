@@ -2,12 +2,11 @@
 using System.Collections;
 
 public enum TipoFuncion{
-	Fourier_Med_Partida_FaseSync = 1,
-	Classic = 3,
-	Partida = 4,
-	PartidaFinalConstante = 5,
-	Partida_Classic_FaseSync = 7,
-	Media_Partida_Classic_FaseSync_Fourier_Knee = 9,
-	Media_Partida_Classic_FaseSync_CosDoubleFrecuency_Knee = 11
+	Clasica = 3,
+	Clasica_Partida = 4,
+	Classic_Partida_FaseSync = 7,
+	Fourier_Partida_FaseSync = 1,
+	Rodilla_Fourier_Classic_FaseSync = 9,
+	Rodilla_CosDoubleFrecuency_Partida_FaseSync = 11
 }
 
