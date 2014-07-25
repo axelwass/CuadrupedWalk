@@ -26,11 +26,11 @@ public class MoveFunctionPartida : FuncionDeMovimiento {
 		this.strength2 = strength;
 	}
 	
-	public override float evalAngle(float t){
+	public override float evalAngulo(float t){
 		return t<(Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D:A2*(float)Mathf.Sin(t*B2+C2) + D2;
 	}
 	
-	public override float evalStrength(float t){
+	public override float evalFuerza(float t){
 			return t<(Mathf.PI/B)?strength:strength2;
 	}
 }

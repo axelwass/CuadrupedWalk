@@ -32,7 +32,7 @@ public class FM_Fourier_Partida : FuncionDeMovimiento {
 		this.strength2 = strength;
 	}
 	
-	public override float evalAngle(float t){
+	public override float evalAngulo(float t){
 		if(t<(2*Mathf.PI/B)){
 			return  A*(float)Mathf.Sin(t/2*B+C) + D;
 		}else{
@@ -40,7 +40,7 @@ public class FM_Fourier_Partida : FuncionDeMovimiento {
 		}
 	}
 	
-	public override float evalStrength(float t){
+	public override float evalFuerza(float t){
 			return t<(2*Mathf.PI/B)?strength:strength2;
 	}
 }

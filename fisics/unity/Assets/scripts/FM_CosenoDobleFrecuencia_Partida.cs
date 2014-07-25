@@ -28,7 +28,7 @@ public class FM_CosenoDobleFrecuencia_Partida : FuncionDeMovimiento {
 		this.D = centerAngle2;
 		this.strength = strength2;
 	}
-	public override float evalAngle(float t){
+	public override float evalAngulo(float t){
 		if (t < (2 * Mathf.PI / B)) {
 			return  A * (float)Mathf.Cos (t / 2 * B + C);
 		}
@@ -43,7 +43,7 @@ public class FM_CosenoDobleFrecuencia_Partida : FuncionDeMovimiento {
 		}
 	}
 	
-	public override float evalStrength(float t){
+	public override float evalFuerza(float t){
 		return t<(2*Mathf.PI/B)?strength:strength2;
 	}
 }

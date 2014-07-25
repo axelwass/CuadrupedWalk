@@ -15,13 +15,13 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 			if (typeName == "Genome") {
 				return typeof(Genoma);
 			} if (typeName == "FunctioT") {
-				return typeof(TipoFuncion);
+				return typeof(TipoDeIndividuo);
 			}
 			return null;
 		}
 	}
 
-	TipoFuncion functionType;
+	TipoDeIndividuo functionType;
 	Gen[] strength;
 	Gen[] period;
 	
@@ -56,48 +56,48 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 		return instance;
 	}
 
-	public TipoFuncion getFunctionType(){
+	public TipoDeIndividuo getFunctionType(){
 		return functionType;
 	}
 
-	private void createVectors(TipoFuncion functionType){
+	private void crearVectores(TipoDeIndividuo functionType){
 		switch (functionType) {
-		case TipoFuncion.Clasica:
+		case TipoDeIndividuo.Clasica:
 			amplitudes = new Gen[12];
 			fases = new Gen[12];
 			centerAngles = new Gen[12];
 			strength = new Gen[1];
 			period = new Gen[1];
 			break;
-		case TipoFuncion.Fourier_Partida_FaseSync:
+		case TipoDeIndividuo.Fourier_Partida_FaseSync:
 			amplitudes = new Gen[36];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.Classic_Partida_FaseSync:
+		case TipoDeIndividuo.Classic_Partida_FaseSync:
 			amplitudes = new Gen[18];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.Clasica_Partida:
+		case TipoDeIndividuo.Clasica_Partida:
 			amplitudes = new Gen[24];
 			fases = new Gen[24];
 			centerAngles = new Gen[24];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.Rodilla_Fourier_Classic_FaseSync:
+		case TipoDeIndividuo.Rodilla_Fourier_Classic_FaseSync:
 			amplitudes = new Gen[24]; //3 más para cada rodillas 
 			fases = new Gen[24];
 			centerAngles = new Gen[24];
 			strength = new Gen[2];
 			period = new Gen[2];
 			break;
-		case TipoFuncion.Rodilla_CosDoubleFrecuency_Partida_FaseSync:
+		case TipoDeIndividuo.Rodilla_CosDoubleFrecuency_Partida_FaseSync:
 			amplitudes = new Gen[18];
 			fases = new Gen[18];
 			centerAngles = new Gen[18];
@@ -131,11 +131,11 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 	private Genoma (){
 	}
 	
-	public Genoma (TipoFuncion functionType)
+	public Genoma (TipoDeIndividuo functionType)
 	{
 		this.functionType = functionType;
 
-		this.createVectors (functionType);
+		this.crearVectores (functionType);
 	}
 	
 	public Genoma init(){
@@ -290,7 +290,7 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 	
 	public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-		info.AddValue ("functionType", functionType, typeof(TipoFuncion));
+		info.AddValue ("functionType", functionType, typeof(TipoDeIndividuo));
         // Use the AddValue method to specify serialized values.
 		//StreamWriter writer = new StreamWriter("save.txt",false);
 		for (int i = 0; i < amplitudes.Length; i++)
@@ -328,38 +328,40 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 	public Genoma(SerializationInfo info, StreamingContext context):this()
     {
 		try{
-			functionType = (TipoFuncion)info.GetValue ("functionType", typeof(TipoFuncion));
+			functionType = (TipoDeIndividuo)info.GetValue ("functionType", typeof(TipoDeIndividuo));
 		}catch(SerializationException e){
-			functionType = TipoFuncion.Classic_Partida_FaseSync;
+			functionType = TipoDeIndividuo.Classic_Partida_FaseSync;
 		}
 
-		createVectors (functionType);
+		crearVectores (functionType);
 
-		//StreamWriter writer = new StreamWriter("load.txt",false);
+		StreamWriter writer = new StreamWriter(Probador.getInstance().archivo +".caracteristicas",false);
 		for (int i = 0; i < amplitudes.Length; i++)
         {
             amplitudes[i].setVal((float) info.GetValue("amplitudes" + i, typeof(float)));
-			//writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
+			writer.WriteLine("amplitudes" + i +": " +  amplitudes[i].getVal());
         }
 		for (int i = 0; i < fases.Length; i++)
         {
             fases[i].setVal((float) info.GetValue("fases" + i, typeof(float)));
-			//writer.WriteLine("fases" + i +": " +  fases[i].getVal());
+			writer.WriteLine("fases" + i +": " +  fases[i].getVal());
         }
 		for (int i = 0; i < centerAngles.Length; i++)
         {
             centerAngles[i].setVal((float) info.GetValue("centerAngles" + i, typeof(float)));
-			//writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
+			writer.WriteLine("centerAngles" + i +": " + centerAngles[i].getVal());
         }
 
 		try{
 			for (int i = 0; i < strength.Length; i++)
 			{
 				strength[i].setVal((float) info.GetValue("strength" + i, typeof(float)));
+				writer.WriteLine("strength" + i +": " + strength[i].getVal());
 			}
 			for (int i = 0; i < period.Length; i++)
 			{
 				period[i].setVal((float) info.GetValue("period" + i, typeof(float)));
+				writer.WriteLine("period" + i +": " + period[i].getVal());
 			}
 		}catch(SerializationException e){
 			strength[0].setVal((float) info.GetValue("strength", typeof(float)));
@@ -368,7 +370,7 @@ public class Genoma:System.Collections.IEnumerable, System.Runtime.Serialization
 
 
 
-		//writer.Close();
+		writer.Close();
     }
 }
 

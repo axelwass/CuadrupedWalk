@@ -53,7 +53,7 @@ public class FM_Caidas : FuncionDeMovimiento {
 		this.strength4 = sEnum.nextValue();
 	}
 	
-	public override float evalAngle(float t){
+	public override float evalAngulo(float t){
 		return t<(Mathf.PI/B)? A*(float)Mathf.Sin(t*B+C) + D: //le saco el 2 pi a todos
 			t<(Mathf.PI/B2)+(Mathf.PI/B)?A2*(float)Mathf.Sin(t*B2+C2) + D2:
 			t<(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?A3*(float)Mathf.Sin(t*B3+C3) + D3:
@@ -62,7 +62,7 @@ public class FM_Caidas : FuncionDeMovimiento {
 				
 	}
 	
-	public override float evalStrength(float t){
+	public override float evalFuerza(float t){
 		return t<(Mathf.PI/B)? strength: //le saco el 2 pi a todos
 			t<(Mathf.PI/B2)+(Mathf.PI/B)?strength2:
 				t<(Mathf.PI/B3)+(Mathf.PI/B2)+(Mathf.PI/B)?strength3:

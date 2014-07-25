@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258972a950bf34144a713c1f169e2e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imprimir_angulo: 0
+  imprimir_angulo: 1
 --- !u!65 &329728258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiempo_simulacion: 10
-  escala_temporal: 50
+  escala_temporal: 1
   velocidad_de_inicio: {x: 0, y: 0, z: 0}
   V2: 1
   H: 1
@@ -1220,8 +1220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulador: {fileID: 362562917}
-  archivo: test\walk21_07_2014(PM05_58_06) (CABALLO doble frec - CONT)\bestSoFar[209].genome
-  usar: 0
+  archivo: Buenos casos\6. coseno doble frecuencia rodilla\walk17_07_2014(AM02_25_00)
+    (OBEJA coseno doble frecuaencai reloaded)/bestSoFar[2000].genome
+  usar: 1
 --- !u!1 &447846594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258972a950bf34144a713c1f169e2e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imprimir_angulo: 0
+  imprimir_angulo: 1
 --- !u!59 &552240010
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -2891,7 +2892,7 @@ MonoBehaviour:
   tipo_funcion: 11
   descripcion: 
   continuar_de_carpeta: test\walk23_07_2014(AM03_17_00) ()\generacion1
-  usar: 1
+  usar: 0
 --- !u!4 &954359148
 Transform:
   m_ObjectHideFlags: 0
@@ -3646,7 +3647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1124361989
 Transform:
   m_ObjectHideFlags: 0
@@ -4392,7 +4393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1565509117
 Transform:
   m_ObjectHideFlags: 0

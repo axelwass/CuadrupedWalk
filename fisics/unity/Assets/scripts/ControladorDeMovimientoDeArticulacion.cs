@@ -29,7 +29,7 @@ public class ControladorDeMovimientoDeArticulacion : MonoBehaviour {
 	public void updateState(float elapsedTime) {
 		if(function != null && joint != null){
 			JointSpring s = new JointSpring();
-			s.targetPosition = function.evalAngle(elapsedTime);
+			s.targetPosition = function.evalAngulo(elapsedTime);
 			if ( s.targetPosition < joint.limits.min ) {
 				s.targetPosition = joint.limits.min;
 			} else if ( s.targetPosition > joint.limits.max ) {
@@ -42,7 +42,7 @@ public class ControladorDeMovimientoDeArticulacion : MonoBehaviour {
 
 				writer.Close();
 			}
-			s.spring = function.evalStrength(elapsedTime);
+			s.spring = function.evalFuerza(elapsedTime);
 			joint.spring = s;
 			
 		}

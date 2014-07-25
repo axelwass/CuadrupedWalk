@@ -8,7 +8,7 @@ public class ContenedorGenoma
 
 	TipoMutacion mutation_t;
 	
-	public ContenedorGenoma (TipoFuncion functionType, TipoMutacion mutation_t)
+	public ContenedorGenoma (TipoDeIndividuo functionType, TipoMutacion mutation_t)
 	{
 		this.mutation_t = mutation_t;
 		this.genome = new Genoma(functionType).init();

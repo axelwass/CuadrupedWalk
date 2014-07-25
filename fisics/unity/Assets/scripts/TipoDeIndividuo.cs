@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum TipoFuncion{
+public enum TipoDeIndividuo{
 	Clasica = 3,
 	Clasica_Partida = 4,
 	Classic_Partida_FaseSync = 7,

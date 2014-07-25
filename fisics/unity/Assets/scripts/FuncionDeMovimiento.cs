@@ -10,8 +10,8 @@ public abstract class FuncionDeMovimiento
 	protected float D;
 	protected float strength;
 
-	public abstract float evalAngle (float t);
-	public abstract float evalStrength (float t);
+	public abstract float evalAngulo (float t);
+	public abstract float evalFuerza (float t);
 		
 }
 

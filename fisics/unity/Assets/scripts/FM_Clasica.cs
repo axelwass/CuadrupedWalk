@@ -14,11 +14,11 @@ public class FM_Clasica: FuncionDeMovimiento
 		this.strength = strength;
 	}
 	
-	public override float evalAngle(float t){
+	public override float evalAngulo(float t){
 		return A*(float)Math.Sin(t*B+C) + D;
 	}
 	
-	public override float evalStrength(float t){
+	public override float evalFuerza(float t){
 		return strength;
 	}
 	

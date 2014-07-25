@@ -75,7 +75,7 @@ public class SimuladorDeCaminata : Simulador {
 	void OnLevelWasLoaded (int level) {
 		if (level == 0) {
 			//Debug.Log("testnumber: " + testNumber);
-			testingCreature = GameObject.FindWithTag("creature");//(GameObject)Instantiate(creaturePref);
+			testingCreature = GameObject.FindWithTag("Cuadrupedo");//(GameObject)Instantiate(creaturePref);
 			tester = (ControladorDeMovimientos)testingCreature.GetComponent("ControladorDeMovimientos");
 			tester.testGenome(tests[testNumber].getGenome());
 			//tests[testNumber].getGenome().print();

@@ -14,7 +14,7 @@ public class AlgoritmoGenetico : MonoBehaviour {
 
 	public TipoMutacion tipo_mutacion = TipoMutacion.Escalonada;
 
-	public TipoFuncion tipo_funcion = TipoFuncion.Clasica;
+	public TipoDeIndividuo tipo_funcion = TipoDeIndividuo.Clasica;
 
 	string folder;
 

@@ -26,11 +26,11 @@ public class FM_Clasica_Partida : FuncionDeMovimiento {
 		this.strength2 = strength;
 	}
 	
-	public override float evalAngle(float t){
+	public override float evalAngulo(float t){
 		return t<(2*Mathf.PI/B)? A*(float)Mathf.Sin(t/2*B+C) + D:A2*(float)Mathf.Sin(t*B2+C2) + D2;
 	}
 
-	public override float evalStrength(float t){
+	public override float evalFuerza(float t){
 			return t<(2*Mathf.PI/B)?strength:strength2;
 	}
 }
